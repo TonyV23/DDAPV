@@ -15,7 +15,9 @@ Including another URLconf
 """
 
 from django.urls import path
+from fondation.views import home
 
 urlpatterns = [
+    path('', home.index, name='home_page'),
     
 ]
