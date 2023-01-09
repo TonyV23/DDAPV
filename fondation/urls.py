@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
@@ -54,5 +54,13 @@ urlpatterns = [
     path ('address/view_communes', address.view_communes, name = 'view_communes'),
     path ('address/view_zones', address.view_zones, name = 'view_zones'),
     path ('address/display', address.display, name = 'address_display'),
+
     
+    # level studies urls
+    
+    path ('levelStudies/', level_studies.index, name = 'level_studies_overview'),
+    path ('levelStudies/add', level_studies.add_level_study, name = 'level_studies_add'),
+    path ('levelStudies/display', level_studies.display, name = 'level_studies_display'),
+
+
 ]
