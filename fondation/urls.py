@@ -15,9 +15,18 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home
+from fondation.views import home, refugees
 
 urlpatterns = [
-    path('', home.index, name='home_page'),
+    path('dashboard/', home.index, name ='dashboard'),
+
+    
+    # refugees urls
+
+    path('refugees/', refugees.index, name = 'refugees_overview'),
+    path('refugees/add/', refugees.add, name ='refugees_add'),
+    path('refugees/display/', refugees.display, name ='refugees_display'),
+
+    
     
 ]
