@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 def index(request) :
 
-    page_title = 'Accueil'
+    page_title = 'Tableau de Bord'
 
 
     return render(
