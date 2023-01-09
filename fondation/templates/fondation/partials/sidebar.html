@@ -4,7 +4,7 @@
     <!-- Application Brand -->
     
     <div class="app-brand">
-        <a href="{% url 'home_page' %}">
+        <a href="{% url 'dashboard' %}">
         <span class="brand-name">Fondation Evan You</span>
         </a>
     </div>
@@ -14,8 +14,8 @@
         <!-- sidebar menu -->
         <ul class="nav sidebar-inner" id="sidebar-menu">
 
-            <li class="active">
-                <a class="sidenav-item-link" href="{% url 'home_page' %}">
+            <li >
+                <a class="sidenav-item-link" href="{% url 'dashboard' %}">
                     <i class="mdi mdi-card-text-outline"></i>
                     <span class="nav-text ">Tableau de bord</span>
                 </a>
@@ -25,7 +25,7 @@
         
             
             <li>
-                <a class="sidenav-item-link" href="#">
+                <a class="sidenav-item-link" href="{% url 'refugees_overview' %}">
                     <i class="mdi mdi-human-male-female"></i>
                     <span class="nav-text">refugiés</span>
                 </a>
