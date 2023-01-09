@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees
+from fondation.views import home, refugees, donations
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
@@ -28,5 +28,11 @@ urlpatterns = [
     path('refugees/display/', refugees.display, name ='refugees_display'),
 
     
+    # donations urls
+    
+    path ('donations/', donations.index, name = 'donations_overview'),
+    path ('donations/add_type', donations.add_type, name = 'donations_types_add'),
+    path ('donations/add_donation_help', donations.add_donation_help, name = 'donations_donations_help_add'),
+    path ('donations/display', donations.display, name = 'donations_display'), 
     
 ]
