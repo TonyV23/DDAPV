@@ -50,3 +50,15 @@ def display(request) :
             'page_title' : page_title
         }
     )
+
+def donors_display(request) :
+
+    page_title = 'Liste des donateurs'
+
+    return render(
+        request,
+        'fondation/donations/donors_display.html',
+        {
+            'page_title' : page_title
+        }
+    )
