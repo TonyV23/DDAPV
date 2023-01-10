@@ -1,0 +1,83 @@
+{% load static %}
+<aside class="left-sidebar sidebar-dark" id="left-sidebar">
+    <div id="sidebar" class="sidebar sidebar-with-footer">
+    <!-- Application Brand -->
+    
+    <div class="app-brand">
+        <a href="{% url 'dashboard' %}">
+        <span class="brand-name">Fondation Evan You</span>
+        </a>
+    </div>
+    
+    <!-- begin sidebar scrollbar -->
+    <div class="sidebar-left" data-simplebar style="height: 100%;">
+        <!-- sidebar menu -->
+        <ul class="nav sidebar-inner" id="sidebar-menu">
+
+            <li >
+                <a class="sidenav-item-link" href="{% url 'dashboard' %}">
+                    <i class="mdi mdi-speedometer"></i>
+                    <span class="nav-text ">Tableau de bord</span>
+                </a>
+            </li>
+
+            <li >
+                <a class="sidenav-item-link" href="{% url 'distributions_overview' %}">
+                    <i class="mdi mdi-source-fork"></i>
+                    <span class="nav-text ">Distribution</span>
+                </a>
+            </li>
+
+            <li class="section-title">Gestion de camps</li>
+        
+            
+            <li>
+                <a class="sidenav-item-link" href="{% url 'refugees_overview' %}">
+                    <i class="mdi mdi-human-male-female"></i>
+                    <span class="nav-text">refugiés</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="sidenav-item-link" href="{% url 'donations_overview' %}">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span class="nav-text">dons et aides</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="sidenav-item-link" href="{% url 'vulnerabilities_overview' %}">
+                    <i class="fa-solid fa-person-harassing"></i>
+                    <span class="nav-text">Vulnerabilités</span>
+                </a>
+            </li>
+
+            <li  class="has-sub" >
+                <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#email"
+                    aria-expanded="false" aria-controls="email">
+                    <i class="mdi mdi-cards"></i>
+                    <span class="nav-text">Autres</span> <b class="caret"></b>
+                </a>
+                <ul  class="collapse"  id="email" data-parent="#sidebar-menu">
+                    <div class="sub-menu">
+                        <li >
+                            <a class="sidenav-item-link" href="{% url 'address_overview' %}">
+                                <span class="nav-text ">Addresse</span>
+                            </a>
+                        </li>
+                        <li >
+                            <a class="sidenav-item-link" href="{% url 'level_studies_overview' %}">
+                                <span class="nav-text">Niveau d'études</span>
+                            </a>
+                        </li>
+                        
+                        <li >
+                            <a class="sidenav-item-link" href="{% url 'matiral_status_overview' %}">
+                                <span class="nav-text">Situation matrimoniale</span>
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </li>
+
+</aside>

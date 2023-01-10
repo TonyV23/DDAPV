@@ -1,0 +1,43 @@
+{% extends 'fondation/layouts/default.html' %} 
+
+{% block content %}
+
+<div class="row">
+    
+    <div class="col-xl-6">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-3">
+                    <!-- <img src="images/elements/hc1.jpg" class="rounded-left horizontal-img" alt="Image"> -->
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title pt-2">Niveau d'études ?</h5>
+                        <p class="card-text mb-6">Cliquez sur le bouton en bas pour enregister le niveau d'études d'un (e) refugié (e) </p>
+                        <a href="{% url 'level_studies_add' %}" class="btn btn-outline-primary">Acceder au formulaire</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title pt-2">La liste niveaux d'études des refugiés ?</h5>
+                        <p class="card-text mb-6">Cliquez sur le bouton en bas pour afficher la liste des niveaux d' études</p>
+                        <a href="{% url 'level_studies_display' %}" class="btn btn-outline-primary">Afficher</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <!-- <img src="images/elements/hc2.jpg" class="rounded-right horizontal-img" alt="Image"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
