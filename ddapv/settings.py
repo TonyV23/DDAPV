@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'fondation',
     'crispy_forms',
     'phone_field',
+    'multiselectfield',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
