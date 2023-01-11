@@ -5,7 +5,8 @@ from fondation.models import Province, Commune, Vulnerability, LevelStudy, Matir
 
 class Person (models.Model) :
     
-    first_last_name = models.CharField('nom et prénom', max_length=30, help_text= 'tapez le nom et prénom')
+    last_name = models.CharField('nom de famille', max_length=30, help_text= 'tapez le nom de famille')
+    first_name = models.CharField('prenom', max_length=30, help_text= 'tapez le prenom')
     GenderType = models.TextChoices('Masculin', 'féminin')
     gender = models.CharField('sexe', choices=GenderType.choices, max_length=20)
     age = models.DateField('date de naissance')
@@ -27,14 +28,14 @@ class Person (models.Model) :
     date_joined = models.DateField("date d'arrivée",auto_created=True, editable=True)
 
     def __str__(self) -> str:
-        return self.first_last_name+' '+self.gender+' '+self.age+' '+self.phone+' '+self.father+' '+self.mother+' '+self.province_name+' '+self.commune_name+' '+self.zone_name+' '+self.vulnerability_name+' '+self.level_study_name+' '+self.matiral_status_name+' '+self.number_of_dependent_children+' '+self.work_before_exile+''+self.date_joined
+        return self.last_name+' '+self.first_name+' '+self.gender+' '+self.age+' '+self.phone+' '+self.father+' '+self.mother+' '+self.province_name+' '+self.commune_name+' '+self.zone_name+' '+self.vulnerability_name+' '+self.level_study_name+' '+self.matiral_status_name+' '+self.number_of_dependent_children+' '+self.work_before_exile+''+self.date_joined
 
     class Meta : 
 
         constraints = [
             models.UniqueConstraint(
-            fields = ['first_last_name','gender','age','phone','father','mother','province_name','commune_name','zone_name','vulnerability_name','level_study_name','matiral_status_name','number_of_dependent_children','work_before_exile'],
+            fields = ['last_name','first_name','gender','age','phone','father','mother','province_name','commune_name','zone_name','vulnerability_name','level_study_name','matiral_status_name','number_of_dependent_children','work_before_exile'],
             name = 'unique_person'
             )
         ]
-        ordering = ['-date_joined', 'first_last_name']
+        ordering = ['-date_joined', 'last_name', 'first_name']
