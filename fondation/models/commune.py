@@ -8,7 +8,7 @@ class Commune(models.Model) :
     commune_name = models.CharField('Nom de la commune', max_length=20, help_text='tapez le nom de la commune', unique=True)
 
     def __str__(self) -> str:
-        return self.commune_name
+        return self.commune_name +', '+self.province_name
 
     class Meta :
         constraints = [
@@ -17,5 +17,3 @@ class Commune(models.Model) :
                 name = 'unique_commune'
             )
         ]
-        
-        ordering = ['province_name', 'commune_name']
