@@ -5,3 +5,4 @@ from .level_studies import *
 from .vulnerability import *
 from .type_help import *
 from .help import *
+from .person import *
