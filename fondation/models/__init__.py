@@ -7,3 +7,4 @@ from .type_help import *
 from .help import *
 from .person import *
 from .donations import *
+from .distributions import *
