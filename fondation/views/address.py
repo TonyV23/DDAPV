@@ -38,29 +38,6 @@ def add_commune(request) :
     )
 
 
-def add_zone(request) :
-
-    page_title = 'Ajouter zone'
-
-    return render(
-        request,
-        'fondation/address/add_zone.html',
-        {
-            'page_title' : page_title
-        }
-    )
-
-def add_quartier_colline(request) :
-
-    page_title = 'Ajouter quartier/ colline'
-
-    return render(
-        request,
-        'fondation/address/add_quartier_colline.html',
-        {
-            'page_title' : page_title
-        }
-    )
 
 def display(request) :
 
@@ -93,18 +70,6 @@ def view_communes(request) :
     return render(
         request,
         'fondation/address/view_communes.html',
-        {
-            'page_title' : page_title
-        }
-    )
-
-def view_zones(request) :
-    
-    page_title = 'Liste des zones'
-
-    return render(
-        request,
-        'fondation/address/view_zones.html',
         {
             'page_title' : page_title
         }
