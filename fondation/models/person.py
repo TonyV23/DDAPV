@@ -5,37 +5,37 @@ from fondation.models import Province, Commune, Vulnerability, LevelStudy, Matir
 
 class Person (models.Model) :
     
-    last_name = models.CharField('nom de famille', max_length=30, help_text= 'tapez le nom de famille')
-    first_name = models.CharField('prenom', max_length=30, help_text= 'tapez le prenom')
+    nom = models.CharField(max_length=30, help_text= 'tapez le nom de famille')
+    prenom = models.CharField(max_length=30, help_text= 'tapez le prenom')
     GenderType = models.TextChoices('Masculin', 'féminin')
-    gender = models.CharField('sexe', choices=GenderType.choices, max_length=20)
-    age = models.DateField('date de naissance')
-    phone = PhoneField('numéro de téléphone', blank=True, help_text= 'tapez le numero de téléphone')
-    father = models.CharField('nom et prenom du père',max_length=50,help_text='tapez le nom et le prenom du père')
-    mother = models.CharField('nom et prenom de la mère',max_length=50,help_text='tapez le nom et le prenom du mère')
+    sexe = models.CharField(choices=GenderType.choices, max_length=20)
+    age = models.DateField()
+    numero_de_telephone = PhoneField(blank=True, help_text= 'tapez le numero de téléphone')
+    nom_prenom_du_pere = models.CharField(max_length=50,help_text='tapez le nom et le prenom du père')
+    nom_prenom_de_la_mere = models.CharField(max_length=50,help_text='tapez le nom et le prenom du mère')
 
-    province_name = models.ForeignKey(Province, on_delete=models.CASCADE)
-    commune_name = models.ForeignKey(Commune, on_delete=models.CASCADE)
-    zone_name = models.CharField('zone', max_length=20, help_text="tapez la zone d'origine")
+    nom_de_la_province = models.ForeignKey(Province, on_delete=models.CASCADE, help_text="province d'origine")
+    nom_de_la_commune = models.ForeignKey(Commune, on_delete=models.CASCADE, help_text="commune d'origine")
+    nom_de_la_zone = models.CharField('zone', max_length=20, help_text="zone d'origine")
 
-    vulnerability_name = models.ForeignKey(Vulnerability, on_delete=models.CASCADE)
-    level_study_name = models.ForeignKey(LevelStudy, on_delete=models.CASCADE)
-    matiral_status_name = models.ForeignKey(MatiralStatus, on_delete=models.CASCADE)
+    la_vulnerabilite = models.ForeignKey(Vulnerability, on_delete=models.CASCADE, help_text="sélectionez sa situation de vulnerabilité")
+    le_niveau_etudes = models.ForeignKey(LevelStudy, on_delete=models.CASCADE, help_text="sélectionez son niveau d'études")
+    situation_matrimoniale = models.ForeignKey(MatiralStatus, on_delete=models.CASCADE, help_text="sélectionez sa situation de situation matrimoniale")
 
-    number_of_dependent_children =  models.PositiveIntegerField("nombre d'enfant(s) à sa charge")
-    work_before_exile = models.CharField("fonction occupée avant l'exil", max_length=50, blank=True)
+    nombre_enfants =  models.PositiveIntegerField(help_text="renseignez le nombre d'enfants à sa charge")
+    fonction_avant_exil = models.CharField(max_length=50, blank=True)
 
-    date_joined = models.DateField("date d'arrivée",auto_created=True, editable=True)
+    date_joined = models.DateField(auto_created=True, editable=True)
 
     def __str__(self) -> str:
-        return self.last_name+' '+self.first_name+' '+self.gender+' '+self.age+' '+self.phone+' '+self.father+' '+self.mother+' '+self.province_name+' '+self.commune_name+' '+self.zone_name+' '+self.vulnerability_name+' '+self.level_study_name+' '+self.matiral_status_name+' '+self.number_of_dependent_children+' '+self.work_before_exile+''+self.date_joined
+        return self.nom+' '+self.prenom+' '+self.sexe+' '+self.age+' '+self.numero_de_telephone+' '+self.nom_prenom_du_pere+' '+self.nom_prenom_de_la_mere+' '+self.nom_de_la_province+' '+self.nom_de_la_commune+' '+self.nom_de_la_zone+' '+self.la_vulnerabilite+' '+self.le_niveau_etudes+' '+self.situation_matrimoniale+' '+self.nombre_enfants+' '+self.fonction_avant_exil+''+self.date_joined
 
     class Meta : 
 
         constraints = [
             models.UniqueConstraint(
-            fields = ['last_name','first_name','gender','age','phone','father','mother','province_name','commune_name','zone_name','vulnerability_name','level_study_name','matiral_status_name','number_of_dependent_children','work_before_exile'],
+            fields = ['nom','prenom','sexe','age','numero_de_telephone','nom_prenom_du_pere','nom_prenom_de_la_mere','nom_de_la_province','nom_de_la_commune','nom_de_la_zone','la_vulnerabilite','le_niveau_etudes','situation_matrimoniale','nombre_enfants','fonction_avant_exil', 'date_joined'],
+            
             name = 'unique_person'
             )
         ]
-        ordering = ['-date_joined', 'last_name', 'first_name']
