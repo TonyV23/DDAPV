@@ -7,6 +7,3 @@ class ProvinceForm (ModelForm) :
     class Meta : 
         model = Province
         fields = '__all__'
-        labels = {
-            'nom_de_la_province' : 'nom province origine'
-        } 
