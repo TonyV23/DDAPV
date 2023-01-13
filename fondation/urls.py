@@ -51,10 +51,8 @@ urlpatterns = [
     path ('address/', address.index, name = 'address_overview'),
     path ('address/add_province', address.add_province, name = 'address_add_province'),
     path ('address/add_commune', address.add_commune, name = 'address_add_commune'),
-    path ('address/add_zone', address.add_zone, name = 'address_add_zone'),
     path ('address/view_provinces', address.view_provinces, name = 'view_provinces'),
     path ('address/view_communes', address.view_communes, name = 'view_communes'),
-    path ('address/view_zones', address.view_zones, name = 'view_zones'),
     path ('address/display', address.display, name = 'address_display'),
 
     
