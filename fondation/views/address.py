@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from fondation.forms import ProvinceForm
 
 def index (request) :
 
@@ -15,12 +16,15 @@ def index (request) :
 
 def add_province(request) :
 
-    page_title = 'Ajouter province'
+    page_title = 'Ajouter une province'
+    form = ProvinceForm
+
 
     return render(
         request,
         'fondation/address/add_province.html',
         {
+            'form' : form,
             'page_title' : page_title
         }
     )
