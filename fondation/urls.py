@@ -79,7 +79,11 @@ urlpatterns = [
     # matiral status urls
 
     path('matiralStatus/', matiral_status.index, name = 'matiral_status_overview'),
-    path('matiralStatus/add', matiral_status.add_matiral_status, name = 'matiral_status_add'),
+    path('matiralStatus/matiral_status_add', matiral_status.matiral_status_add, name = 'matiral_status_add'),
+    path('matiralStatus/matiral_status_store', matiral_status.matiral_status_store, name = 'matiral_status_store'),
+    path('matiralStatus/matiral_status_edit/<int:id>', matiral_status.matiral_status_edit, name = 'matiral_status_edit'),
+    path('matiralStatus/matiral_status_update/<int:id>', matiral_status.matiral_status_update, name = 'matiral_status_update'),
+    path('matiralStatus/matiral_status_delete/<int:id>', matiral_status.matiral_status_delete, name = 'matiral_status_delete'),
     path('matiralStatus/display', matiral_status.display, name = 'matiral_status_display'),
 
 
