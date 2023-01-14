@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
 
-from fondation.forms import ProvinceForm
-from fondation.models import Province
+from fondation.forms import ProvinceForm, CommuneForm
+from fondation.models import Province, Commune
 
 def index (request) :
 
@@ -21,7 +21,7 @@ def add_province(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une province'
     if request.method == 'GET' :
-        form = ProvinceForm
+        form = ProvinceForm ()
 
     return render(
         request,
@@ -80,18 +80,65 @@ def province_delete(request, id):
 
 
 def add_commune(request) :
-
-    page_title = 'Ajouter commune'
+    assert isinstance(request, HttpRequest)
+    page_title = 'Ajouter une commune'
+    if request.method == 'GET' :
+        form = CommuneForm()
 
     return render(
         request,
         'fondation/address/add_commune.html',
         {
+            'form' : form,
             'page_title' : page_title
         }
     )
 
+def store_commune(request) :
+    if request.method == 'POST':
+        form = CommuneForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"La commune a été enregistré avec succès !")
+        else :
+            messages.error(request, form.errors)
+        return redirect('/address/address_view_communes')
 
+def commune_edit(request, id) :
+    assert isinstance(request, HttpRequest)
+    page_title = 'Modifier la commune'
+    if request.method == 'GET':
+        if id == 0:
+            form = CommuneForm()
+        else:
+            province = Commune.objects.get(pk=id)
+            form = CommuneForm(instance=province)
+        return render(
+            request,
+            'fondation/address/address_edit_commune.html',
+            {
+                'form': form,
+                'page_title' :page_title
+            }
+        )
+
+def commune_update(request, id) :
+    if request.method == 'POST':
+        if id == 0:
+            form = CommuneForm(request.POST)
+        else:
+            commune = Commune.objects.get(pk=id)
+            form = CommuneForm(request.POST, instance=commune)
+        if form.is_valid():
+            form.save()
+        messages.success(request, "La commune a été modifié avec succès !")
+        return redirect('/address/address_view_communes')
+
+def commune_delete(request, id) :
+    communes = Commune.objects.get(pk = id)
+    communes.delete()
+    messages.success(request,"La commune a été supprimé avec succès !")
+    return redirect('/address/address_view_communes')
 
 def display(request) :
 
@@ -122,11 +169,13 @@ def view_provinces(request) :
 def view_communes(request) :
     
     page_title = 'Liste des communes'
+    communes = Commune.objects.all()
 
     return render(
         request,
-        'fondation/address/view_communes.html',
+        'fondation/address/address_view_communes.html',
         {
-            'page_title' : page_title
+            'page_title' : page_title,
+            'communes' : communes
         }
     )
