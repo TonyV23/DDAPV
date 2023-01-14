@@ -2,7 +2,46 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
+<div class="content-body">
 
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <div></div>
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-dark">+ Niveau d'études</h2>
+                    </div>
+                    <div class="card-body">
+                        <!-- Vertical Form -->
+                        <form action="{% url 'level_studies_store' %}" method="post">
+                            {% csrf_token %}
+                            <div class="col-12">
+                                {{ form.niveau_etudes|as_crispy_field }}
+                            </div>
+                            <div class="text-center">
+                                <br/>
+                                <button type="submit" class="btn btn-sm btn-success btn-pill">Enregistrer</button>
+                                <button type="reset" class="btn btn-sm btn-outline-danger btn-pill">Vider le formulaire</button>
+                            </div>
+                        </form><!-- Vertical Form -->
+          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+</div>
 
 
 
