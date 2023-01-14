@@ -140,7 +140,6 @@ def commune_delete(request, id) :
     messages.success(request,"La commune a été supprimé avec succès !")
     return redirect('/address/address_view_communes')
 
-def display(request) :
 
     page_title = 'Origines des refugiés'
 
