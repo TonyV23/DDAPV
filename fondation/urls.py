@@ -40,9 +40,12 @@ urlpatterns = [
     
     # vulnerabilities urls 
     
-    path('vulnerabilities/', vulnerabilities.index, name = 'vulnerabilities_overview'),
-    path('vulnerabilities/add_type', vulnerabilities.add_vulnerabilities_type, name = 'vulnerabilities_add_type'),
-    path('vulnerabilities/add_value', vulnerabilities.add_vulnerabilities_value, name = 'vulnerabilities_add_value'),
+    path ('vulnerabilities/', vulnerabilities.index, name = 'vulnerabilities_overview'),
+    path ('vulnerabilities/vulnerabilities_add', vulnerabilities.vulnerabilities_add, name = 'vulnerabilities_add'),
+    path ('vulnerabilities/vulnerabilities_store', vulnerabilities.vulnerabilities_store, name = 'vulnerabilities_store'),
+    path ('vulnerabilities/vulnerabilities_edit/<int:id>', vulnerabilities.vulnerabilities_edit, name = 'vulnerabilities_edit'),
+    path ('vulnerabilities/vulnerabilities_update/<int:id>', vulnerabilities.vulnerabilities_update, name = 'vulnerabilities_update'),
+    path ('vulnerabilities/vulnerabilities_delete/<int:id>', vulnerabilities.vulnerabilities_delete, name = 'vulnerabilities_delete'),
     path ('vulnerabilities/display', vulnerabilities.display, name = 'vulnerabilities_display'),
 
     
