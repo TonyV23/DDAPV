@@ -68,7 +68,11 @@ urlpatterns = [
     # level studies urls
     
     path ('levelStudies/', level_studies.index, name = 'level_studies_overview'),
-    path ('levelStudies/add', level_studies.add_level_study, name = 'level_studies_add'),
+    path ('levelStudies/level_study_add', level_studies.level_study_add, name = 'level_studies_add'),
+    path ('levelStudies/level_study_store', level_studies.level_study_store, name = 'level_studies_store'),
+    path ('levelStudies/level_study_edit/<int:id>', level_studies.level_study_edit, name = 'level_studies_edit'),
+    path ('levelStudies/level_study_store/<int:id>', level_studies.level_study_update, name = 'level_studies_update'),
+    path ('levelStudies/level_study_delete/<int:id>', level_studies.level_study_delete, name = 'level_studies_delete'),
     path ('levelStudies/display', level_studies.display, name = 'level_studies_display'),
 
 
