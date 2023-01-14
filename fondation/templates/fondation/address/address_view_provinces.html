@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Provinces</h2>
                         <div class="card-header py-3">
-                          <a href="{% url 'address_add_province' %}" class="btn btn-dark btn-pill"
+                          <a href="{% url 'address_add_province' %}" class="btn btn-sm btn-primary btn-pill"
                             >Nouvelle province</a>
                         </div>
                          {% comment %} {% if messages %}
@@ -46,8 +46,8 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nom la province</th>
-                                        <th> EDIT </th>
-                                        <th>DELETE</th>
+                                        <th> modifier </th>
+                                        <th>supprimer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,7 +58,7 @@
                                                                     
                                         <td>
                                             <a href="{% url 'address_province_edit' province.id %}"
-                                            class="btn btn-warning btn-pill">Edit</a>
+                                            class="btn btn-sm btn-primary btn-pill">MODIFIER</a>
                                         </td>
                             
                                         <td>
@@ -67,8 +67,8 @@
                                                 <button
                                                     type="submit"
                                                     onclick="return confirm('Voulez-vous vraiment supprimer cette province ?')"
-                                                    class="btn btn-danger btn-pill">
-                                                    Delete
+                                                    class="btn btn-sm btn-danger btn-pill">
+                                                    SUPPRIMER
                                                 </button>
                                             </form>
                                         </td>

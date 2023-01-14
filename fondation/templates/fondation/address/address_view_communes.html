@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Communes</h2>
                         <div class="card-header py-3">
-                          <a href="{% url 'address_add_commune' %}" class="btn btn-dark btn-pill"
+                          <a href="{% url 'address_add_commune' %}" class="btn btn-sm btn-primary btn-pill"
                             >Nouvelle commune</a>
                         </div>
                          {% comment %} {% if messages %}
@@ -60,7 +60,7 @@
                                                                     
                                         <td>
                                             <a href="{% url 'address_commune_edit' commune.id %}"
-                                            class="btn btn-warning btn-pill">Modifier</a>
+                                            class="btn btn-sm btn-primary btn-pill">MODIFIER</a>
                                         </td>
                             
                                         <td>
@@ -69,7 +69,7 @@
                                                 <button
                                                     type="submit"
                                                     onclick="return confirm('Voulez-vous vraiment supprimer cette commune ?')"
-                                                    class="btn btn-danger btn-pill">
+                                                    class="btn btn-sm btn-danger btn-pill">
                                                     Supprimer
                                                 </button>
                                             </form>
