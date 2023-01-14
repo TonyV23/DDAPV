@@ -64,8 +64,6 @@ urlpatterns = [
     path ('address/address_commune_delete/<int:id>', address.commune_delete, name = 'address_commune_delete'),
     path ('address/address_view_communes', address.view_communes, name = 'view_communes'),
     
-    path ('address/address_display', address.display, name = 'address_display'),
-
     
     # level studies urls
     
