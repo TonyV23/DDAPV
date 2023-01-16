@@ -2,11 +2,12 @@ from django.db import models
 from multiselectfield import MultiSelectField
 
 
-from fondation.models import Person
+from fondation.models import Camp, Person
 
 class Distribution(models.Model) : 
     
-    beneficiaire = models.ForeignKey(Person, on_delete=models.CASCADE ,help_text="sélectionez le bénéficiaire")
+    camp = models.ForeignKey(Camp, on_delete=models.CASCADE, help_text="sélectionez le camp du refugié (e)")
+    beneficiaire = models.ForeignKey(Person, on_delete=models.CASCADE ,help_text="sélectionez le (la) bénéficiaire", unique_for_date='date_given')
     
     TypeHelpChoices = (
         ('aide_en_nature','Aide en nature'),
@@ -19,12 +20,4 @@ class Distribution(models.Model) :
     date_given = models.DateField(auto_created=True)
 
     def __str__(self) -> str:
-        return self.beneficiaire+" "+self.type_assistance+" "+self.description+''+self.date_given
-
-    class Meta : 
-        constraints = [
-            models.UniqueConstraint(
-                fields = ['beneficiaire', 'type_assistance', 'description','date_given'],
-                name = 'unique_distribution'
-            )
-        ]
+        return self.camp+" "+self.beneficiaire+" "+self.type_assistance+" "+self.description+''+self.date_given
