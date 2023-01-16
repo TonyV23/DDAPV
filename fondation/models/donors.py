@@ -3,8 +3,11 @@ from django.db import models
 from multiselectfield import MultiSelectField
 from phone_field import PhoneField
 
-class Donation(models.Model) : 
-    
+from fondation.models import Camp
+
+class Donor(models.Model) : 
+
+    camp = models.ForeignKey(Camp, on_delete=models.CASCADE, help_text="sélectionez le camp")     
     TypeDonor = (
         ('org', 'Organisation'),
         ('entrp', 'Entreprise'),
@@ -31,12 +34,4 @@ class Donation(models.Model) :
     donor_date_given = models.DateField(auto_created=True)
 
     def __str__(self) -> str:
-        return self.type_donneur+' '+self.nom_du_donneur+' '+self.type_aide+' '+self.description+''+self.numero_de_telephone+' '+self.adresse_mail+' '+self.donor_date_given
-
-    class Meta :
-        constraints = [
-            models.UniqueConstraint(
-                fields = ['type_donneur','nom_du_donneur','type_aide','description','numero_de_telephone','adresse_mail','donor_date_given'],
-                name = 'unique_donor'
-            )            
-        ]        
+        return self.camp+' '+self.type_donneur+' '+self.nom_du_donneur+' '+self.type_aide+' '+self.description+''+self.numero_de_telephone+' '+self.adresse_mail+' '+self.donor_date_given
