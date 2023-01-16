@@ -82,6 +82,8 @@ def province_delete(request, id):
 def add_commune(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une commune'
+    provinces = Province.objects.all()
+
     if request.method == 'GET' :
         form = CommuneForm()
 
@@ -90,7 +92,8 @@ def add_commune(request) :
         'fondation/address/add_commune.html',
         {
             'form' : form,
-            'page_title' : page_title
+            'page_title' : page_title,
+            'provinces' : provinces
         }
     )
 
