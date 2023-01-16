@@ -31,6 +31,7 @@ class Donor(models.Model) :
     numero_de_telephone = PhoneField(help_text='ce numero de téléphone sera utilisé pour entrer en contact avec vous')
     adresse_mail = models.EmailField(help_text='cette addresse mail sera utilisée pour entrer en contact avec vous')
 
+    donation_received = models.BooleanField(default=0)
     donor_date_given = models.DateField(auto_created=True)
 
     def __str__(self) -> str:

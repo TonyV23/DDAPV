@@ -3,49 +3,13 @@
 {% block content %}
 
 <div class="row d-flex justify-content-center">
-    
-    <div class="col-lg-6 col-xl-5">
-        <div class="card mb-4">
-        <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
-        <div class="card-body">
-            <h5 class="card-title pt-2">Nouveau type de dons ou aides ?</h5>
-            <p class="card-text mb-6">Cliquez sur le bouton en bas pour enregister les types de dons ou aides que bénéficieront les refugiés du camp
-                <br> <br> exemple : <span style="color: darkslateblue;"> aide en nature, aide en espèce, ...</span>
-            </p>
-            <a href="{% url 'donations_types_add' %}" class="btn btn-outline-primary">Acceder au formulaire</a>
-        </div>
-        </div>
-    </div>
-    
-    <div class="col-lg-6 col-xl-5">
-        <div class="card mb-4">
-        <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
-        <div class="card-body">
-            <h5 class="card-title pt-2">Aides / Dons</h5>
-            <p class="card-text mb-6">Cliquez sur le bouton en bas pour enregister les dons ou aides que bénéficieront les refugiés du camp
-                <br> exemple : <span style="color: darkslateblue;"> vivre alimentaire, kit de dignité (femme), enseignements des métiers, ...</span></p>
-            <a href="{% url 'donations_donations_help_add' %}" class="btn btn-outline-primary">Acceder au formulaire</a>
-        </div>
-        </div>
-    </div>
-    
-    <div class="col-lg-6 col-xl-5">
-        <div class="card mb-4">
-        <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
-        <div class="card-body">
-            <h5 class="card-title pt-2">Consulter la liste des dons et aides offerts par la fondation</h5>
-            <p class="card-text mb-6">Cliquez sur le bouton en bas pour afficher la liste des dons et aides offerts par la fondation</p>
-            <a href="{% url 'donations_display' %}" class="btn btn-outline-primary">Afficher</a>
-        </div>
-        </div>
-    </div>
-    
+        
     <div class="col-lg-6 col-xl-5">
         <div class="card mb-4">
         <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
         <div class="card-body">
             <h5 class="card-title pt-2">Liste des donateurs et leurs dons ?</h5>
-            <br><p class="card-text mb-6">Cliquez sur le bouton en bas pour afficher la liste des dons et aides offerts par la fondation</p>
+            <br><p class="card-text mb-6">Cliquez sur le bouton en bas pour afficher la liste des donateurs de la fondation</p>
             <a href="{% url 'donors_display' %}" class="btn btn-outline-primary">Afficher</a>
         </div>
         </div>

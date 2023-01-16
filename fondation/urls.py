@@ -31,11 +31,12 @@ urlpatterns = [
     # donations urls
     
     path ('donations/', donations.index, name = 'donations_overview'),
-    path ('donations/add_type', donations.add_type, name = 'donations_types_add'),
-    path ('donations/add_donation_help', donations.add_donation_help, name = 'donations_donations_help_add'),
-    path ('donations/display', donations.display, name = 'donations_display'),
-    path ('donations/donors_display', donations.donors_display, name = 'donors_display'),
-
+    path ('donations/donors_add', donations.donors_add, name = 'donors_add'),
+    path ('donations/donors_store', donations.donors_store, name = 'donors_store'),
+    path ('donations/donors_edit/<int:id>', donations.donors_edit, name = 'donoros_edit'),
+    path ('donations/donors_update/<int:id>', donations.donors_update, name = 'donoros_update'),
+    path ('donations/display', donations.donors_display, name = 'donors_display'),
+    
 
     
     # vulnerabilities urls 
