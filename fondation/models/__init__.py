@@ -3,6 +3,7 @@ from .commune import *
 from .matiral_status import *
 from .level_studies import *
 from .vulnerability import *
+from .camp import *
 from .person import *
 from .donations import *
 from .distributions import *
