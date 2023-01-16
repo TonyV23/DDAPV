@@ -5,5 +5,5 @@ from .level_studies import *
 from .vulnerability import *
 from .camp import *
 from .person import *
-from .donations import *
+from .donors import *
 from .distributions import *
