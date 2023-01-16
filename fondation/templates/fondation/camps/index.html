@@ -1,0 +1,21 @@
+{% extends 'fondation/layouts/default.html' %} 
+
+{% block content %}
+
+
+<div class="col-lg-6 col-xl-5">
+    <div class="card mb-4">
+    <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
+        <div class="card-body">
+            <h5 class="card-title ">Camp</h5>
+            <p class="card-text pb-3">Pour ajouter un nouveau camp d'intervention cliquez sur le bouton en bas </p>
+            <div class="row d-flex justify-content-between">
+                <a href="{% url 'camps_add' %}" class="btn btn-outline-primary ">Acceder au formulaire</a>
+                <a href="{% url 'camps_display' %}" class="btn btn-outline-primary ">Voir les camps</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
