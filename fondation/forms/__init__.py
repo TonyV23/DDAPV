@@ -4,3 +4,4 @@ from .level_study_form import LevelStudyForm
 from .matiral_status_form import MatiralStatusForm
 from .vulnerability_form import VulnerabilityForm
 from .donor_form import DonorForm
+from .camp_form import CampForm
