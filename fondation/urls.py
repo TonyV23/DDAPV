@@ -100,8 +100,14 @@ urlpatterns = [
     # distribution urls
 
     path ('distributions/', distributions.index, name = 'distributions_overview'),
-    path ('distributions/', distributions.add_distribution, name = 'distributions_add'),
-    path ('distributions/', distributions.display, name = 'distributions_display'),
+    path ('distributions/distribution_add', distributions.distribution_add, name = 'distributions_add'),
+    path ('distributions/distribution_store', distributions.distribution_store, name = 'distributions_store'),
+    path ('distributions/distribution_edit/<int:id>', distributions.distribution_edit, name = 'distributions_edit'),
+    path ('distributions/distribution_update/<int:id>', distributions.distribution_update, name = 'distributions_update'),
+    path ('distributions/distribution_delete/<int:id>', distributions.distribution_delete, name = 'distributions_delete'),
+    path ('distributions/display', distributions.display, name = 'distributions_display'),
+    path ('distributions/distribution_display_by_id/<int:id>', distributions.display_by_id, name = 'distribution_display_by_id'),
+    path ('distributions/getBeneficiaire', distributions.getBeneficiaire, name = 'distributions_getBeneficiaire'),
 
 
     # camps urls

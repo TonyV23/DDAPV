@@ -1,7 +1,8 @@
 {% extends 'fondation/layouts/default.html' %} 
 
 {% block content %}
-<h1 class="page-title text-center mb-2">Sélectionez le camp pour afficher la liste des refugiés</h1>
+
+<h1 class="page-title text-center mb-2">Sélectionez le camp pour afficher la liste des distributions</h1>
 
 <div class="row d-flex justify-content-center">
     
@@ -14,7 +15,7 @@
                     <h5 class="card-title text-dark font-weight-bold">LE CAMP {{camp.nom_du_camp}} à {{camp.site}}</h5>
                     <p class="card-text pb-3"></p>
                     <div class="row d-flex justify-content-between">
-                        <a href="{% url 'refugees_display_by_id' camp.id %}" class="btn btn-sm btn-primary btn-pill ">afficher la liste</a>
+                        <a href="{% url 'distribution_display_by_id' camp.id %}" class="btn btn-sm btn-primary btn-pill ">afficher la liste</a>
                     </div>
                 </div>
             </div>

@@ -20,4 +20,4 @@ class Distribution(models.Model) :
     date_given = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.camp+" "+self.beneficiaire+" "+self.type_assistance+" "+self.description+''+self.date_given
+        return self.camp+"  "+self.beneficiaire+"  "+self.type_assistance+"  "+self.description
