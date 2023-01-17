@@ -32,7 +32,7 @@ class Donor(models.Model) :
     adresse_mail = models.EmailField(help_text='cette addresse mail sera utilisée pour entrer en contact avec vous')
 
     donation_received = models.BooleanField(default=0)
-    donor_date_given = models.DateField(auto_created=True)
+    donor_date_given = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.camp+' '+self.type_donneur+' '+self.nom_du_donneur+' '+self.type_aide+' '+self.description+''+self.numero_de_telephone+' '+self.adresse_mail+' '+self.donor_date_given
