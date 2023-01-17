@@ -8,7 +8,7 @@ class Commune(models.Model) :
     nom_de_la_commune = models.CharField(max_length=20, help_text='tapez le nom de la commune', unique=True)
 
     def __str__(self) -> str:
-        return self.nom_de_la_commune +', '+self.nom_de_la_province
+        return self.nom_de_la_commune
 
     class Meta :
         constraints = [
