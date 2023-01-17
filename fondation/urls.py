@@ -23,9 +23,15 @@ urlpatterns = [
     
     # refugees urls
 
-    path('refugees/', refugees.index, name = 'refugees_overview'),
-    path('refugees/add/', refugees.add, name ='refugees_add'),
-    path('refugees/display/', refugees.display, name ='refugees_display'),
+    path ('refugees/', refugees.index, name = 'refugees_overview'),
+    path ('refugees/refugees_add/', refugees.refugees_add, name ='refugees_add'),
+    path ('refugees/refugees_store/', refugees.refugees_store, name ='refugees_store'),
+    path ('refugees/refugees_edit/<int:id>', refugees.refugees_edit, name ='refugees_edit'),
+    path ('refugees/refugees_update/<int:id>', refugees.refugees_update, name ='refugees_update'),
+    path ('refugees/refugees_delete/<int:id>', refugees.refugees_delete, name ='refugees_delete'),
+    path ('refugees/display/', refugees.refugees_display, name ='refugees_display'),
+    path ('refugees/refugees_display/<int:id>', refugees.refugees_display_by_id, name = 'refugees_display_by_id'),
+    path ('refugees/getCommunes', refugees.getCommunes, name = 'refugees_getCommunes'),
 
     
     # donations urls
