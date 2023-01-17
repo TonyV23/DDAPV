@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpRequest
 
 from fondation.forms import DistributionForm
-from fondation.models import Distribution , Camp
+from fondation.models import Distribution , Camp, Person
 
 
 def index (request) :
@@ -108,3 +108,14 @@ def display_by_id(request, id) :
             'page_title' : page_title,        
         }
     ) 
+
+def getBeneficiaire(request) :
+    camp_id = request.GET.get('id_camp')
+    beneficiaires = Person.objects.filter(camp_id = camp_id)
+    return render(
+        request,
+        'fondation/distributions/getBeneficiaire.html',
+        {
+            'beneficiaires': beneficiaires,
+        }
+    )
