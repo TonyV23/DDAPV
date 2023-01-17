@@ -14,3 +14,20 @@ $(function () {
     );
   });
 });
+
+// GetBeneficiaire by camp_id
+$(function () {
+  $("#id_camp").on("change", function () {
+    id_camp = $(this).val();
+    alert(id_camp);
+    $.get(
+      "/distributions/getBeneficiaire",
+      {
+        id_camp: id_camp,
+      },
+      function (data, textStatus, jqXHR) {
+        $("#id_beneficiaire").html(data);
+      }
+    );
+  });
+});
