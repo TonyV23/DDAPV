@@ -95,4 +95,4 @@ def camps_display(request) :
             'camps' : camps,
             'page_title' : page_title
         }
-    ) 
+    )
