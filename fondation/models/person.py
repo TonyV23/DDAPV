@@ -31,7 +31,7 @@ class Person (models.Model) :
     date_joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.nom+' '+self.prenom+' '+self.sexe+' '+self.age+' '+self.numero_de_telephone+' '+self.nom_prenom_du_pere+' '+self.nom_prenom_de_la_mere+' '+self.camp+''+self.nom_de_la_province+' '+self.nom_de_la_commune+' '+self.nom_de_la_zone+' '+self.la_vulnerabilite+' '+self.le_niveau_etudes+' '+self.situation_matrimoniale+' '+self.nombre_enfants+' '+self.fonction_avant_exil+''+self.date_joined
+        return self.nom+' '+self.prenom+' '+self.sexe+' '+self.nom_prenom_du_pere+' '+self.nom_prenom_de_la_mere+' '+self.nom_de_la_zone+' '+self.fonction_avant_exil
 
     class Meta : 
 
