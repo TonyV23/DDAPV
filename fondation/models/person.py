@@ -7,9 +7,11 @@ class Person (models.Model) :
     
     nom = models.CharField(max_length=30, help_text= 'tapez le nom de famille')
     prenom = models.CharField(max_length=30, help_text= 'tapez le prenom')
-    GenderType = models.TextChoices('Masculin', 'féminin')
-    sexe = models.CharField(choices=GenderType.choices, max_length=20)
-    age = models.DateField()
+    GenderType = (
+            ('M','Masculin'),('F', 'féminin')
+        )
+    sexe = models.CharField(choices=GenderType, max_length=20)
+    age = models.DateField('date de naissance')
     numero_de_telephone = PhoneField(blank=True, help_text= 'tapez le numero de téléphone')
     nom_prenom_du_pere = models.CharField(max_length=50,help_text='tapez le nom et le prenom du père')
     nom_prenom_de_la_mere = models.CharField(max_length=50,help_text='tapez le nom et le prenom du mère')
@@ -26,7 +28,7 @@ class Person (models.Model) :
     nombre_enfants =  models.PositiveIntegerField(help_text="renseignez le nombre d'enfants à sa charge")
     fonction_avant_exil = models.CharField(max_length=50, blank=True)
 
-    date_joined = models.DateField(auto_created=True, editable=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.nom+' '+self.prenom+' '+self.sexe+' '+self.age+' '+self.numero_de_telephone+' '+self.nom_prenom_du_pere+' '+self.nom_prenom_de_la_mere+' '+self.camp+''+self.nom_de_la_province+' '+self.nom_de_la_commune+' '+self.nom_de_la_zone+' '+self.la_vulnerabilite+' '+self.le_niveau_etudes+' '+self.situation_matrimoniale+' '+self.nombre_enfants+' '+self.fonction_avant_exil+''+self.date_joined
