@@ -19,7 +19,7 @@ $(function () {
 $(function () {
   $("#id_camp").on("change", function () {
     id_camp = $(this).val();
-    alert(id_camp);
+    //alert(id_camp);
     $.get(
       "/distributions/getBeneficiaire",
       {
