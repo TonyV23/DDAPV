@@ -1,6 +1,6 @@
 <option value="">-------</option>
 {% for beneficiaire in beneficiaires %}
     <option value="{{beneficiaire.id}}">
-        {{ beneficiaire.nom }} {{ beneficiaire.prenom }} {{ beneficiaire.sexe }}
+        NOM : {{ beneficiaire.nom }}, Prénom : {{ beneficiaire.prenom }} ,  Sexe : {{ beneficiaire.sexe }} né (e) le :{{ beneficiaire.age }}
     </option>
 {% endfor %}
