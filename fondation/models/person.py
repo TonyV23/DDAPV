@@ -30,8 +30,8 @@ class Person (models.Model) :
 
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self) -> str:
-        return self.nom+' '+self.prenom+' '+self.sexe+' '+self.nom_prenom_du_pere+' '+self.nom_prenom_de_la_mere+' '+self.nom_de_la_zone+' '+self.fonction_avant_exil
+    def __str__(self) :
+        return self.nom+' '+self.prenom+' '+self.sexe
 
     class Meta : 
 

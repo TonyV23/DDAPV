@@ -6,7 +6,7 @@ class Camp (models.Model) :
     site = models.CharField(max_length=100, help_text="tapez la localisation géograpfique du camp où se trouve ce camp")
 
     def __str__(self) -> str:
-        return self.nom_du_camp+''+self.site
+        return self.nom_du_camp+'   de  '+self.site
 
     class Meta :
         constraints = [
