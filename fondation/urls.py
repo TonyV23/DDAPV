@@ -39,8 +39,9 @@ urlpatterns = [
     path ('donations/', donations.index, name = 'donations_overview'),
     path ('donations/donors_add', donations.donors_add, name = 'donors_add'),
     path ('donations/donors_store', donations.donors_store, name = 'donors_store'),
-    path ('donations/donors_edit/<int:id>', donations.donors_edit, name = 'donoros_edit'),
-    path ('donations/donors_update/<int:id>', donations.donors_update, name = 'donoros_update'),
+    path ('donations/donors_edit/<int:id>', donations.donors_edit, name = 'donors_edit'),
+    path ('donations/donors_update/<int:id>', donations.donors_update, name = 'donors_update'),
+    path ('donations/donors_delete/<int:id>', donations.donors_delete, name = 'donors_delete'),
     path ('donations/display', donations.donors_display, name = 'donors_display'),
     
 
