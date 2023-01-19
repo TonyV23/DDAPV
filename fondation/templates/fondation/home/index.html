@@ -1,5 +1,71 @@
 {% extends 'fondation/layouts/default.html' %} 
 
 {% block content %}
-<div class="content"></div>
+<div class="content">
+
+    <div class="row">
+        
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-default bg-secondary">
+            <div class="d-flex p-5">
+              <div class="icon-md bg-secondary rounded-circle mr-3">
+                <i class="fa-solid fa-people-group"></i>
+              </div>
+              <div class="text-left">
+                <span class="h2 d-block text-white">{{total_refugees}}</span>
+                <a href="{% url 'refugees_display' %}"><p class="text-white">Refugiés</p></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Second box -->
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-default bg-success">
+            <div class="d-flex p-5">
+              <div class="icon-md bg-success rounded-circle mr-3">
+                <i class="fa-solid fa-tents" style="height: 12px; width: 15px;"></i>
+              </div>
+              <div class="text-left">
+                <span class="h2 d-block text-white">{{total_camps}}</span>
+                <a href="{% url 'camps_display' %}"><p class="text-white">Camps</p></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Third box -->
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-default bg-primary">
+            <div class="d-flex p-5">
+              <div class="icon-md bg-primary rounded-circle mr-3">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+              </div>
+              <div class="text-left">
+                <span class="h2 d-block text-white">{{total_donors}}</span>
+                <a href="{% url 'donors_display' %}" ><p class="text-white">Donateurs</p></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Fourth box -->
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-default bg-info">
+            <div class="d-flex p-5">
+              <div class="icon-md bg-info rounded-circle mr-3">
+                <i class="fa-sharp fa-solid fa-dollar-sign"></i>
+              </div>
+              <div class="text-left">
+                <span class="h2 d-block text-white">{{total_distributions}}</span>
+                <a href="{% url 'distributions_display' %}"><p class="text-white">bénéficiaires</p></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+
+</div>
 {% endblock %}
