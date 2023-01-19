@@ -20,6 +20,7 @@ def index(request) :
 def donors_add(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Faire un don'
+    donors = Donor.objects.all()
 
     if request.method == 'GET' :
         form = DonorForm()
@@ -29,6 +30,7 @@ def donors_add(request) :
         'fondation/donations/add_donator.html',
         {
             'page_title' : page_title,
+            'donors' : donors,
             'form' : form,
         }
     )
@@ -38,10 +40,10 @@ def donors_store(request) :
         form = DonorForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,"Merci pour votre don , prenez soin de vous !")
+            messages.success(request,"Le (la) donateur (trice) a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/')
+        return redirect('/donations/display')
 
 def donors_edit(request, id) :
     assert isinstance(request, HttpRequest)
@@ -72,6 +74,13 @@ def donors_update(request, id) :
             form.save()
         messages.success(request, "L'état du donateur a été modifié avec succès !")
         return redirect('/donations/display')
+
+def donors_delete(request,id) :
+    donors = Donor.objects.get(pk = id)
+    donors.delete()
+    messages.success(request,"Le (la) donateur (trice) a été supprimé avec succès !")
+    return redirect('/donations/display')
+
 
 def donors_display(request) :
     
