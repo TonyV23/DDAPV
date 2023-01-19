@@ -20,10 +20,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Liste des donateurs de la fondation</h2>
-                        <!-- <div class="card-header py-3">
-                          <a href="{% url 'address_add_province' %}" class="btn btn-sm btn-primary btn-pill"
-                            >Nouvelle province</a>
-                        </div> -->
+                        <div class="card-header py-3">
+                          <a href="{% url 'donors_add' %}" class="btn btn-sm btn-primary btn-pill"
+                            >+</a>
+                        </div>
                          {% comment %} {% if messages %}
                          {% for message in messages %} 
                          <p class="alert alert-success w-100 h-100">{{ message }} </p>
@@ -55,7 +55,7 @@
                                         <th>e-mail</th>
                                         <th>date de donation</th>
                                         <th> modifier </th>
-                                        <!-- <th>supprimer</th> -->
+                                        <th>supprimer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,17 +76,17 @@
                                             class="btn btn-sm btn-primary btn-pill">MODIFIER</a>
                                         </td>
                             
-                                        <!-- <td>
-                                            <form action="{% url 'address_province_delete' province.id %}" method="post">
+                                        <td>
+                                            <form action="{% url 'donors_delete' donor.id %}" method="post">
                                                 {% csrf_token %}
                                                 <button
                                                     type="submit"
-                                                    onclick="return confirm('Voulez-vous vraiment supprimer cette province ?')"
+                                                    onclick="return confirm('Voulez-vous vraiment supprimer ce donateur ?')"
                                                     class="btn btn-sm btn-danger btn-pill">
                                                     SUPPRIMER
                                                 </button>
                                             </form>
-                                        </td> -->
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
