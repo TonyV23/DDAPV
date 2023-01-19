@@ -1,6 +1,15 @@
 {% extends 'fondation/layouts/default.html' %} 
 
 {% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+        <li class="breadcrumb-item">  <a href="{% url 'refugees_overview' %}">Aperçu sur les refugiés</a>  </li>
+        <li class="breadcrumb-item active" aria-current="page">Liste des camps selon les refugiés</li>
+    </ol>
+</nav>   
+
 <h1 class="page-title text-center mb-2">Sélectionez le camp pour afficher la liste des refugiés</h1>
 
 <div class="row d-flex justify-content-center">

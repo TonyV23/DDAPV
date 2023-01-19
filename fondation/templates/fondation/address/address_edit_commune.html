@@ -6,13 +6,13 @@
 
         <div class="content-body">
 
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <div></div>
-                    </ol>
-                </div>
-            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+                  <li class="breadcrumb-item">  <a href="{% url 'address_overview' %}">Aperçu sur les addresses  </a>  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Modifier une commune  </li>
+                </ol>
+            </nav>
 
             <div class="container-fluid">
                 <div class="row justify-content-center">
