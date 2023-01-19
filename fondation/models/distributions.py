@@ -14,9 +14,7 @@ class Distribution(models.Model) :
         ('aide_en_espece','Aide en éspèce'),
         ('accompagnement_psychosocial','Accompagnement psychosocial'),
         ('accompagnement_medical','Accompagnement médical')
-    )
-    type_assistance = MultiSelectField(choices=TypeHelpChoices, max_length=150)
-    description = models.CharField(max_length=500, help_text='décrivez le type de don et/ou aides que le bénéficiaire reçoit')
+    )    
     type_aide = MultiSelectField(choices=TypeHelpChoices, max_length=150)
 
     TypeAssistChoices = (
@@ -34,10 +32,9 @@ class Distribution(models.Model) :
         ('reinstallation','Réinstallation'),
         ('kinesitherapie','kinésithérapie'),
     )
-
     type_assistance = MultiSelectField(choices=TypeAssistChoices, max_length=150)
 
-    description = models.CharField(max_length=500, help_text='décrivez le type de don et/ou aides que le bénéficiaire reçoit', blank=True)
+    description = models.CharField("Autres",max_length=500, help_text='reseignez autre type d\'assistance qui ne figure pas dans la liste', blank=True)
     
     date_given = models.DateTimeField(auto_now_add=True)
 
