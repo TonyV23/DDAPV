@@ -15,9 +15,29 @@ class Distribution(models.Model) :
         ('accompagnement_psychosocial','Accompagnement psychosocial'),
         ('accompagnement_medical','Accompagnement médical')
     )
-    type_assistance = MultiSelectField(choices=TypeHelpChoices, max_length=150)
-    description = models.CharField(max_length=500, help_text='décrivez le type de don et/ou aides que le bénéficiaire reçoit')
-    date_given = models.DateField(auto_created=True)
+    type_aide = MultiSelectField(choices=TypeHelpChoices, max_length=150)
+
+    TypeAssistChoices = (
+        ('vivre_alimentaire','Vivre alimentaire'),
+        ('ustenciles_de_cuisines','Ustenciles de cuisines'),
+        ('eau_potable','Eau potable'),
+        ('briquettes','briquettes'),
+        ('kit_de_dignite','Kit de dignité pour les femmes'),
+        ('vetements','Les Vêtements'),
+        ('kit_scolaire','Kit Scolaire'),
+        ('medicaments','Médicaments / Soins médicaux'),
+        ('fonds_de_roulements','Fonds de roulements de micro-projets'),
+        ('enseignements_de_metiers','Enseignements de métiers'),
+        ('reunification_familliale','Réunification familliale'),
+        ('reinstallation','Réinstallation'),
+        ('kinesitherapie','kinésithérapie'),
+    )
+
+    type_assistance = MultiSelectField(choices=TypeAssistChoices, max_length=150)
+
+    description = models.CharField(max_length=500, help_text='décrivez le type de don et/ou aides que le bénéficiaire reçoit', blank=True)
+    
+    date_given = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.camp+" "+self.beneficiaire+" "+self.type_assistance+" "+self.description+''+self.date_given
