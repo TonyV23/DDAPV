@@ -26,7 +26,25 @@ class Donor(models.Model) :
     )
     type_aide = MultiSelectField(choices=TypeHelpChoices, max_length=150)
 
-    description = models.CharField(max_length=500, help_text='décrivez le type de don et/ou aides que vous souhaitez donner à notre fondation',blank=True)
+    TypeAssistChoices = (
+        ('vivre_alimentaire','Vivre alimentaire'),
+        ('ustenciles_de_cuisines','Ustenciles de cuisines'),
+        ('eau_potable','Eau potable'),
+        ('briquettes','briquettes'),
+        ('kit_de_dignite','Kit de dignité pour les femmes'),
+        ('vetements','Les Vêtements'),
+        ('kit_scolaire','Kit Scolaire'),
+        ('medicaments','Médicaments / Soins médicaux'),
+        ('fonds_de_roulements','Fonds de roulements de micro-projets'),
+        ('enseignements_de_metiers','Enseignements de métiers'),
+        ('reunification_familliale','Réunification familliale'),
+        ('reinstallation','Réinstallation'),
+        ('kinesitherapie','kinésithérapie'),
+    )
+
+    type_assistance = MultiSelectField(choices=TypeAssistChoices, max_length=150)
+
+    description = models.CharField("Autres",max_length=500, help_text='décrivez le type de don et/ou aides que vous souhaitez donner à notre fondation',blank=True)
 
     numero_de_telephone = PhoneField(help_text='ce numero de téléphone sera utilisé pour entrer en contact avec vous')
     adresse_mail = models.EmailField(help_text='cette addresse mail sera utilisée pour entrer en contact avec vous')
