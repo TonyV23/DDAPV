@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 
-from fondation.models import Person, Donor, Camp, Distribution ,Province, Vulnerability
+from fondation.models import Person, Donor, Camp, Distribution ,Province, Vulnerability, LevelStudy, MatiralStatus
 
 
 def index(request) :
@@ -19,6 +19,8 @@ def index(request) :
     all_province_occurence = getProvinceOccurence()
     all_vulnerabilities_occurence = getVulnerabilitiesOccurence()
 
+    all_level_studies_list = getAllLevelStudiesListName()
+    all_level_studies_occurence = getAllLevelStudiesOccurence()
 
     variable = {
 
@@ -28,10 +30,15 @@ def index(request) :
         'total_camps' : total_camps,
         'total_donors' : total_donors,
         'total_distributions' : total_distributions,
+        
         'all_province_list': all_province_list,
         'all_vulnerabilities_list' : all_vulnerabilities_list,
         'all_province_occurence' : all_province_occurence,
         'all_vulnerabilities_occurence' :all_vulnerabilities_occurence,
+
+        'all_level_studies_list' : all_level_studies_list,
+        'all_level_studies_occurence' : all_level_studies_occurence,
+
     
     }
 
@@ -113,3 +120,36 @@ def getVulnerabilitiesOccurence() :
 
     return persons_vulnerabilities_dict    
 
+
+def getAllLevelStudiesListName() : 
+    get_all_level_studies_ids =  LevelStudy.objects.values('niveau_etudes')
+    get_all_level_studies_ids_list = []
+
+    for i in range(0, len(get_all_level_studies_ids)) :
+        get_all_level_studies_ids_list.append(list(get_all_level_studies_ids[i].values())[0])
+
+    return get_all_level_studies_ids_list
+
+def getAllLevelStudiesOccurence() :
+    
+    get_all_level_studies_ids =  LevelStudy.objects.values('id')
+    get_all_level_studies_ids_list = []
+    for i in range(0, len(get_all_level_studies_ids)) :
+        get_all_level_studies_ids_list.append(list(get_all_level_studies_ids[i].values())[0])
+
+    get_all_level_studies_refugees = Person.objects.values('le_niveau_etudes_id')
+    get_all_level_studies_refugees_list = []
+    for j in range(0, len(get_all_level_studies_refugees)) :
+        get_all_level_studies_refugees_list.append(list(get_all_level_studies_refugees[j].values())[0])
+
+    refugees_level_studies_dict = {}
+
+    for k in range(0, len(get_all_level_studies_ids_list)) :
+        occurence_level_studies = 0
+        if get_all_level_studies_ids_list[k] in get_all_level_studies_refugees_list :
+            for l in range(0, len(get_all_level_studies_refugees_list)) :
+                if get_all_level_studies_refugees_list[l] == get_all_level_studies_ids_list[k] :
+                    occurence_level_studies = +1
+            refugees_level_studies_dict[get_all_level_studies_ids_list[k]] = occurence_level_studies
+
+    return refugees_level_studies_dict    
