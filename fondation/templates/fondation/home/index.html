@@ -69,6 +69,79 @@
     
     </div>
 
+    <div class="row d-flex justify-content-center">
+      
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Origines des refugiés</h5>
+
+            <!-- Bar Chart -->
+            <div id="barChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#barChart"), {
+                  series: [{
+                    data: [{% for province in all_province_occurence %} '{{province}}', {% endfor %}]
+                  }],
+                  chart: {
+                    type: 'bar',
+                    height: 350
+                  },
+                  plotOptions: {
+                    bar: {
+                      borderRadius: 4,
+                      horizontal: true,
+                    }
+                  },
+                  dataLabels: {
+                    enabled: false
+                  },
+                  xaxis: {
+                    categories: [{% for province_name in all_province_list %} '{{province_name}}', {% endfor %}],
+                  }
+                }).render();
+              });
+            </script>
+            <!-- End Bar Chart -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-primary font-weight-bold">Statistiques des vulnerabilités</h5>
+
+            <!-- Radar Chart -->
+            <div id="radarChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#radarChart"), {
+                  series: [{
+                    name: 'Series 1',
+                    data: [{% for occurence_vulnerabilities in all_vulnerabilities_occurence %} '{{occurence_vulnerabilities}}', {% endfor %}],
+                  }],
+                  chart: {
+                    height: 350,
+                    type: 'radar',
+                  },
+                  xaxis: {
+                    categories: [{% for vulnerability in all_vulnerabilities_list %} '{{vulnerability}}', {% endfor %}]
+                  }
+                }).render();
+              });
+            </script>
+            <!-- End Radar Chart -->
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
     
 
 
