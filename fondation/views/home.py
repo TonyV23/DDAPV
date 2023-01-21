@@ -79,10 +79,10 @@ def getProvinceOccurence() :
 
     for k in range(0, len(get_all_provinces_ids_list)) :
         occurence_provinces = 0
-        if get_all_provinces_ids_list[k] in get_all_provinces_person_ids :
-            for l in range(0, len(get_all_provinces_person_ids)) :
-                if get_all_provinces_person_ids[l] == get_all_provinces_ids_list[k] :
-                    occurence_provinces = +1
+        if get_all_provinces_ids_list[k] in get_all_provinces_person_ids_list :
+            for l in range(0, len(get_all_provinces_person_ids_list)) :
+                if get_all_provinces_person_ids_list[l] == get_all_provinces_ids_list[k] :
+                    occurence_provinces = occurence_provinces +1
             province_person_dict [get_all_provinces_ids_list[k]] = occurence_provinces
 
     return province_person_dict
