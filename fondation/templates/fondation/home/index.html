@@ -71,7 +71,7 @@
 
     <div class="row d-flex justify-content-center">
       
-      <div class="col-lg-6">
+      <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title font-weight-bold text-primary">Origines des refugiés</h5>
@@ -110,7 +110,7 @@
         </div>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-primary font-weight-bold">Statistiques des vulnerabilités</h5>
@@ -140,6 +140,40 @@
           </div>
         </div>
       </div>
+      
+    </div>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Niveau d'etudes des refugiés</h5>
+
+            <!-- Pie Chart -->
+            <div id="pieChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#pieChart"), {
+                  series: [{% for level_studies_occurence in all_level_studies_occurence %} {{level_studies_occurence}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'pie',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  labels: [{% for level_studies in all_level_studies_list %} '{{level_studies}}', {% endfor %}]
+                }).render();
+              });
+            </script>
+            <!-- End Pie Chart -->
+
+          </div>
+        </div>
+      </div>
+      
       
     </div>
     
