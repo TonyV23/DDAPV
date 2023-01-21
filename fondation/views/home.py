@@ -21,6 +21,8 @@ def index(request) :
 
     all_level_studies_list = getAllLevelStudiesListName()
     all_level_studies_occurence = getAllLevelStudiesOccurence()
+    all_matiral_status_list = getAllMatiralStatusListName()
+    all_matiral_status_occurence = getAllMatiralStatusOccurence()
 
     variable = {
 
@@ -38,6 +40,8 @@ def index(request) :
 
         'all_level_studies_list' : all_level_studies_list,
         'all_level_studies_occurence' : all_level_studies_occurence,
+        'all_matiral_status_list' : all_matiral_status_list,
+        'all_matiral_status_occurence' :all_matiral_status_occurence,
 
     
     }
@@ -130,6 +134,7 @@ def getAllLevelStudiesListName() :
 
     return get_all_level_studies_ids_list
 
+
 def getAllLevelStudiesOccurence() :
     
     get_all_level_studies_ids =  LevelStudy.objects.values('id')
@@ -153,3 +158,37 @@ def getAllLevelStudiesOccurence() :
             refugees_level_studies_dict[get_all_level_studies_ids_list[k]] = occurence_level_studies
 
     return refugees_level_studies_dict    
+
+
+def getAllMatiralStatusListName() :
+    get_all_matiral_status_names =  MatiralStatus.objects.values('situation_matrimoniale')
+    get_all_matiral_status_names_list = []
+
+    for i in range(0, len(get_all_matiral_status_names)) :
+        get_all_matiral_status_names_list.append(list(get_all_matiral_status_names[i].values())[0])
+
+    return get_all_matiral_status_names_list
+
+
+def getAllMatiralStatusOccurence() :
+    get_all_matiral_status_ids = MatiralStatus.objects.values('id')
+    get_all_matiral_status_ids_list = []
+    for i in range(0, len(get_all_matiral_status_ids)) :
+        get_all_matiral_status_ids_list.append(list(get_all_matiral_status_ids[i].values())[0])
+    
+    get_all_person_matiral_status_ids = Person.objects.values('situation_matrimoniale_id')
+    get_all_person_matiral_status_ids_list = []
+    for j in range(0, len(get_all_person_matiral_status_ids)) :
+        get_all_person_matiral_status_ids_list.append(list(get_all_person_matiral_status_ids[j].values())[0])
+
+    person_matiral_status = {}
+
+    for k in range (0, len(get_all_matiral_status_ids_list)) :
+        occurence_matiral_status = 0
+        if get_all_matiral_status_ids_list[k] in get_all_person_matiral_status_ids_list :
+            for l in range(0, len(get_all_person_matiral_status_ids_list)) :
+                if get_all_person_matiral_status_ids_list[l] == get_all_matiral_status_ids_list[k] :
+                    occurence_matiral_status =+ 1            
+            person_matiral_status[get_all_matiral_status_ids_list[k]] = occurence_matiral_status
+    
+    return person_matiral_status
