@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
 
-
-from fondation.models import Person, Donor, Camp, Distribution
+from fondation.models import Person, Donor, Camp, Distribution ,Province, Vulnerability
 
 
 def index(request) :
@@ -13,10 +12,10 @@ def index(request) :
     total_refugees = Person.objects.count()
     total_camps = Camp.objects.count()
     total_donors = Donor.objects.count()
-    total_distributions = Distribution.objects.count()
+    total_distributions = Distribution.objects.only('beneficiaire_id').count()
 
-
-
+    all_province_list = getAllProvinceListName()
+    all_vulnerabilities_list = getAllVulnerabilitiesListName()
 
 
     variable = {
@@ -35,3 +34,23 @@ def index(request) :
         template_name = template,
         context = variable
     )
+
+
+def getAllProvinceListName() :
+    get_all_provinces_name = Province.objects.values('nom_de_la_province')
+    get_all_provinces_name_list = []
+
+    for i in range(0, len(get_all_provinces_name)) :
+        get_all_provinces_name_list.append(list(get_all_provinces_name[i].values())[0])
+    
+    return get_all_provinces_name_list
+
+
+def getAllVulnerabilitiesListName():
+    get_all_vulnerabilities_name = Vulnerability.objects.values('vulnerabilite')
+    get_all_vulnerabilities_name_list = []
+
+    for i in range (0, len(get_all_vulnerabilities_name)) :
+        get_all_vulnerabilities_name_list.append(list(get_all_vulnerabilities_name[i].values())[0])
+
+    return get_all_vulnerabilities_name_list
