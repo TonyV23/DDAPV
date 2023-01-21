@@ -174,7 +174,35 @@
         </div>
       </div>
       
-      
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Situation matrimoniale</h5>
+
+            <!-- Donut Chart -->
+            <div id="donutChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#donutChart"), {
+                  series: [{% for matiral_status_occurence in all_matiral_status_occurence %} {{matiral_status_occurence}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'donut',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  labels: [{% for matiral_status_name in all_matiral_status_list %} '{{matiral_status_name}}', {% endfor %}],
+                }).render();
+              });
+            </script>
+            <!-- End Donut Chart -->
+
+          </div>
+        </div>
+      </div>
+
     </div>
     
 
