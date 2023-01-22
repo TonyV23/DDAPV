@@ -207,7 +207,7 @@
     
     <div class="row d-flex justify-content-center">
       
-      <div class="col-lg-6">
+      <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title font-weight-bold text-primary">Total des refugiés dans chaque camps</h5>
@@ -256,7 +256,7 @@
         </div>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title font-weight-bold text-primary">Statistiques de genre</h5>
@@ -291,6 +291,45 @@
 
     </div>
 
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Statistiques sur les donateurs</h5>
+
+            <!-- Polar Area Chart -->
+            <div id="polarAreaChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#polarAreaChart"), {
+                  series: [{{organization_occurence}},{{entreprise_occurence}},{{association_occurence}},{{particulier_occurence}},{{anonyme_occurence}}],
+                  chart: {
+                    type: 'polarArea',
+                    height: 350,
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  stroke: {
+                    colors: ['#fff']
+                  },
+                  fill: {
+                    opacity: 0.8
+                  },
+                  labels :['Organisation','Entreprise','Association','Particulier','Anonyme']
+                }).render();
+              });
+            </script>
+            <!-- End Polar Area Chart -->
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
 
 </div>
 {% endblock %}
