@@ -256,6 +256,39 @@
         </div>
       </div>
 
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Statistiques de genre</h5>
+
+            <!-- Doughnut Chart -->
+            <canvas id="doughnutChart" style="max-height: 328px;"></canvas>
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new Chart(document.querySelector('#doughnutChart'), {
+                  type: 'doughnut',
+                  data: {
+                    labels: ['Hommes', 'Femmes'],
+                    datasets: [{
+                      label: 'My First Dataset',
+                      data: [{{masculine_gender_occurence}}, {{feminine_gender_occurence}}],
+                      backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                      ],
+                      hoverOffset: 4
+                    }]
+                  }
+                });
+              });
+            </script>
+            <!-- End Doughnut CHart -->
+
+          </div>
+        </div>
+      </div>
+
     </div>
 
 
