@@ -328,6 +328,42 @@
         </div>
       </div>
 
+      <div class="col-lg-6 mb-2">
+        <div class="card" style="height: 383px;">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bolder text-primary">Arrivée des refugiés par jour</h5>
+
+            <!-- Line Chart -->
+            <canvas id="lineChart" style="max-height: 500px;"></canvas>
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new Chart(document.querySelector('#lineChart'), {
+                  type: 'line',
+                  data: {
+                    labels: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.day}}', {% endfor %}],
+                    datasets: [{
+                      label: 'Line Chart',
+                      data: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.available}}', {% endfor %}],
+                      fill: false,
+                      borderColor: 'rgb(75, 192, 192)',
+                      tension: 0.1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+              });
+            </script>
+            <!-- End Line CHart -->
+
+          </div>
+        </div>
+      </div>
 
     </div>
 
