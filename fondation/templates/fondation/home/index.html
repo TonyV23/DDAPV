@@ -205,7 +205,58 @@
 
     </div>
     
+    <div class="row d-flex justify-content-center">
+      
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Total des refugiés dans chaque camps</h5>
 
+            <!-- Radial Bar Chart -->
+            <div id="radialBarChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#radialBarChart"), {
+                  series: [{% for camp in camp_occurence %} {{camp}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'radialBar',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  plotOptions: {
+                    radialBar: {
+                      dataLabels: {
+                        name: {
+                          fontSize: '22px',
+                        },
+                        value: {
+                          fontSize: '16px',
+                        },
+                        total: {
+                          show: true,
+                          label: 'Total',
+                          formatter: function(w) {
+                            // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                            return {{total_refugees}}
+                          }
+                        }
+                      }
+                    }
+                  },
+                  labels: [{% for nom_camp in camp_list %} '{{nom_camp}}', {% endfor %}],
+                }).render();
+              });
+            </script>
+            <!-- End Radial Bar Chart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
 
 
 </div>
