@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.db.models import Count
 
 from fondation.models import Person, Donor, Camp, Distribution ,Province, Vulnerability, LevelStudy, MatiralStatus
 
@@ -24,6 +24,9 @@ def index(request) :
     all_matiral_status_list = getAllMatiralStatusListName()
     all_matiral_status_occurence = getAllMatiralStatusOccurence()
 
+    camp_list = getAllCampListName()
+    camp_occurence = getAllCampOccurence()
+
     variable = {
 
         'page_title' : page_title,
@@ -43,7 +46,10 @@ def index(request) :
         'all_matiral_status_list' : all_matiral_status_list,
         'all_matiral_status_occurence' :all_matiral_status_occurence,
 
-    
+        'camp_list' : camp_list,
+        'camp_occurence' : camp_occurence,
+
+
     }
 
     return render(
@@ -192,3 +198,35 @@ def getAllMatiralStatusOccurence() :
             person_matiral_status[get_all_matiral_status_ids_list[k]] = occurence_matiral_status
     
     return person_matiral_status
+
+
+def getAllCampListName() :
+    get_all_camp_name = Camp.objects.values('nom_du_camp')
+    get_all_camp_name_list = []
+    for i in range (0, len(get_all_camp_name)) :
+        get_all_camp_name_list.append(list(get_all_camp_name[i].values())[0])
+
+    return get_all_camp_name_list
+
+def getAllCampOccurence() :
+    get_all_camp_name = Camp.objects.values('id')
+    get_all_camp_name_list = []
+    for i in range (0, len(get_all_camp_name)) :
+        get_all_camp_name_list.append(list(get_all_camp_name[i].values())[0])
+
+    get_all_refugees_camp = Person.objects.values('camp_id')
+    get_all_refugees_camp_list = []
+    for i in range (0, len(get_all_refugees_camp)) :
+        get_all_refugees_camp_list.append(list(get_all_refugees_camp[i].values())[0])
+
+    refugees_camps_dict = {}
+
+    for k in range(0, len(get_all_camp_name_list)) :
+        occurence_camp = 0
+        if get_all_camp_name_list[k] in get_all_refugees_camp_list :
+            for l in range (0, len(get_all_refugees_camp_list)) :
+                if get_all_refugees_camp_list[l] == get_all_camp_name_list[k] :
+                    occurence_camp =+1
+            refugees_camps_dict[get_all_camp_name_list[k]] = occurence_camp
+
+    return refugees_camps_dict 
