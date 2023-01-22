@@ -37,6 +37,8 @@ def index(request) :
     particulier_occurence = getParticulierOccurence()
     anonyme_occurence = getAnonymOccurence() 
 
+    refugees_arrived_per_day = getRefugeesArrivedPerDay()
+
     variable = {
 
         'page_title' : page_title,
@@ -67,6 +69,8 @@ def index(request) :
         'association_occurence' : association_occurence,
         'particulier_occurence' : particulier_occurence,
         'anonyme_occurence' : anonyme_occurence,
+
+        'refugees_arrived_per_day' : refugees_arrived_per_day,
 
     }
 
@@ -305,3 +309,8 @@ def getAnonymOccurence() :
         anonym_occurence_list.append(list(anonym_occurence[i].values())[1])
     
     return anonym_occurence_list
+
+def getRefugeesArrivedPerDay() :
+    refugees_arrived_per_day = Person.objects.extra(select={'day': 'date( date_joined )'}).values('day').annotate(available=Count('date_joined'))
+    
+    return refugees_arrived_per_day
