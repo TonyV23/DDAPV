@@ -29,7 +29,13 @@ def index(request) :
 
 
     masculine_gender_occurence = getMasculineOccurence()
-    feminine_gender_occurence = getFeminineOccurence() 
+    feminine_gender_occurence = getFeminineOccurence()
+
+    organization_occurence = getOrganizationOccurence()
+    entreprise_occurence = getEntrepriseOccurence()
+    association_occurence = getAssociationOccurence()
+    particulier_occurence = getParticulierOccurence()
+    anonyme_occurence = getAnonymOccurence() 
 
     variable = {
 
@@ -55,6 +61,12 @@ def index(request) :
 
         'masculine_gender_occurence' : masculine_gender_occurence,
         'feminine_gender_occurence' : feminine_gender_occurence,
+
+        'organization_occurence' : organization_occurence,
+        'entreprise_occurence' : entreprise_occurence,
+        'association_occurence' : association_occurence,
+        'particulier_occurence' : particulier_occurence,
+        'anonyme_occurence' : anonyme_occurence,
 
     }
 
@@ -253,3 +265,43 @@ def getMasculineOccurence() :
         masculine_gender_occurence_list.append(list(masculine_gender_occurence[i].values())[1])
     
     return masculine_gender_occurence_list
+
+def getOrganizationOccurence() : 
+    organization_occurence = Donor.objects.values('type_donneur').filter(type_donneur='org').annotate(organization = Count('type_donneur'))
+    organization_occurence_list = []
+    for i in range (0, len(organization_occurence)) :
+        organization_occurence_list.append(list(organization_occurence[i].values())[1])
+    
+    return organization_occurence_list
+
+def getEntrepriseOccurence() : 
+    entreprise_occurence = Donor.objects.values('type_donneur').filter(type_donneur='entrp').annotate(entreprise = Count('type_donneur'))
+    entreprise_occurence_list = []
+    for i in range (0, len(entreprise_occurence)) :
+        entreprise_occurence_list.append(list(entreprise_occurence[i].values())[1])
+    
+    return entreprise_occurence_list
+
+def getAssociationOccurence() : 
+    association_occurence = Donor.objects.values('type_donneur').filter(type_donneur='assoc').annotate(association = Count('type_donneur'))
+    association_occurence_list = []
+    for i in range (0, len(association_occurence)) :
+        association_occurence_list.append(list(association_occurence[i].values())[1])
+    
+    return association_occurence_list
+
+def getParticulierOccurence() : 
+    particulier_occurence = Donor.objects.values('type_donneur').filter(type_donneur='part').annotate(particulier = Count('type_donneur'))
+    particulier_occurence_list = []
+    for i in range (0, len(particulier_occurence)) :
+        particulier_occurence_list.append(list(particulier_occurence[i].values())[1])
+    
+    return particulier_occurence_list
+
+def getAnonymOccurence() : 
+    anonym_occurence = Donor.objects.values('type_donneur').filter(type_donneur='anonym').annotate(anonym = Count('type_donneur'))
+    anonym_occurence_list = []
+    for i in range (0, len(anonym_occurence)) :
+        anonym_occurence_list.append(list(anonym_occurence[i].values())[1])
+    
+    return anonym_occurence_list
