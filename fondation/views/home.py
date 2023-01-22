@@ -27,6 +27,10 @@ def index(request) :
     camp_list = getAllCampListName()
     camp_occurence = getAllCampOccurence()
 
+
+    masculine_gender_occurence = getMasculineOccurence()
+    feminine_gender_occurence = getFeminineOccurence() 
+
     variable = {
 
         'page_title' : page_title,
@@ -49,6 +53,8 @@ def index(request) :
         'camp_list' : camp_list,
         'camp_occurence' : camp_occurence,
 
+        'masculine_gender_occurence' : masculine_gender_occurence,
+        'feminine_gender_occurence' : feminine_gender_occurence,
 
     }
 
@@ -230,3 +236,20 @@ def getAllCampOccurence() :
             refugees_camps_dict[get_all_camp_name_list[k]] = occurence_camp
 
     return refugees_camps_dict 
+
+
+def getFeminineOccurence() :
+    feminine_gender_occurence = Person.objects.values('sexe').filter(sexe ='F').annotate(feminine_gender = Count('sexe'))
+    feminine_gender_occurence_list = []
+    for i in range(0,len(feminine_gender_occurence)) :
+        feminine_gender_occurence_list.append(list(feminine_gender_occurence[i].values())[1])
+    
+    return feminine_gender_occurence_list
+
+def getMasculineOccurence() :
+    masculine_gender_occurence = Person.objects.values('sexe').filter(sexe ='M').annotate(masculine_gender = Count('sexe'))
+    masculine_gender_occurence_list = []
+    for i in range(0,len(masculine_gender_occurence)) :
+        masculine_gender_occurence_list.append(list(masculine_gender_occurence[i].values())[1])
+    
+    return masculine_gender_occurence_list
