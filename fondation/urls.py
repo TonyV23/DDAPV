@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, camp
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, camp, auth
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
@@ -120,5 +120,11 @@ urlpatterns = [
     path('camps/camps_update/<int:id>', camp.camps_update, name='camps_update'),
     path('camps/camps_delete/<int:id>', camp.camps_delete, name='camps_delete'),
     path('camps/camps_display', camp.camps_display, name='camps_display'),
+
+    # authentication urls
+
+    path ('login/', auth.userLogin, name = 'login'),
+    path ('logout/', auth.userLogout, name = 'logout'),
+
     
 ]
