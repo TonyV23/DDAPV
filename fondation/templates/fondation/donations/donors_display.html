@@ -5,14 +5,14 @@
 
 <div class="content-body">
 
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <div></div>
-            </ol>
-        </div>
-    </div>
-    <!-- row -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+          <li class="breadcrumb-item">  <a href="{% url 'donations_overview' %}">Aperçu sur les donateurs</a>  </li>
+          <li class="breadcrumb-item active" aria-current="page">Liste des donateurs</li>
+        </ol>
+    </nav>
+    
 
     <div class="container-fluid">
         <div class="row">
@@ -20,10 +20,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Liste des donateurs de la fondation</h2>
-                        <!-- <div class="card-header py-3">
-                          <a href="{% url 'address_add_province' %}" class="btn btn-sm btn-primary btn-pill"
-                            >Nouvelle province</a>
-                        </div> -->
+                        <div class="card-header py-3">
+                          <a href="{% url 'donors_add' %}" class="btn btn-sm btn-primary btn-pill"
+                            >+</a>
+                        </div>
                          {% comment %} {% if messages %}
                          {% for message in messages %} 
                          <p class="alert alert-success w-100 h-100">{{ message }} </p>
@@ -48,13 +48,14 @@
                                         <th>type</th>
                                         <th>Nom</th>
                                         <th>type d'aide </th>
+                                        <th>type d'assistance </th>
                                         <th>don/aide reçu</th>
                                         <th>description</th>
                                         <th>telephone</th>
                                         <th>e-mail</th>
                                         <th>date de donation</th>
                                         <th> modifier </th>
-                                        <!-- <th>supprimer</th> -->
+                                        <th>supprimer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +65,7 @@
                                         <td>{{ donor.type_donneur }}</td>
                                         <td>{{ donor.nom_donneur }}</td>
                                         <td>{{ donor.type_aide }}</td>
+                                        <td>{{ donor.type_assistance }}</td>
                                         <td>{{ donor.donation_received }}</td>
                                         <td>{{ donor.description }}</td>
                                         <td>{{ donor.numero_de_telephone }}</td>
@@ -74,17 +76,17 @@
                                             class="btn btn-sm btn-primary btn-pill">MODIFIER</a>
                                         </td>
                             
-                                        <!-- <td>
-                                            <form action="{% url 'address_province_delete' province.id %}" method="post">
+                                        <td>
+                                            <form action="{% url 'donors_delete' donor.id %}" method="post">
                                                 {% csrf_token %}
                                                 <button
                                                     type="submit"
-                                                    onclick="return confirm('Voulez-vous vraiment supprimer cette province ?')"
+                                                    onclick="return confirm('Voulez-vous vraiment supprimer ce donateur ?')"
                                                     class="btn btn-sm btn-danger btn-pill">
                                                     SUPPRIMER
                                                 </button>
                                             </form>
-                                        </td> -->
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

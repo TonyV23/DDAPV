@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+      <li class="breadcrumb-item">  <a href="{% url 'distributions_overview' %}">Aperçu sur la distribution</a>  </li>
+      <li class="breadcrumb-item active" aria-current="page">Les distributions selon les camps</li>
+    </ol>
+</nav>
+
 <h1 class="page-title text-center mb-2">Sélectionez le camp pour afficher la liste des distributions</h1>
 
 <div class="row d-flex justify-content-center">

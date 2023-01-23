@@ -6,13 +6,13 @@
 
         <div class="content-body">
 
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <div></div>
-                    </ol>
-                </div>
-            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+                  <li class="breadcrumb-item">  <a href="{% url 'donations_overview' %}">Aperçu sur les donateurs</a>  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Modifier donateur</li>
+                </ol>
+            </nav>           
 
             <div class="container-fluid">
                 <div class="row justify-content-center">
@@ -36,6 +36,9 @@
                                     </div>
                                     <div class="col-12">
                                         {{ form.type_aide|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form.type_assistance|as_crispy_field }}
                                     </div>
                                     <div class="col-12">
                                         {{ form.donation_received|as_crispy_field }}

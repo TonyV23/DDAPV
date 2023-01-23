@@ -1,6 +1,12 @@
 {% extends 'fondation/layouts/default.html' %} 
 
 {% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+      <li class="breadcrumb-item active" aria-current="page">Aperçu sur les addresses </li>
+    </ol>
+</nav>
 
 <h1 class="page-title text-center">Les origines des refugiés</h1>
 

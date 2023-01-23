@@ -1,5 +1,371 @@
 {% extends 'fondation/layouts/default.html' %} 
 
 {% block content %}
-<div class="content"></div>
+<div class="content">
+
+    <div class="row d-flex justify-content-center">
+      
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-secondary">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-secondary rounded-circle mr-3">
+                  <i class="fa-solid fa-people-group"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_refugees}}</span>
+                  <a href="{% url 'refugees_display' %}">
+                    <p class="text-white">Refugiés</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-success">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-success rounded-circle mr-3">
+                  <i class="fa-solid fa-tents" style="height: 12px; width: 15px;"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_camps}}</span>
+                  <a href="{% url 'camps_display' %}">
+                    <p class="text-white">Camps</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-primary">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-primary rounded-circle mr-3">
+                  <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_donors}}</span>
+                  <a href="{% url 'donors_display' %}">
+                    <p class="text-white">Donateurs</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-info">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-info rounded-circle mr-3">
+                  <i class="fa-sharp fa-solid fa-dollar-sign"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_distributions}}</span>
+                  <a href="{% url 'distributions_display' %}"><p class="text-white">bénéficiaires</p></a>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Origines des refugiés</h5>
+
+            <!-- Bar Chart -->
+            <div id="barChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#barChart"), {
+                  series: [{
+                    data: [{% for province in all_province_occurence %} '{{province}}', {% endfor %}]
+                  }],
+                  chart: {
+                    type: 'bar',
+                    height: 350
+                  },
+                  plotOptions: {
+                    bar: {
+                      borderRadius: 4,
+                      horizontal: true,
+                    }
+                  },
+                  dataLabels: {
+                    enabled: false
+                  },
+                  xaxis: {
+                    categories: [{% for province_name in all_province_list %} '{{province_name}}', {% endfor %}],
+                  }
+                }).render();
+              });
+            </script>
+            <!-- End Bar Chart -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-primary font-weight-bold">Statistiques des vulnerabilités</h5>
+
+            <!-- Radar Chart -->
+            <div id="radarChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#radarChart"), {
+                  series: [{
+                    name: 'Series 1',
+                    data: [{% for occurence_vulnerabilities in all_vulnerabilities_occurence %} '{{occurence_vulnerabilities}}', {% endfor %}],
+                  }],
+                  chart: {
+                    height: 350,
+                    type: 'radar',
+                  },
+                  xaxis: {
+                    categories: [{% for vulnerability in all_vulnerabilities_list %} '{{vulnerability}}', {% endfor %}]
+                  }
+                }).render();
+              });
+            </script>
+            <!-- End Radar Chart -->
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-lg-6 mb-2">
+        <div class="card" style="height: 392px;">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Niveau d'etudes des refugiés</h5>
+
+            <!-- Pie Chart -->
+            <div id="pieChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#pieChart"), {
+                  series: [{% for level_studies_occurence in all_level_studies_occurence %} {{level_studies_occurence}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'pie',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  labels: [{% for level_studies in all_level_studies_list %} '{{level_studies}}', {% endfor %}]
+                }).render();
+              });
+            </script>
+            <!-- End Pie Chart -->
+
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Situation matrimoniale</h5>
+
+            <!-- Donut Chart -->
+            <div id="donutChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#donutChart"), {
+                  series: [{% for matiral_status_occurence in all_matiral_status_occurence %} {{matiral_status_occurence}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'donut',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  labels: [{% for matiral_status_name in all_matiral_status_list %} '{{matiral_status_name}}', {% endfor %}],
+                }).render();
+              });
+            </script>
+            <!-- End Donut Chart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="row d-flex justify-content-center">
+      
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Total des refugiés dans chaque camps</h5>
+
+            <!-- Radial Bar Chart -->
+            <div id="radialBarChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#radialBarChart"), {
+                  series: [{% for camp in camp_occurence %} {{camp}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'radialBar',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  plotOptions: {
+                    radialBar: {
+                      dataLabels: {
+                        name: {
+                          fontSize: '22px',
+                        },
+                        value: {
+                          fontSize: '16px',
+                        },
+                        total: {
+                          show: true,
+                          label: 'Total',
+                          formatter: function(w) {
+                            // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                            return {{total_refugees}}
+                          }
+                        }
+                      }
+                    }
+                  },
+                  labels: [{% for nom_camp in camp_list %} '{{nom_camp}}', {% endfor %}],
+                }).render();
+              });
+            </script>
+            <!-- End Radial Bar Chart -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Statistiques de genre</h5>
+
+            <!-- Doughnut Chart -->
+            <canvas id="doughnutChart" style="max-height: 328px;"></canvas>
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new Chart(document.querySelector('#doughnutChart'), {
+                  type: 'doughnut',
+                  data: {
+                    labels: ['Hommes', 'Femmes'],
+                    datasets: [{
+                      label: 'My First Dataset',
+                      data: [{{masculine_gender_occurence}}, {{feminine_gender_occurence}}],
+                      backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                      ],
+                      hoverOffset: 4
+                    }]
+                  }
+                });
+              });
+            </script>
+            <!-- End Doughnut CHart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Statistiques sur les donateurs</h5>
+
+            <!-- Polar Area Chart -->
+            <div id="polarAreaChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#polarAreaChart"), {
+                  series: [{{organization_occurence}},{{entreprise_occurence}},{{association_occurence}},{{particulier_occurence}},{{anonyme_occurence}}],
+                  chart: {
+                    type: 'polarArea',
+                    height: 350,
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  stroke: {
+                    colors: ['#fff']
+                  },
+                  fill: {
+                    opacity: 0.8
+                  },
+                  labels :['Organisation','Entreprise','Association','Particulier','Anonyme']
+                }).render();
+              });
+            </script>
+            <!-- End Polar Area Chart -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-2">
+        <div class="card" style="height: 383px;">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bolder text-primary">Arrivée des refugiés par jour</h5>
+
+            <!-- Line Chart -->
+            <canvas id="lineChart" style="max-height: 500px;"></canvas>
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new Chart(document.querySelector('#lineChart'), {
+                  type: 'line',
+                  data: {
+                    labels: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.day}}', {% endfor %}],
+                    datasets: [{
+                      label: 'Line Chart',
+                      data: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.available}}', {% endfor %}],
+                      fill: false,
+                      borderColor: 'rgb(75, 192, 192)',
+                      tension: 0.1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+              });
+            </script>
+            <!-- End Line CHart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+</div>
 {% endblock %}
