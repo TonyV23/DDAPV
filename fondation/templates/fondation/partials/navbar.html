@@ -54,12 +54,12 @@
             <li class="dropdown user-menu">
 
             <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <span class="d-none d-lg-inline-block">Tony</span>
+                <span class="d-none d-lg-inline-block">{{user.username}}</span>
             </button>
 
             <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-footer">
-                <a class="dropdown-link-item" href="#"> 
+                <a class="dropdown-link-item" href="{% url 'logout' %}"> 
                     <i class="mdi mdi-logout"></i> Log Out </a>
                 </li>
             </ul>
