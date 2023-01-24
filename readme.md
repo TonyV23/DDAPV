@@ -4,7 +4,7 @@
 
 Ce projet développé par <a href = "github.com/TonyV23">HAKIZMANA Tony Carlin</a>, facilite la gestion de distribution des dons et aides aux personnes vulnérables dans les camps des refugiés burundais
 
-### Ce qu'on peut faire avec ce site web
+### CE QUE PEUT FAIRE AVEC CE SITE WEB
 
 Ce site web est conçu pour fonctioner au sein d'une fondation qui s'occupe des personnes vulnérables en général et des refugiés dans les camps en particulier 
 
