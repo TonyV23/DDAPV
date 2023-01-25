@@ -4,7 +4,7 @@
         <span class="sr-only">Toggle navigation</span>
         </button>
 
-        <!-- <span class="page-title">dashboard</span> -->
+        <span class="page-title font-weight-italic">{{page_title}}</span>
 
         <div class="navbar-right ">
 
@@ -54,12 +54,17 @@
             <li class="dropdown user-menu">
 
             <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <span class="d-none d-lg-inline-block">Tony</span>
+                <span class="d-none d-lg-inline-block">{{user.username}}</span>
             </button>
 
             <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <button type="button" class="btn btn-check btn-pill" data-toggle="modal" data-target="#exampleModalTooltip">
+                        voir profil
+                      </button>                    
+                </li>
                 <li class="dropdown-footer">
-                <a class="dropdown-link-item" href="#"> 
+                <a class="dropdown-link-item" href="{% url 'logout' %}"> 
                     <i class="mdi mdi-logout"></i> Log Out </a>
                 </li>
             </ul>

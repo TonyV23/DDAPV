@@ -43,4 +43,43 @@
     <!-- #/ container -->
 </div>
 
+<div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Information de votre compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <h5 class="font-weight-bold">Nom d'utilisateur</h5>
+                <p>{{user.username}}</p>
+                <hr>
+                
+                <h5 class="font-weight-bold">Adresse e-mail</h5>
+                <p>{{user.email}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Création du compte</h5>
+                <p>{{user.date_joined}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Dernière connexion</h5>
+                <p>{{user.last_login}}</p>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}
