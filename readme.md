@@ -33,3 +33,9 @@ Voici les differentes fonctionnalités :
     * les types de donateurs (voir si c'est sont des organisations, des entreprises, des associations, des particuliers ou des anonymes et leur nombre nombre de participations)
 
     * le nombre de nouveaux refugiés par jour
+
+### TECHNOLOGIES UTILISEES
+
+- FRONTED : le framework bootstrap v4
+- BACKEND : le framework Django v4.1 (autres package se trouvent dans le fichier requirements.txt )
+- BASE DE DONNEES : Mysql
