@@ -107,7 +107,6 @@ urlpatterns = [
     path ('distributions/distribution_update/<int:id>', distributions.distribution_update, name = 'distributions_update'),
     path ('distributions/distribution_delete/<int:id>', distributions.distribution_delete, name = 'distributions_delete'),
     path ('distributions/display', distributions.display, name = 'distributions_display'),
-    path ('distributions/distribution_display_by_id/<int:id>', distributions.display_by_id, name = 'distribution_display_by_id'),
     path ('distributions/getBeneficiaire', distributions.getBeneficiaire, name = 'distributions_getBeneficiaire'),
 
 
