@@ -14,29 +14,13 @@
                 <div class="text-left">
                   <span class="h2 d-block text-white">{{total_refugees}}</span>
                   <a href="{% url 'refugees_display' %}">
-                    <p class="text-white">Refugiés</p>
+                    <p class="text-white">Personnes</p>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div class="col-xl-3 col-md-6">
-            <div class="card card-default bg-success">
-              <div class="d-flex p-5">
-                <div class="icon-md bg-success rounded-circle mr-3">
-                  <i class="fa-solid fa-tents" style="height: 12px; width: 15px;"></i>
-                </div>
-                <div class="text-left">
-                  <span class="h2 d-block text-white">{{total_camps}}</span>
-                  <a href="{% url 'camps_display' %}">
-                    <p class="text-white">Camps</p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+                   
           <div class="col-xl-3 col-md-6">
             <div class="card card-default bg-primary">
               <div class="d-flex p-5">
@@ -74,7 +58,7 @@
       <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title font-weight-bold text-primary">Origines des refugiés</h5>
+            <h5 class="card-title font-weight-bold text-primary">Nombre de personnes vulnérables par province</h5>
 
             <!-- Bar Chart -->
             <div id="barChart"></div>
@@ -83,7 +67,7 @@
               document.addEventListener("DOMContentLoaded", () => {
                 new ApexCharts(document.querySelector("#barChart"), {
                   series: [{
-                    data: [{% for province in all_province_occurence %} '{{province}}', {% endfor %}]
+                    data: [{% for province in all_province_occurence.values %} '{{province}}', {% endfor %}]
                   }],
                   chart: {
                     type: 'bar',
@@ -99,7 +83,7 @@
                     enabled: false
                   },
                   xaxis: {
-                    categories: [{% for province_name in all_province_list %} '{{province_name}}', {% endfor %}],
+                    categories: [{% for province_name in all_province_occurence.keys %} '{{province_name}}', {% endfor %}],
                   }
                 }).render();
               });
@@ -113,7 +97,7 @@
       <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title text-primary font-weight-bold">Statistiques des vulnerabilités</h5>
+            <h5 class="card-title text-primary font-weight-bold">Nombre de personnes ayant ces vulnérabilités</h5>
 
             <!-- Radar Chart -->
             <div id="radarChart"></div>
@@ -123,14 +107,14 @@
                 new ApexCharts(document.querySelector("#radarChart"), {
                   series: [{
                     name: 'Series 1',
-                    data: [{% for occurence_vulnerabilities in all_vulnerabilities_occurence %} '{{occurence_vulnerabilities}}', {% endfor %}],
+                    data: [{% for occurence_vulnerabilities in all_vulnerabilities_occurence.values %} '{{occurence_vulnerabilities}}', {% endfor %}],
                   }],
                   chart: {
                     height: 350,
                     type: 'radar',
                   },
                   xaxis: {
-                    categories: [{% for vulnerability in all_vulnerabilities_list %} '{{vulnerability}}', {% endfor %}]
+                    categories: [{% for vulnerability in all_vulnerabilities_occurence.keys %} '{{vulnerability}}', {% endfor %}]
                   }
                 }).render();
               });
@@ -148,7 +132,7 @@
       <div class="col-lg-6 mb-2">
         <div class="card" style="height: 392px;">
           <div class="card-body">
-            <h5 class="card-title font-weight-bold text-primary">Niveau d'etudes des refugiés</h5>
+            <h5 class="card-title font-weight-bold text-primary">Le niveau d'études</h5>
 
             <!-- Pie Chart -->
             <div id="pieChart"></div>
@@ -156,7 +140,7 @@
             <script>
               document.addEventListener("DOMContentLoaded", () => {
                 new ApexCharts(document.querySelector("#pieChart"), {
-                  series: [{% for level_studies_occurence in all_level_studies_occurence %} {{level_studies_occurence}}, {% endfor %}],
+                  series: [{% for level_studies_occurence in all_level_studies_occurence.values %} {{level_studies_occurence}}, {% endfor %}],
                   chart: {
                     height: 350,
                     type: 'pie',
@@ -164,7 +148,7 @@
                       show: true
                     }
                   },
-                  labels: [{% for level_studies in all_level_studies_list %} '{{level_studies}}', {% endfor %}]
+                  labels: [{% for level_studies in all_level_studies_occurence.keys %} '{{level_studies}}', {% endfor %}]
                 }).render();
               });
             </script>
@@ -185,7 +169,7 @@
             <script>
               document.addEventListener("DOMContentLoaded", () => {
                 new ApexCharts(document.querySelector("#donutChart"), {
-                  series: [{% for matiral_status_occurence in all_matiral_status_occurence %} {{matiral_status_occurence}}, {% endfor %}],
+                  series: [{% for matiral_status_occurence in all_matiral_status_occurence.values %} {{matiral_status_occurence}}, {% endfor %}],
                   chart: {
                     height: 350,
                     type: 'donut',
@@ -193,7 +177,7 @@
                       show: true
                     }
                   },
-                  labels: [{% for matiral_status_name in all_matiral_status_list %} '{{matiral_status_name}}', {% endfor %}],
+                  labels: [{% for matiral_status_name in all_matiral_status_occurence.keys %} '{{matiral_status_name}}', {% endfor %}],
                 }).render();
               });
             </script>
@@ -206,60 +190,11 @@
     </div>
     
     <div class="row d-flex justify-content-center">
-      
-      <div class="col-lg-6 mb-2">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title font-weight-bold text-primary">Total des refugiés dans chaque camps</h5>
-
-            <!-- Radial Bar Chart -->
-            <div id="radialBarChart"></div>
-
-            <script>
-              document.addEventListener("DOMContentLoaded", () => {
-                new ApexCharts(document.querySelector("#radialBarChart"), {
-                  series: [{% for camp in camp_occurence %} {{camp}}, {% endfor %}],
-                  chart: {
-                    height: 350,
-                    type: 'radialBar',
-                    toolbar: {
-                      show: true
-                    }
-                  },
-                  plotOptions: {
-                    radialBar: {
-                      dataLabels: {
-                        name: {
-                          fontSize: '22px',
-                        },
-                        value: {
-                          fontSize: '16px',
-                        },
-                        total: {
-                          show: true,
-                          label: 'Total',
-                          formatter: function(w) {
-                            // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                            return {{total_refugees}}
-                          }
-                        }
-                      }
-                    }
-                  },
-                  labels: [{% for nom_camp in camp_list %} '{{nom_camp}}', {% endfor %}],
-                }).render();
-              });
-            </script>
-            <!-- End Radial Bar Chart -->
-
-          </div>
-        </div>
-      </div>
 
       <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title font-weight-bold text-primary">Statistiques de genre</h5>
+            <h5 class="card-title font-weight-bold text-primary">Le nombre de femmes et hommes</h5>
 
             <!-- Doughnut Chart -->
             <canvas id="doughnutChart" style="max-height: 328px;"></canvas>
@@ -289,14 +224,10 @@
         </div>
       </div>
 
-    </div>
-
-    <div class="row d-flex justify-content-center">
-
       <div class="col-lg-6 mb-2">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title font-weight-bold text-primary">Statistiques sur les donateurs</h5>
+            <h5 class="card-title font-weight-bold text-primary">Le nombre de donateurs selon leur type</h5>
 
             <!-- Polar Area Chart -->
             <div id="polarAreaChart"></div>
@@ -328,13 +259,18 @@
         </div>
       </div>
 
-      <div class="col-lg-6 mb-2">
-        <div class="card" style="height: 383px;">
+    </div>
+
+    <div class="row d-flex justify-content-center">
+
+      
+      <div class="col-lg-12">
+        <div class="card">
           <div class="card-body">
-            <h5 class="card-title font-weight-bolder text-primary">Arrivée des refugiés par jour</h5>
+            <h5 class="card-title font-weight-bolder text-primary">Enregistrement des personnes vulnerables par jour</h5>
 
             <!-- Line Chart -->
-            <canvas id="lineChart" style="max-height: 500px;"></canvas>
+            <canvas id="lineChart" style="max-height: 300px;"></canvas>
             <script>
               document.addEventListener("DOMContentLoaded", () => {
                 new Chart(document.querySelector('#lineChart'), {
