@@ -87,35 +87,10 @@ def display(request) :
 
     return render(
         request,
-        'fondation/distributions/distributions_overview.html',
+        'fondation/distributions/display.html',
         { 
             'camps' : camps,
             'page_title' : page_title,
             'distributions' : distributions,
-        }
-    )
-
-def display_by_id(request, id) :
-    assert isinstance(request, HttpRequest)
-    page_title = 'Les refugiés du camps' 
-    distributions = Distribution.objects.filter(camp_id=id).all()
- 
-    return render(
-        request,
-        'fondation/distributions/display_distribution_by_id.html',
-        {
-            'distributions' : distributions,
-            'page_title' : page_title,        
-        }
-    ) 
-
-def getBeneficiaire(request) :
-    camp_id = request.GET.get('id_camp')
-    beneficiaires = Person.objects.filter(camp_id = camp_id)
-    return render(
-        request,
-        'fondation/distributions/getBeneficiaire.html',
-        {
-            'beneficiaires': beneficiaires,
         }
     )
