@@ -46,8 +46,9 @@
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>camp</th>
+                                        <th>province</th>
+                                        <th>commune</th>
+                                        <th>zone</th>
                                         <th>beneficiaire</th>
                                         <th>type assistance</th>
                                         <th>description</th>
@@ -59,8 +60,9 @@
                                 <tbody>
                                     {% for distribution in distributions %}
                                     <tr>
-                                        <td>{{ distribution.id }}</td>
-                                        <td>{{ distribution.camp }}</td>
+                                        <td>{{ distribution.province }}</td>
+                                        <td>{{ distribution.commune }}</td>
+                                        <td>{{ distribution.zone }}</td>
                                         <td>{{ distribution.beneficiaire }}</td>
                                         <td>{{ distribution.type_assistance }}</td>
                                         <td>{{ distribution.description }}</td>
