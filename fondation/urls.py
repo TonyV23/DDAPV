@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, visitor
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, visitor, type_aide
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
@@ -116,5 +116,15 @@ urlpatterns = [
     # visitors urls
 
     path ('', visitor.index, name = 'home'),
+
+    # type aide urls
+
+    path('typeAide/', type_aide.index, name = 'type_aide_overview'),
+    path('typeAide/type_aide_add', type_aide.type_aide_add, name = 'type_aide_add'),
+    path('typeAide/type_aide_store', type_aide.type_aide_store, name = 'type_aide_store'),
+    path('typeAide/type_aide_edit/<int:id>', type_aide.type_aide_edit, name = 'type_aide_edit'),
+    path('typeAide/type_aide_update/<int:id>', type_aide.type_aide_update, name = 'type_aide_update'),
+    path('typeAide/type_aide_delete/<int:id>', type_aide.type_aide_delete, name = 'type_aide_delete'),
+    path('typeAide/display', type_aide.display, name = 'type_aide_display'),
     
 ]
