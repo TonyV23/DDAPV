@@ -8,7 +8,7 @@ from fondation.models import Person, Province, Commune, Camp
 
 def index (request):
 
-    page_title = 'Aperçu sur les refugiés'
+    page_title = 'Aperçu sur les personnes vulnérables'
 
     return render(
         request,
@@ -18,10 +18,9 @@ def index (request):
         }
     )
 
-
 def refugees_add(request) :
     assert isinstance(request, HttpRequest)
-    page_title = 'Nouveau refugié (e)'
+    page_title = 'Nouvelle personne'
     provinces = Province.objects.all()
     if request.method == 'GET' :
         form = RefugeeForm()
@@ -41,14 +40,14 @@ def refugees_store(request) :
         form = RefugeeForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,"Le (la) refugié (e) a été enregistré avec succès !")
+            messages.success(request,"La personne a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
         return redirect('/refugees/display/')
 
 def refugees_edit(request, id) :
     assert isinstance(request, HttpRequest)
-    page_title = 'Modifier les infos du refugiés'
+    page_title = 'Modifier les infos de la personne'
     if request.method == 'GET':
         if id == 0:
             form = RefugeeForm()
@@ -74,17 +73,17 @@ def refugees_update(request, id) :
             form = RefugeeForm(request.POST, instance=refugee)
         if form.is_valid():
             form.save()
-        messages.success(request, "Les infos du refugié (e) ont été modifié avec succès !")
+        messages.success(request, "Les infos de la personne ont été modifié avec succès !")
         return redirect('/refugees/display/')
 
 def refugees_delete(request, id) :
     refugee = Person.objects.get(pk = id)
     refugee.delete()
-    messages.success(request,"Les infos du refugié (e) ont été supprimé avec succès !")
-    return redirect('//refugees/display/')
+    messages.success(request,"Les infos de la personne ont été supprimé avec succès !")
+    return redirect('/refugees/display/')
 
 def refugees_display(request) :
-    page_title = 'Les refugiés selon les camps'
+    page_title = 'Liste des personnes vulnérables'
     refugees = Person.objects.all()
     camps = Camp.objects.all()
 
@@ -97,20 +96,6 @@ def refugees_display(request) :
             'page_title' : page_title,
         }
     )
-
-def refugees_display_by_id(request,id) :
-    assert isinstance(request, HttpRequest)
-    page_title = 'Les refugiés du camps' 
-    refugees = Person.objects.filter(camp_id=id).all()
- 
-    return render(
-        request,
-        'fondation/refugees/display_refugees_by_id.html',
-        {
-            'refugees' : refugees,
-            'page_title' : page_title,        
-        }
-    ) 
 
 def getCommunes(request):
     province_id = request.GET.get('id_nom_de_la_province')
