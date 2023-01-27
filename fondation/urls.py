@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, visitor, type_aide
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, visitor, type_aide, type_assistance
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
@@ -126,5 +126,16 @@ urlpatterns = [
     path('typeAide/type_aide_update/<int:id>', type_aide.type_aide_update, name = 'type_aide_update'),
     path('typeAide/type_aide_delete/<int:id>', type_aide.type_aide_delete, name = 'type_aide_delete'),
     path('typeAide/display', type_aide.display, name = 'type_aide_display'),
+
+
+    # type aide urls
+
+    path('typeAssistance/', type_assistance.index, name = 'type_assistance_overview'),
+    path('typeAssistance/type_assistance_add', type_assistance.type_assistance_add, name = 'type_assistance_add'),
+    path('typeAssistance/type_assistance_store', type_assistance.type_assistance_store, name = 'type_assistance_store'),
+    path('typeAssistance/type_assistance_edit/<int:id>', type_assistance.type_assistance_edit, name = 'type_assistance_edit'),
+    path('typeAssistance/type_assistance_update/<int:id>', type_assistance.type_assistance_update, name = 'type_assistance_update'),
+    path('typeAssistance/type_assistance_delete/<int:id>', type_assistance.type_assistance_delete, name = 'type_assistance_delete'),
+    path('typeAssistance/display', type_assistance.display, name = 'type_assistance_display'),
     
 ]
