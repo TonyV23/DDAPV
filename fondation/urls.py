@@ -108,15 +108,6 @@ urlpatterns = [
     path ('distributions/distribution_delete/<int:id>', distributions.distribution_delete, name = 'distributions_delete'),
     path ('distributions/display', distributions.display, name = 'distributions_display'),
 
-    # camps urls
-
-    path ('camps/', camp.index, name = 'camps_overview'),
-    path('camps/camps_add', camp.camps_add, name='camps_add'),
-    path('camps/camps_store', camp.camps_store, name='camps_store'),
-    path('camps/camps_edit/<int:id>', camp.camps_edit, name='camps_edit'),
-    path('camps/camps_update/<int:id>', camp.camps_update, name='camps_update'),
-    path('camps/camps_delete/<int:id>', camp.camps_delete, name='camps_delete'),
-    path('camps/camps_display', camp.camps_display, name='camps_display'),
 
     # authentication urls
 
