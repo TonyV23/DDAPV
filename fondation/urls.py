@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, camp, auth, visitor
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, visitor
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
