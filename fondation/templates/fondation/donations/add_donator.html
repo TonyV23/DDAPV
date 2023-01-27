@@ -31,10 +31,7 @@
                                 <div class="col-lg-6 col-xl-5">
                                     {% csrf_token %}
                                     <div class="col-12">
-                                        {{ form.camp|as_crispy_field }}
-                                        <div class="col-12">
-                                            {{ form.type_donneur|as_crispy_field }}
-                                        </div>
+                                        {{ form.type_donneur|as_crispy_field }}
                                     </div>
                                     <div class="col-12">
                                         {{ form.nom_du_donneur|as_crispy_field }}
@@ -43,15 +40,17 @@
                                         {{ form.type_aide|as_crispy_field }}
                                     </div>
                                     <div class="col-12">
-                                        {{ form.numero_de_telephone|as_crispy_field }}
+                                        {{ form.type_assistance|as_crispy_field }}
                                     </div>
                                     <div class="col-12">
                                         {{ form.adresse_mail|as_crispy_field }}
                                     </div>
                                 </div>
+                                
                                 <div class="col-lg-6 col-xl-5">
+                                    
                                     <div class="col-12">
-                                        {{ form.type_assistance|as_crispy_field }}
+                                        {{ form.numero_de_telephone|as_crispy_field }}
                                     </div>
                                     <div class="col-12">
                                         {{ form.description|as_crispy_field }}
