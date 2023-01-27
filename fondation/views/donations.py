@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
 
-from fondation.models import Donor
+from fondation.models import Donor, TypeAssistance
 from fondation.forms import DonorForm
 
 def index(request) :
@@ -93,5 +93,16 @@ def donors_display(request) :
         {
             'donors' : donors,
             'page_title' : page_title
+        }
+    )
+
+def getAssistance(request):
+    type_aid_id = request.GET.get('id_type_aide')
+    type_assistances = TypeAssistance.objects.filter(type_aide_id = type_aid_id)
+    return render(
+        request,
+        'fondation/donations/getAssistance.html',
+        {
+            'type_assistances': type_assistances
         }
     )

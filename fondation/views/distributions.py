@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpRequest
 
 from fondation.forms import DistributionForm
-from fondation.models import Distribution
+from fondation.models import Distribution, Commune, TypeAssistance
 
 
 def index (request) :
@@ -90,5 +90,27 @@ def display(request) :
         { 
             'page_title' : page_title,
             'distributions' : distributions,
+        }
+    )
+
+def getCommunes(request):
+    province_id = request.GET.get('id_province')
+    communes = Commune.objects.filter(nom_de_la_province_id = province_id)
+    return render(
+        request,
+        'fondation/distributions/getCommune.html',
+        {
+            'communes': communes
+        }
+    )
+
+def getAssistance(request):
+    type_aid_id = request.GET.get('id_type_aide')
+    type_assistances = TypeAssistance.objects.filter(type_aide_id = type_aid_id)
+    return render(
+        request,
+        'fondation/distributions/getAssistance.html',
+        {
+            'type_assistances': type_assistances
         }
     )
