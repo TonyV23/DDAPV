@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Count
 
-from fondation.models import Person, Donor, Camp, Distribution ,Province, Vulnerability, LevelStudy, MatiralStatus
+from fondation.models import Person, Donor, Distribution ,Province, Vulnerability, LevelStudy, MatiralStatus
 
 
 def index(request) :
@@ -10,7 +10,6 @@ def index(request) :
     template = 'fondation/home/index.html'
 
     total_refugees = Person.objects.count()
-    total_camps = Camp.objects.count()
     total_donors = Donor.objects.count()
     total_distributions = Distribution.objects.only('beneficiaire_id').count()
 

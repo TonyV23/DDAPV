@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpRequest
 
 from fondation.forms import DistributionForm
-from fondation.models import Distribution , Camp, Person
+from fondation.models import Distribution
 
 
 def index (request) :
@@ -83,13 +83,11 @@ def display(request) :
 
     page_title = 'Liste des distributions'
     distributions = Distribution.objects.all()
-    camps = Camp.objects.all()
 
     return render(
         request,
         'fondation/distributions/display.html',
         { 
-            'camps' : camps,
             'page_title' : page_title,
             'distributions' : distributions,
         }

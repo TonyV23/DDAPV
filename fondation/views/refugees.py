@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpRequest
 
 from fondation.forms import RefugeeForm
-from fondation.models import Person, Province, Commune, Camp
+from fondation.models import Person, Province, Commune
 
 
 def index (request):
@@ -85,13 +85,11 @@ def refugees_delete(request, id) :
 def refugees_display(request) :
     page_title = 'Liste des personnes vulnérables'
     refugees = Person.objects.all()
-    camps = Camp.objects.all()
 
     return render(
         request,
         'fondation/refugees/display_refugees.html',
         {
-            'camps' : camps,
             'refugees' : refugees,
             'page_title' : page_title,
         }
