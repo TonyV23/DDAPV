@@ -15,18 +15,51 @@ $(function () {
   });
 });
 
-// GetBeneficiaire by camp_id
 $(function () {
-  $("#id_camp").on("change", function () {
-    id_camp = $(this).val();
-    //alert(id_camp);
+  $("#id_province").on("change", function () {
+    id_province = $(this).val();
+    alert(id_province);
     $.get(
-      "/distributions/getBeneficiaire",
+      "/distributions/getCommunes",
       {
-        id_camp: id_camp,
+        id_province: id_province,
       },
       function (data, textStatus, jqXHR) {
-        $("#id_beneficiaire").html(data);
+        $("#id_commune").html(data);
+      }
+    );
+  });
+});
+
+// GetAssistance by type_aide_id
+$(function () {
+  $("#id_type_aide").on("change", function () {
+    id_type_aide = $(this).val();
+    alert(id_type_aide);
+    $.get(
+      "/donations/getAssistance",
+      {
+        id_type_aide: id_type_aide,
+      },
+      function (data, textStatus, jqXHR) {
+        $("#id_type_assistance").html(data);
+      }
+    );
+  });
+});
+
+// GetAssistance by type_aide_id
+$(function () {
+  $("#id_type_aide").on("change", function () {
+    id_type_aide = $(this).val();
+    alert(id_type_aide);
+    $.get(
+      "/distributions/getAssistance",
+      {
+        id_type_aide: id_type_aide,
+      },
+      function (data, textStatus, jqXHR) {
+        $("#id_type_assistance").html(data);
       }
     );
   });
