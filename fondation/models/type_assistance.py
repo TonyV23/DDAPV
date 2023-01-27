@@ -5,7 +5,7 @@ from fondation.models import TypeAide
 class TypeAssistance(models.Model) :
     
     type_aide = models.ForeignKey(TypeAide, on_delete=models.CASCADE)
-    type_assistance = models.CharField(max_length=20, unique = True)
+    type_assistance = models.CharField(max_length=100, unique = True)
 
     def __str__(self) -> str:
         return self.type_assistance
