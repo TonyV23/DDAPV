@@ -42,7 +42,7 @@ urlpatterns = [
     path ('donations/donors_update/<int:id>', donations.donors_update, name = 'donors_update'),
     path ('donations/donors_delete/<int:id>', donations.donors_delete, name = 'donors_delete'),
     path ('donations/display', donations.donors_display, name = 'donors_display'),
-    
+    path ('donations/getAssistance', donations.getAssistance, name = 'donors_getAssistance'),
 
     
     # vulnerabilities urls 
@@ -106,7 +106,8 @@ urlpatterns = [
     path ('distributions/distribution_update/<int:id>', distributions.distribution_update, name = 'distributions_update'),
     path ('distributions/distribution_delete/<int:id>', distributions.distribution_delete, name = 'distributions_delete'),
     path ('distributions/display', distributions.display, name = 'distributions_display'),
-
+    path ('distributions/getCommunes', distributions.getCommunes, name = 'distributions_getCommunes'),
+    path ('distributions/getAssistance', distributions.getAssistance, name = 'distributions_getAssistance'),
 
     # authentication urls
 
