@@ -5,4 +5,6 @@ from .matiral_status_form import MatiralStatusForm
 from .vulnerability_form import VulnerabilityForm
 from .donor_form import DonorForm
 from .refugee_form import RefugeeForm
-from.distribution_form import DistributionForm
+from .distribution_form import DistributionForm
+from .type_aide_form import TypeAideForm
+from .type_assistance_form import TypeAssistanceForm
