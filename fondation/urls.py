@@ -30,7 +30,6 @@ urlpatterns = [
     path ('refugees/refugees_update/<int:id>', refugees.refugees_update, name ='refugees_update'),
     path ('refugees/refugees_delete/<int:id>', refugees.refugees_delete, name ='refugees_delete'),
     path ('refugees/display/', refugees.refugees_display, name ='refugees_display'),
-    path ('refugees/refugees_display/<int:id>', refugees.refugees_display_by_id, name = 'refugees_display_by_id'),
     path ('refugees/getCommunes', refugees.getCommunes, name = 'refugees_getCommunes'),
 
     
