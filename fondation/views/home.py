@@ -147,7 +147,7 @@ def getAllMatiralStatusOccurence() :
     person_matiral_status = {}
 
     for k in get_all_matiral_status_ids_list :
-        get_all_matiral_status_names = MatiralStatus.objects.values('situation_matrimoniale')
+        get_all_matiral_status_names = MatiralStatus.objects.filter(pk=k).values('situation_matrimoniale')
         get_all_matiral_status_name = ""
 
         for i in range(0, len(get_all_matiral_status_names)) :
