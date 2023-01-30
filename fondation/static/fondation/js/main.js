@@ -18,7 +18,7 @@ $(function () {
 $(function () {
   $("#id_province").on("change", function () {
     id_province = $(this).val();
-    alert(id_province);
+    //alert(id_province);
     $.get(
       "/distributions/getCommunes",
       {
@@ -35,7 +35,7 @@ $(function () {
 $(function () {
   $("#id_type_aide").on("change", function () {
     id_type_aide = $(this).val();
-    alert(id_type_aide);
+    //alert(id_type_aide);
     $.get(
       "/donations/getAssistance",
       {
@@ -52,7 +52,7 @@ $(function () {
 $(function () {
   $("#id_type_aide").on("change", function () {
     id_type_aide = $(this).val();
-    alert(id_type_aide);
+    //alert(id_type_aide);
     $.get(
       "/distributions/getAssistance",
       {
