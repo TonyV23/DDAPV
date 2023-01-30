@@ -4,6 +4,7 @@ from django.http import HttpRequest
 
 from fondation.forms import RefugeeForm
 from fondation.models import Person, Province, Commune
+from fondation.filters import PersonFilter
 
 
 def index (request):
@@ -86,12 +87,16 @@ def refugees_display(request) :
     page_title = 'Liste des personnes vulnérables'
     refugees = Person.objects.all()
 
+    filter = PersonFilter(request.GET, queryset = refugees)
+    refugees = filter.qs
+    
     return render(
         request,
         'fondation/refugees/display_refugees.html',
         {
             'refugees' : refugees,
             'page_title' : page_title,
+            'filter' : filter,
         }
     )
 
