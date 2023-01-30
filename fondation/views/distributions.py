@@ -4,7 +4,7 @@ from django.http import HttpRequest
 
 from fondation.forms import DistributionForm
 from fondation.models import Distribution, Commune, TypeAssistance
-
+from fondation.filters import DistributionFilter
 
 def index (request) :
 
@@ -83,6 +83,8 @@ def display(request) :
 
     page_title = 'Liste des distributions'
     distributions = Distribution.objects.all()
+    filter = DistributionFilter(request.GET, distributions)
+    distributions = filter.qs
 
     return render(
         request,
@@ -90,6 +92,7 @@ def display(request) :
         { 
             'page_title' : page_title,
             'distributions' : distributions,
+            'filter' : filter,
         }
     )
 
