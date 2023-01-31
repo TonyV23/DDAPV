@@ -1,0 +1,89 @@
+{% extends 'fondation/layouts/default_employee.html' %} 
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">  <a href="{% url 'dashboard_employee' %}">Dashboard  </a>  </li>
+      <li class="breadcrumb-item active" aria-current="page">Aperçu sur la distribution  </li>
+    </ol>
+</nav>
+
+<div class="row">
+    
+    <div class="col-xl-6">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-3">
+                    <!-- <img src="images/elements/hc1.jpg" class="rounded-left horizontal-img" alt="Image"> -->
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title pt-2">Souhaitez-vous faire une distribution de dons et aides ?</h5>
+                        <p class="card-text mb-6">Cliquez sur le bouton en bas pour acceder au formulaire de distribution</p>
+                        <a href="{% url 'distributions_add_employee' %}" class="btn btn-outline-primary">Acceder au formulaire</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h5 class="card-title pt-2">Consulter la liste des dons et aides déjà fournis ?</h5>
+                        <p class="card-text mb-6">Cliquez sur le bouton en bas pour afficher la liste des dons et aides déjà fournis</p>
+                        <a href="{% url 'distributions_display_employee' %}" class="btn btn-outline-primary">Afficher</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <!-- <img src="images/elements/hc2.jpg" class="rounded-right horizontal-img" alt="Image"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Information de votre compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <h5 class="font-weight-bold">Nom d'utilisateur</h5>
+                <p>{{user.username}}</p>
+                <hr>
+                
+                <h5 class="font-weight-bold">Adresse e-mail</h5>
+                <p>{{user.email}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Création du compte</h5>
+                <p>{{user.date_joined}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Dernière connexion</h5>
+                <p>{{user.last_login}}</p>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

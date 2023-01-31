@@ -1,0 +1,139 @@
+{% extends 'fondation/layouts/default_employee.html' %} 
+
+{% block content %}
+<div class="content">
+
+    <div class="row d-flex justify-content-center">
+      
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-secondary">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-secondary rounded-circle mr-3">
+                  <i class="fa-solid fa-people-group"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_refugees}}</span>
+                  <a href="{% url 'refugees_overview_employee' %}">
+                    <p class="text-white">Personnes vulnérables</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+                   
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-primary">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-primary rounded-circle mr-3">
+                  <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_donors}}</span>
+                  <a href="{% url 'donations_overview_employee' %}">
+                    <p class="text-white">Donateurs</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-info">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-info rounded-circle mr-3">
+                  <i class="fa-sharp fa-solid fa-dollar-sign"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_distributions}}</span>
+                  <a href="{% url 'distributions_overview_employee' %}"><p class="text-white">bénéficiaires</p></a>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    </div>
+    
+
+    <div class="row d-flex justify-content-center">
+      
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bolder text-primary">Enregistrement des personnes vulnerables par jour</h5>
+
+            <!-- Line Chart -->
+            <canvas id="lineChart" style="max-height: 300px;"></canvas>
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new Chart(document.querySelector('#lineChart'), {
+                  type: 'line',
+                  data: {
+                    labels: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.day}}', {% endfor %}],
+                    datasets: [{
+                      label: 'Line Chart',
+                      data: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.available}}', {% endfor %}],
+                      fill: false,
+                      borderColor: 'rgb(75, 192, 192)',
+                      tension: 0.1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+              });
+            </script>
+            <!-- End Line CHart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Information de votre compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <h5 class="font-weight-bold">Nom d'utilisateur</h5>
+                <p>{{user.username}}</p>
+                <hr>
+                
+                <h5 class="font-weight-bold">Adresse e-mail</h5>
+                <p>{{user.email}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Création du compte</h5>
+                <p>{{user.date_joined}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Dernière connexion</h5>
+                <p>{{user.last_login}}</p>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
