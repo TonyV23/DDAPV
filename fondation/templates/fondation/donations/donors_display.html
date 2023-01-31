@@ -24,6 +24,18 @@
                           <a href="{% url 'donors_add' %}" class="btn btn-sm btn-primary btn-pill"
                             >+</a>
                         </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body col-15">
+                                        <form method="get">
+                                            {{filter.form}}
+                                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                          {% comment %} {% if messages %}
                          {% for message in messages %} 
                          <p class="alert alert-success w-100 h-100">{{ message }} </p>
@@ -44,15 +56,13 @@
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>camp</th>
                                         <th>type</th>
                                         <th>Nom</th>
                                         <th>type d'aide </th>
                                         <th>type d'assistance </th>
-                                        <th>don/aide reçu</th>
-                                        <th>description</th>
                                         <th>telephone</th>
                                         <th>e-mail</th>
+                                        <th>description</th>
                                         <th>date de donation</th>
                                         <th> modifier </th>
                                         <th>supprimer</th>
@@ -61,15 +71,13 @@
                                 <tbody>
                                     {% for donor in donors %}
                                     <tr>
-                                        <td>{{ donor.camp }}</td>
                                         <td>{{ donor.type_donneur }}</td>
                                         <td>{{ donor.nom_donneur }}</td>
                                         <td>{{ donor.type_aide }}</td>
                                         <td>{{ donor.type_assistance }}</td>
-                                        <td>{{ donor.donation_received }}</td>
-                                        <td>{{ donor.description }}</td>
                                         <td>{{ donor.numero_de_telephone }}</td>
                                         <td>{{ donor.addresse_mail }}</td>
+                                        <td>{{ donor.description }}</td>
                                         <td>{{ donor.donor_date_given }}</td>
                                         <td>
                                             <a href="{% url 'donors_edit' donor.id %}"

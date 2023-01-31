@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.http import HttpRequest
 
 from fondation.forms import DistributionForm
-from fondation.models import Distribution , Camp, Person
-
+from fondation.models import Distribution, Commune, TypeAssistance
+from fondation.filters import DistributionFilter
 
 def index (request) :
 
@@ -83,39 +83,37 @@ def display(request) :
 
     page_title = 'Liste des distributions'
     distributions = Distribution.objects.all()
-    camps = Camp.objects.all()
+    filter = DistributionFilter(request.GET, distributions)
+    distributions = filter.qs
 
     return render(
         request,
-        'fondation/distributions/distributions_overview.html',
+        'fondation/distributions/display.html',
         { 
-            'camps' : camps,
             'page_title' : page_title,
             'distributions' : distributions,
+            'filter' : filter,
         }
     )
 
-def display_by_id(request, id) :
-    assert isinstance(request, HttpRequest)
-    page_title = 'Les refugiés du camps' 
-    distributions = Distribution.objects.filter(camp_id=id).all()
- 
+def getCommunes(request):
+    province_id = request.GET.get('id_province')
+    communes = Commune.objects.filter(nom_de_la_province_id = province_id)
     return render(
         request,
-        'fondation/distributions/display_distribution_by_id.html',
+        'fondation/distributions/getCommune.html',
         {
-            'distributions' : distributions,
-            'page_title' : page_title,        
+            'communes': communes
         }
-    ) 
+    )
 
-def getBeneficiaire(request) :
-    camp_id = request.GET.get('id_camp')
-    beneficiaires = Person.objects.filter(camp_id = camp_id)
+def getAssistance(request):
+    type_aid_id = request.GET.get('id_type_aide')
+    type_assistances = TypeAssistance.objects.filter(type_aide_id = type_aid_id)
     return render(
         request,
-        'fondation/distributions/getBeneficiaire.html',
+        'fondation/distributions/getAssistance.html',
         {
-            'beneficiaires': beneficiaires,
+            'type_assistances': type_assistances
         }
     )

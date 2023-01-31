@@ -41,7 +41,7 @@ def vulnerabilities_store(request) :
         form = VulnerabilityForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,"La situation matrimoniale a été enregistré avec succès !")
+            messages.success(request,"La situation de vulnerabilité a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
         return redirect('/vulnerabilities/display')

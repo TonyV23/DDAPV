@@ -9,49 +9,27 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-                  <li class="breadcrumb-item">  <a href="{% url 'distributions_overview' %}">Aperçu sur la distribution</a>  </li>
-                  <li class="breadcrumb-item">  <a href="{% url 'distributions_add' %}">Nouvelle distribution</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Modifier une distribution</li>
+                  <li class="breadcrumb-item">  <a href="{% url 'type_assistance_overview' %}">Aperçu sur les types d'assistances</a>  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Modifier le type d'assistance</li>
                 </ol>
             </nav>
-            
+         
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header py-3">
-                                <h2 class="m-0 font-weight-bold text-dark">Modifier la distribution</h2>
+                                <h2 class="m-0 font-weight-bold text-dark">Modifier le type d'assistance</h2>
                             </div>
                             <div class="card-body">
                                 <!-- Vertical Form -->
-                                <form action="{% url 'distributions_update' form.instance.pk %}" method="post">
+                                <form action="{% url 'type_assistance_update' form.instance.pk %}" method="post">
                                     {% csrf_token %}
-                                    <div class="col row d-flex justify-content-center">
-                                        <div class="col-lg-6 col-xl-5 ">
-                                            <div class="col-12">
-                                                {{ form.province|as_crispy_field }}
-                                            </div>
-                                            <div class="col-12">
-                                                {{ form.commune|as_crispy_field }}
-                                            </div>
-                                            <div class="col-12">
-                                                {{ form.zone|as_crispy_field }}
-                                            </div>
-                                            <div class="col-12">
-                                                {{ form.beneficiaire|as_crispy_field }}
-                                            </div>
-                                            <div class="col-12">
-                                                {{ form.type_aide|as_crispy_field }}
-                                            </div>        
-                                        </div>
-                                        <div class="col-lg-6 col-xl-5">
-                                            <div class="col-12">
-                                                {{ form.type_assistance|as_crispy_field }}
-                                            </div>
-                                            <div class="col-12">
-                                                {{ form.description|as_crispy_field }}
-                                            </div>        
-                                        </div>
+                                    <div class="col-12">
+                                        {{ form.type_aide|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form.type_assistance|as_crispy_field }}
                                     </div>
                                     <div class="text-center">
                                         <br/>

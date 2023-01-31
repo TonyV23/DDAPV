@@ -2,25 +2,24 @@
 
 {% block content %}
 
-
 <div class="content-body">
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-          <li class="breadcrumb-item">  <a href="{% url 'camps_overview' %}">Aperçu sur les camps</a>  </li>
-          <li class="breadcrumb-item active" aria-current="page">Liste des camps</li>
+          <li class="breadcrumb-item">  <a href="{% url 'type_assistance_overview' %}">Aperçu sur les types d'assistances</a>  </li>
+          <li class="breadcrumb-item active" aria-current="page">Liste des types d'assistance</li>
         </ol>
     </nav>
-
+ 
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">Tous les camps</h2>
+                        <h2 class="card-title">Les types d'assistances</h2>
                         <div class="card-header py-3">
-                          <a href="{% url 'camps_add' %}" class="btn btn-sm btn-primary btn-pill"
+                          <a href="{% url 'type_assistance_add' %}" class="btn btn-lg btn-primary btn-pill"
                             > + </a>
                         </div>
                          {% comment %} {% if messages %}
@@ -44,32 +43,32 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nom du camp</th>
-                                        <th>Site</th>
-                                        <th> Modifier </th>
-                                        <th>Supprimer</th>
+                                        <th>Type d'aides</th>
+                                        <th>Type d'assistances</th>
+                                        <th> modifier </th>
+                                        <th>supprimer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for camp in camps %}
+                                    {% for type_assist in type_assistances %}
                                     <tr>
-                                        <td>{{ camp.id }}</td>
-                                        <td>{{ camp.nom_du_camp }}</td>
-                                        <td>{{ camp.site }}</td>
+                                        <td>{{ type_assist.id }}</td>
+                                        <td>{{ type_assist.type_aide }}</td>
+                                        <td>{{ type_assist.type_assistance }}</td>
                                                                     
                                         <td>
-                                            <a href="{% url 'camps_edit' camp.id %}"
+                                            <a href="{% url 'type_assistance_edit' type_assist.id %}"
                                             class="btn btn-sm btn-primary btn-pill">MODIFIER</a>
                                         </td>
                             
                                         <td>
-                                            <form action="{% url 'camps_delete' camp.id %}" method="post">
+                                            <form action="{% url 'type_assistance_delete' type_assist.id %}" method="post">
                                                 {% csrf_token %}
                                                 <button
                                                     type="submit"
-                                                    onclick="return confirm('Voulez-vous vraiment supprimer ce camp ?')"
+                                                    onclick="return confirm('Voulez-vous vraiment supprimer cette situation matrimoniale ?')"
                                                     class="btn btn-sm btn-danger btn-pill">
-                                                    -
+                                                    SUPPRIMER
                                                 </button>
                                             </form>
                                         </td>
@@ -124,5 +123,6 @@ aria-hidden="true">
         </div>
     </div>
 </div>
+
 
 {% endblock %}

@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, camp, auth
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
@@ -30,7 +30,6 @@ urlpatterns = [
     path ('refugees/refugees_update/<int:id>', refugees.refugees_update, name ='refugees_update'),
     path ('refugees/refugees_delete/<int:id>', refugees.refugees_delete, name ='refugees_delete'),
     path ('refugees/display/', refugees.refugees_display, name ='refugees_display'),
-    path ('refugees/refugees_display/<int:id>', refugees.refugees_display_by_id, name = 'refugees_display_by_id'),
     path ('refugees/getCommunes', refugees.getCommunes, name = 'refugees_getCommunes'),
 
     
@@ -43,7 +42,7 @@ urlpatterns = [
     path ('donations/donors_update/<int:id>', donations.donors_update, name = 'donors_update'),
     path ('donations/donors_delete/<int:id>', donations.donors_delete, name = 'donors_delete'),
     path ('donations/display', donations.donors_display, name = 'donors_display'),
-    
+    path ('donations/getAssistance', donations.getAssistance, name = 'donors_getAssistance'),
 
     
     # vulnerabilities urls 
@@ -107,24 +106,33 @@ urlpatterns = [
     path ('distributions/distribution_update/<int:id>', distributions.distribution_update, name = 'distributions_update'),
     path ('distributions/distribution_delete/<int:id>', distributions.distribution_delete, name = 'distributions_delete'),
     path ('distributions/display', distributions.display, name = 'distributions_display'),
-    path ('distributions/distribution_display_by_id/<int:id>', distributions.display_by_id, name = 'distribution_display_by_id'),
-    path ('distributions/getBeneficiaire', distributions.getBeneficiaire, name = 'distributions_getBeneficiaire'),
-
-
-    # camps urls
-
-    path ('camps/', camp.index, name = 'camps_overview'),
-    path('camps/camps_add', camp.camps_add, name='camps_add'),
-    path('camps/camps_store', camp.camps_store, name='camps_store'),
-    path('camps/camps_edit/<int:id>', camp.camps_edit, name='camps_edit'),
-    path('camps/camps_update/<int:id>', camp.camps_update, name='camps_update'),
-    path('camps/camps_delete/<int:id>', camp.camps_delete, name='camps_delete'),
-    path('camps/camps_display', camp.camps_display, name='camps_display'),
+    path ('distributions/getCommunes', distributions.getCommunes, name = 'distributions_getCommunes'),
+    path ('distributions/getAssistance', distributions.getAssistance, name = 'distributions_getAssistance'),
 
     # authentication urls
 
     path ('login/', auth.userLogin, name = 'login'),
     path ('logout/', auth.userLogout, name = 'logout'),
 
+    # type aide urls
+
+    path('typeAide/', type_aide.index, name = 'type_aide_overview'),
+    path('typeAide/type_aide_add', type_aide.type_aide_add, name = 'type_aide_add'),
+    path('typeAide/type_aide_store', type_aide.type_aide_store, name = 'type_aide_store'),
+    path('typeAide/type_aide_edit/<int:id>', type_aide.type_aide_edit, name = 'type_aide_edit'),
+    path('typeAide/type_aide_update/<int:id>', type_aide.type_aide_update, name = 'type_aide_update'),
+    path('typeAide/type_aide_delete/<int:id>', type_aide.type_aide_delete, name = 'type_aide_delete'),
+    path('typeAide/display', type_aide.display, name = 'type_aide_display'),
+
+
+    # type aide urls
+
+    path('typeAssistance/', type_assistance.index, name = 'type_assistance_overview'),
+    path('typeAssistance/type_assistance_add', type_assistance.type_assistance_add, name = 'type_assistance_add'),
+    path('typeAssistance/type_assistance_store', type_assistance.type_assistance_store, name = 'type_assistance_store'),
+    path('typeAssistance/type_assistance_edit/<int:id>', type_assistance.type_assistance_edit, name = 'type_assistance_edit'),
+    path('typeAssistance/type_assistance_update/<int:id>', type_assistance.type_assistance_update, name = 'type_assistance_update'),
+    path('typeAssistance/type_assistance_delete/<int:id>', type_assistance.type_assistance_delete, name = 'type_assistance_delete'),
+    path('typeAssistance/display', type_assistance.display, name = 'type_assistance_display'),
     
 ]

@@ -9,34 +9,30 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-          <li class="breadcrumb-item">  <a href="{% url 'camps_overview' %}">Aperçu sur les camps</a>  </li>
-          <li class="breadcrumb-item active" aria-current="page">Ajouter un camp</li>
+          <li class="breadcrumb-item">  <a href="{% url 'type_aide_overview' %}">Aperçu sur les types d'aides</a>  </li>
+          <li class="breadcrumb-item active" aria-current="page">Ajouter le type d'aide</li>
         </ol>
     </nav>
-
-    <!-- row -->
+ 
 
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header py-3">
-                        <h2 class="m-0 font-weight-bold text-dark">Nouveau camp</h2>
+                        <h2 class="m-0 font-weight-bold text-dark">Le type d'aides</h2>
                     </div>
                     <div class="card-body">
                         <!-- Vertical Form -->
-                        <form action="{% url 'camps_store' %}" method="post">
+                        <form action="{% url 'type_aide_store' %}" method="post">
                             {% csrf_token %}
                             <div class="col-12">
-                                {{ form.nom_du_camp|as_crispy_field }}
-                            </div>
-                            <div class="col-12">
-                                {{ form.site|as_crispy_field }}
+                                {{ form.type_aide|as_crispy_field }}
                             </div>
                             <div class="text-center">
                                 <br/>
                                 <button type="submit" class="btn btn-sm btn-success btn-pill">Enregistrer</button>
-                                <button type="reset" class="btn btn-sm btn-danger btn-pill">Vider le formulaire</button>
+                                <button type="reset" class="btn btn-sm btn-outline-danger btn-pill">Vider le formulaire</button>
                             </div>
                         </form><!-- Vertical Form -->
           

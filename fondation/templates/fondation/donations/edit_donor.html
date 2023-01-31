@@ -24,34 +24,39 @@
                             <div class="card-body">
                                 <!-- Vertical Form -->
                                 <form action="{% url 'donors_update' form.instance.pk %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="col-12">
-                                        {{ form.camp|as_crispy_field }}
+                                    <div class="col row d-flex justify-content-center">
+
+                                        <div class="col-lg-6 col-xl-5">
+                                            {% csrf_token %}
+                                            <div class="col-12">
+                                                {{ form.type_donneur|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.nom_du_donneur|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.type_aide|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.type_assistance|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.adresse_mail|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-6 col-xl-5">
+                                            
+                                            <div class="col-12">
+                                                {{ form.numero_de_telephone|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.description|as_crispy_field }}
+                                            </div>
+                                                    
+                                        </div>
                                     </div>
-                                    <div class="col-12">
-                                        {{ form.type_donneur|as_crispy_field }}
-                                    </div>
-                                    <div class="col-12">
-                                        {{ form.nom_du_donneur|as_crispy_field }}
-                                    </div>
-                                    <div class="col-12">
-                                        {{ form.type_aide|as_crispy_field }}
-                                    </div>
-                                    <div class="col-12">
-                                        {{ form.type_assistance|as_crispy_field }}
-                                    </div>
-                                    <div class="col-12">
-                                        {{ form.donation_received|as_crispy_field }}
-                                    </div>
-                                    <div class="col-12">
-                                        {{ form.description|as_crispy_field }}
-                                    </div>
-                                    <div class="col-12">
-                                        {{ form.numero_de_telephone|as_crispy_field }}
-                                    </div>
-                                    <div class="col-12">
-                                        {{ form.adresse_mail|as_crispy_field }}
-                                    </div>
+                                    
                                     <div class="text-center">
                                         <br/>
                                         <button type="submit" class="btn btn-sm btn-success btn-pill">Modifier</button>

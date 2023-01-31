@@ -1,38 +1,47 @@
 {% extends 'fondation/layouts/default.html' %} 
 
 {% block content %}
-
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-      <li class="breadcrumb-item">  <a href="{% url 'distributions_overview' %}">Aperçu sur la distribution</a>  </li>
-      <li class="breadcrumb-item active" aria-current="page">Les distributions selon les camps</li>
+      <li class="breadcrumb-item active" aria-current="page">Aides et Assistance </li>
     </ol>
 </nav>
 
-<h1 class="page-title text-center mb-2">Sélectionez le camp pour afficher la liste des distributions</h1>
+<h1 class="page-title text-center">Les types d'aides et assistances </h1>
 
 <div class="row d-flex justify-content-center">
     
-    {% for camp in camps %}
-        
-        <div class="col-lg-6 col-xl-5 ">
-            <div class="card mb-4">
-            <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
-                <div class="card-body">
-                    <h5 class="card-title text-dark font-weight-bold">LE CAMP {{camp.nom_du_camp}} à {{camp.site}}</h5>
-                    <p class="card-text pb-3"></p>
-                    <div class="row d-flex justify-content-between">
-                        <a href="{% url 'distribution_display_by_id' camp.id %}" class="btn btn-sm btn-primary btn-pill ">afficher la liste</a>
-                    </div>
+    <div class="col-lg-6 col-xl-5">
+        <div class="card mb-4">
+        <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
+            <div class="card-body">
+                <h5 class="card-title ">Les types d'aides</h5>
+                <p class="card-text pb-3">Pour ajouter un nouveau type d'aide</p>
+                <div class="row d-flex justify-content-between">
+                    <a href="{% url 'type_aide_add' %}" class="btn btn-outline-primary ">Acceder au formulaire</a>
+                    <a href="{% url 'type_aide_display' %}" class="btn btn-outline-primary ">Afficher la liste</a>
                 </div>
             </div>
-        </div>    
+        </div>
+    </div>
     
-        {% endfor %}
-        
+    <div class="col-lg-6 col-xl-5">
+        <div class="card mb-4">
+        <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
+            <div class="card-body">
+                <h5 class="card-title ">Les types d'assistances </h5>
+                <p class="card-text pb-3">Pour ajouter un nouveau type d'assistance</p>
+                <div class="row d-flex justify-content-between">
+                    <a href="{% url 'type_assistance_add' %}" class="btn btn-outline-primary ">Acceder au formulaire</a>
+                    <a href="{% url 'type_assistance_display' %}" class="btn btn-outline-primary ">Afficher la liste</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+      
 </div>
-
 <div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
 aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
