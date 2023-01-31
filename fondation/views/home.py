@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from fondation.models import Person, Donor, Distribution ,Province, Vulnerability, LevelStudy, MatiralStatus
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def index(request) :
 
     page_title = 'Tableau de Bord'

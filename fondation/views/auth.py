@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from fondation.forms import UserForm
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def index(request):
     page_title = 'Aperçu sur les utilisateurs'
     template = 'fondation/user/index.html'
@@ -21,7 +21,7 @@ def index(request):
         context = variable
     )
     
-@login_required(url ='login')
+@login_required(login_url ='login')
 def userList(request) :
     page_title = 'Liste des utilisateurs'
     users = User.objects.all()
@@ -38,7 +38,7 @@ def userList(request) :
         context = variable
     )
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def userRegister(request) :
     page_title = 'Nouveau utilisateur'
     template = 'fondation/user/register.html'
@@ -55,7 +55,7 @@ def userRegister(request) :
         context = variable
     )
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def userStore(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -66,31 +66,35 @@ def userStore(request):
         return redirect('/userList/')
 
 def userLogin(request) :
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+
+    if request.user.is_authenticated :
+        return redirect('/dashboard')
+    else :
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/dashboard')
+            else:
+                messages.info(request, 'Nom d\'utilisateur ou mot de passe incorrect')
+
+        page_title = 'Connexion'
+        template  = 'fondation/user/login.html'
         
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/dashboard')
-        else:
-            messages.info(request, 'Nom d\'utilisateur ou mot de passe incorrect')
+        variable = {
 
-    page_title = 'Connexion'
-    template  = 'fondation/user/login.html'
-    
-    variable = {
+            'page_title' : page_title
 
-        'page_title' : page_title
+        }
 
-    }
-
-    return render(
-        request,
-        template_name = template,
-        context = variable
-    )
+        return render(
+            request,
+            template_name = template,
+            context = variable
+        )
 
 def userLogout(request) :
     logout(request)

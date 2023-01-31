@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from fondation.forms import TypeAideForm
 from fondation.models import TypeAide
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def index(request) :
 
     page_title = 'Aperçu sur les types d\'aides'
@@ -19,7 +19,7 @@ def index(request) :
         }
     )
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def type_aide_add(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un type d\'aides'
@@ -36,7 +36,7 @@ def type_aide_add(request) :
         }
     )
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def type_aide_store(request) :
     if request.method == 'POST':
         form = TypeAideForm(request.POST)
@@ -47,7 +47,7 @@ def type_aide_store(request) :
             messages.error(request, form.errors)
         return redirect('/typeAide/display')
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def type_aide_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier le type d\'aide'
@@ -67,7 +67,7 @@ def type_aide_edit(request, id) :
             }
         )
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def type_aide_update(request,id) :
     if request.method == 'POST':
         if id == 0:
@@ -80,14 +80,14 @@ def type_aide_update(request,id) :
         messages.success(request, "Le type d\'aide a été modifié avec succès !")
         return redirect('/typeAide/display')
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def type_aide_delete(request, id) :
     type_aide = TypeAide.objects.get(pk = id)
     type_aide.delete()
     messages.success(request,"Le type d\'aide a été supprimé avec succès !")
     return redirect('/typeAide/display')
 
-@login_required(url ='login')
+@login_required(login_url ='login')
 def display(request) :
 
     page_title = 'Liste des types d\'aides'
