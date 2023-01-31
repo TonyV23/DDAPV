@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from fondation.forms import UserForm
+from fondation.decorators import unauthenticated_user
 
 @login_required(login_url ='login')
 def index(request):
@@ -65,36 +66,33 @@ def userStore(request):
             messages.success(request, 'Le compte de '+user+' a été ajouté')
         return redirect('/userList/')
 
+@unauthenticated_user
 def userLogin(request) :
-
-    if request.user.is_authenticated :
-        return redirect('/dashboard')
-    else :
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('/dashboard')
-            else:
-                messages.info(request, 'Nom d\'utilisateur ou mot de passe incorrect')
-
-        page_title = 'Connexion'
-        template  = 'fondation/user/login.html'
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         
-        variable = {
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/dashboard')
+        else:
+            messages.info(request, 'Nom d\'utilisateur ou mot de passe incorrect')
 
-            'page_title' : page_title
+    page_title = 'Connexion'
+    template  = 'fondation/user/login.html'
+    
+    variable = {
 
-        }
+        'page_title' : page_title
 
-        return render(
-            request,
-            template_name = template,
-            context = variable
-        )
+    }
+
+    return render(
+        request,
+        template_name = template,
+        context = variable
+    )
 
 def userLogout(request) :
     logout(request)
