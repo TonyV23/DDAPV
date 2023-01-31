@@ -3,8 +3,10 @@ from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 
 from fondation.models import Person, Donor, Distribution ,Province, Vulnerability, LevelStudy, MatiralStatus
+from fondation.decorators import admin_only
 
 @login_required(login_url ='login')
+@admin_only
 def index(request) :
 
     page_title = 'Tableau de Bord'
