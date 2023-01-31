@@ -111,8 +111,12 @@ urlpatterns = [
 
     # authentication urls
 
+    path ('users/', auth.index, name = 'users_overview'),
+    path ('register/', auth.userRegister, name = 'register'),
+    path ('store/', auth.userStore, name = 'users_store'),
     path ('login/', auth.userLogin, name = 'login'),
     path ('logout/', auth.userLogout, name = 'logout'),
+    path ('userList/', auth.userList, name = 'users_list'),
 
     # type aide urls
 
