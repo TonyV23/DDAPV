@@ -48,7 +48,7 @@
                             <td scope="row">{{ user.last_login }}</td>
                             <td scope="row">{{ user.is_active }}</td>
                             <td scope="row">
-                                <form action="#" method="post">
+                                <form action="{% url 'delete_user' user.id %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit" onclick="return confirm('Voulez vous supprimer cet utilisateur ?')"
                                         class="btn btn-danger">
