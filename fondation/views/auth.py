@@ -100,3 +100,10 @@ def userLogout(request) :
     logout(request)
 
     return redirect('/login')
+
+def userDelete(request, id) :
+    user = User.objects.get(pk = id)
+    user.delete()
+    form = UserForm(request.POST)
+    user_account = form.cleaned_data.get('username')
+    messages.success(request, 'Le compte de '+user_account+' a été supprimé avec succès')
