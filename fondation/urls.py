@@ -117,6 +117,7 @@ urlpatterns = [
     path ('login/', auth.userLogin, name = 'login'),
     path ('logout/', auth.userLogout, name = 'logout'),
     path ('userList/', auth.userList, name = 'users_list'),
+    path ('user/delete/<int:id>', auth.userDelete, name = 'delete_user'),
 
     # type aide urls
 
