@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 from fondation.forms import TypeAideForm
 from fondation.models import TypeAide
+from fondation.decorators import allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request) :
 
     page_title = 'Aperçu sur les types d\'aides'

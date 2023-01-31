@@ -5,9 +5,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from fondation.forms import UserForm
-from fondation.decorators import unauthenticated_user
+from fondation.decorators import unauthenticated_user, allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request):
     page_title = 'Aperçu sur les utilisateurs'
     template = 'fondation/user/index.html'
