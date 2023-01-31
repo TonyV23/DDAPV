@@ -1,0 +1,106 @@
+{% extends 'fondation/layouts/default.html' %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+        <li class="breadcrumb-item">  <a href="{% url 'users_overview' %}">Aperçu sur les utilisateurs</a>  </li>
+        <li class="breadcrumb-item active" aria-current="page">Liste des utilisateurs </li>
+    </ol>
+</nav>        
+
+<div class="content-body">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-alert mr-1"></i>{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %} {% endif %}
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" >
+                    <thead>
+                        <tr>
+                            <th scope="col"> Id </th>
+                            <th scope="col"> Prenom </th>
+                            <th scope="col"> Nom </th>
+                            <th scope="col"> Email </th>
+                            <th scope="col"> utilisateur </th>
+                            <th scope="col"> Admin </th>
+                            <th scope="col"> Dernière connexion </th>
+                            <th scope="col"> Connecte </th>
+                            <th scope="col">actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td scope="row">{{ user.id }}</td>
+                            <td scope="row">{{ user.first_name }}</td>
+                            <td scope="row">{{ user.last_name }}</td>
+                            <td scope="row">{{ user.email }}</td>
+                            <td scope="row">{{ user.username }}</td>
+                            <td scope="row">{{ user.is_superuser }}</td>
+                            <td scope="row">{{ user.last_login }}</td>
+                            <td scope="row">{{ user.is_active }}</td>
+                            <td scope="row">
+                                <form action="#" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('Voulez vous supprimer cet utilisateur ?')"
+                                        class="btn btn-danger">
+                                        supprimer
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Information de votre compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <h5 class="font-weight-bold">Nom d'utilisateur</h5>
+                <p>{{user.username}}</p>
+                <hr>
+                
+                <h5 class="font-weight-bold">Adresse e-mail</h5>
+                <p>{{user.email}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Création du compte</h5>
+                <p>{{user.date_joined}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Dernière connexion</h5>
+                <p>{{user.last_login}}</p>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
