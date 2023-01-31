@@ -15,10 +15,11 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance, home_employee
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
+    path('employeeDashboard/', home_employee.index, name ='dashboard_employee'),
 
     
     # refugees urls
