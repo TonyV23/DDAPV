@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from fondation.models import Donor, TypeAssistance
 from fondation.forms import DonorForm
 from fondation.filters import DonorFilter
 
-
+@login_required(url ='login')
 def index(request) :
 
     page_title = 'Aperçu sur les aides et dons'
@@ -19,6 +20,7 @@ def index(request) :
         }
     )
 
+@login_required(url ='login')
 def donors_add(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Faire un don'
@@ -37,6 +39,7 @@ def donors_add(request) :
         }
     )
 
+@login_required(url ='login')
 def donors_store(request) :
     if request.method == 'POST':
         form = DonorForm(request.POST)
@@ -47,6 +50,7 @@ def donors_store(request) :
             messages.error(request, form.errors)
         return redirect('/donations/display')
 
+@login_required(url ='login')
 def donors_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier l\'état du don'
@@ -65,6 +69,7 @@ def donors_edit(request, id) :
             }
         )
 
+@login_required(url ='login')
 def donors_update(request, id) :
     if request.method == 'POST':
         if id == 0:
@@ -77,6 +82,7 @@ def donors_update(request, id) :
         messages.success(request, "L'état du donateur a été modifié avec succès !")
         return redirect('/donations/display')
 
+@login_required(url ='login')
 def donors_delete(request,id) :
     donors = Donor.objects.get(pk = id)
     donors.delete()
@@ -84,6 +90,7 @@ def donors_delete(request,id) :
     return redirect('/donations/display')
 
 
+@login_required(url ='login')
 def donors_display(request) :
     
     page_title = 'Liste des donateurs'
@@ -102,6 +109,7 @@ def donors_display(request) :
         }
     )
 
+@login_required(url ='login')
 def getAssistance(request):
     type_aid_id = request.GET.get('id_type_aide')
     type_assistances = TypeAssistance.objects.filter(type_aide_id = type_aid_id)

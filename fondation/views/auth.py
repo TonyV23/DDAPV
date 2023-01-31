@@ -1,11 +1,12 @@
-from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from fondation.forms import UserForm
 
+@login_required(url ='login')
 def index(request):
     page_title = 'Aperçu sur les utilisateurs'
     template = 'fondation/user/index.html'
@@ -19,7 +20,8 @@ def index(request):
         template_name = template,
         context = variable
     )
-
+    
+@login_required(url ='login')
 def userList(request) :
     page_title = 'Liste des utilisateurs'
     users = User.objects.all()
@@ -36,6 +38,7 @@ def userList(request) :
         context = variable
     )
 
+@login_required(url ='login')
 def userRegister(request) :
     page_title = 'Nouveau utilisateur'
     template = 'fondation/user/register.html'
@@ -52,6 +55,7 @@ def userRegister(request) :
         context = variable
     )
 
+@login_required(url ='login')
 def userStore(request):
     if request.method == 'POST':
         form = UserForm(request.POST)

@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from fondation.forms import DistributionForm
 from fondation.models import Distribution, Commune, TypeAssistance
 from fondation.filters import DistributionFilter
 
+@login_required(url ='login')
 def index (request) :
 
     page_title = 'Aperçu sur les distributions'
@@ -18,6 +20,7 @@ def index (request) :
         }
     )
 
+@login_required(url ='login')
 def distribution_add(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Nouvelle distribution'
@@ -33,6 +36,7 @@ def distribution_add(request) :
         }
     )
 
+@login_required(url ='login')
 def distribution_store(request) :
     if request.method == 'POST':
         form = DistributionForm(request.POST)
@@ -43,6 +47,7 @@ def distribution_store(request) :
             messages.error(request, form.errors)
         return redirect('/distributions/display')
 
+@login_required(url ='login')
 def distribution_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la distribution'
@@ -61,6 +66,7 @@ def distribution_edit(request, id) :
             }
         )
 
+@login_required(url ='login')
 def distribution_update(request, id) :
     if request.method == 'POST':
         if id == 0:
@@ -73,12 +79,14 @@ def distribution_update(request, id) :
         messages.success(request, "La distribution a été modifié avec succès !")
         return redirect('/distributions/display')
 
+@login_required(url ='login')
 def distribution_delete(request, id) :
     distributions = Distribution.objects.get(pk = id)
     distributions.delete()
     messages.success(request,"La distribution a été supprimé avec succès !")
     return redirect('/distributions/display')
 
+@login_required(url ='login')
 def display(request) :
 
     page_title = 'Liste des distributions'
@@ -96,6 +104,7 @@ def display(request) :
         }
     )
 
+@login_required(url ='login')
 def getCommunes(request):
     province_id = request.GET.get('id_province')
     communes = Commune.objects.filter(nom_de_la_province_id = province_id)
@@ -107,6 +116,7 @@ def getCommunes(request):
         }
     )
 
+@login_required(url ='login')
 def getAssistance(request):
     type_aid_id = request.GET.get('id_type_aide')
     type_assistances = TypeAssistance.objects.filter(type_aide_id = type_aid_id)

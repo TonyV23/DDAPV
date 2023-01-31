@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from fondation.forms import TypeAssistanceForm
 from fondation.models import TypeAssistance
 
 
+@login_required(url ='login')
 def index(request) :
 
     page_title = 'Aperçu sur les types d\'assistance'
@@ -18,6 +20,7 @@ def index(request) :
         }
     )
 
+@login_required(url ='login')
 def type_assistance_add(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un type d\'assistance'
@@ -34,6 +37,7 @@ def type_assistance_add(request) :
         }
     )
 
+@login_required(url ='login')
 def type_assistance_store(request) :
     if request.method == 'POST':
         form = TypeAssistanceForm(request.POST)
@@ -44,6 +48,7 @@ def type_assistance_store(request) :
             messages.error(request, form.errors)
         return redirect('/typeAssistance/display')
 
+@login_required(url ='login')
 def type_assistance_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier le type d\'aide'
@@ -63,6 +68,7 @@ def type_assistance_edit(request, id) :
             }
         )
 
+@login_required(url ='login')
 def type_assistance_update(request,id) :
     if request.method == 'POST':
         if id == 0:
@@ -75,12 +81,14 @@ def type_assistance_update(request,id) :
         messages.success(request, "Le type d\'aide a été modifié avec succès !")
         return redirect('/typeAssistance/display')
 
+@login_required(url ='login')
 def type_assistance_delete(request, id) :
     type_assistance = TypeAssistance.objects.get(pk = id)
     type_assistance.delete()
     messages.success(request,"Le type d\'aide a été supprimé avec succès !")
     return redirect('/typeAssistance/display')
 
+@login_required(url ='login')
 def display(request) :
 
     page_title = 'Liste des types d\'assistance'

@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from fondation.forms import RefugeeForm
 from fondation.models import Person, Province, Commune
 from fondation.filters import PersonFilter
 
-
+@login_required(url ='login')
 def index (request):
 
     page_title = 'Aperçu sur les personnes vulnérables'
@@ -19,6 +20,7 @@ def index (request):
         }
     )
 
+@login_required(url ='login')
 def refugees_add(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Nouvelle personne'
@@ -36,6 +38,7 @@ def refugees_add(request) :
         }
     )
 
+@login_required(url ='login')
 def refugees_store(request) :
     if request.method == 'POST':
         form = RefugeeForm(request.POST)
@@ -46,6 +49,7 @@ def refugees_store(request) :
             messages.error(request, form.errors)
         return redirect('/refugees/display/')
 
+@login_required(url ='login')
 def refugees_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier les infos de la personne'
@@ -65,6 +69,7 @@ def refugees_edit(request, id) :
         )
 
 
+@login_required(url ='login')
 def refugees_update(request, id) :
     if request.method == 'POST':
         if id == 0:
@@ -77,12 +82,14 @@ def refugees_update(request, id) :
         messages.success(request, "Les infos de la personne ont été modifié avec succès !")
         return redirect('/refugees/display/')
 
+@login_required(url ='login')
 def refugees_delete(request, id) :
     refugee = Person.objects.get(pk = id)
     refugee.delete()
     messages.success(request,"Les infos de la personne ont été supprimé avec succès !")
     return redirect('/refugees/display/')
 
+@login_required(url ='login')
 def refugees_display(request) :
     page_title = 'Liste des personnes vulnérables'
     refugees = Person.objects.all()
@@ -100,6 +107,7 @@ def refugees_display(request) :
         }
     )
 
+@login_required(url ='login')
 def getCommunes(request):
     province_id = request.GET.get('id_nom_de_la_province')
     communes = Commune.objects.filter(nom_de_la_province_id = province_id)

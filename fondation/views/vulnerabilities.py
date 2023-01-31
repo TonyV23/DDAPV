@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 
 from fondation.forms import VulnerabilityForm
 from fondation.models import Vulnerability
 
+@login_required(url ='login')
 def index (request) :
     
     page_title = 'Aperçu sur les vulnerabilités'
@@ -19,6 +21,7 @@ def index (request) :
     )
 
 
+@login_required(url ='login')
 def vulnerabilities_add(request) :
 
     assert isinstance(request, HttpRequest)
@@ -36,6 +39,7 @@ def vulnerabilities_add(request) :
         }
     )
 
+@login_required(url ='login')
 def vulnerabilities_store(request) :
     if request.method == 'POST':
         form = VulnerabilityForm(request.POST)
@@ -46,6 +50,7 @@ def vulnerabilities_store(request) :
             messages.error(request, form.errors)
         return redirect('/vulnerabilities/display')
 
+@login_required(url ='login')
 def vulnerabilities_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la situation de vulnerabilité'
@@ -65,6 +70,7 @@ def vulnerabilities_edit(request, id) :
             }
         )
 
+@login_required(url ='login')
 def vulnerabilities_update(request, id) :
     if request.method == 'POST':
         if id == 0:
@@ -77,6 +83,7 @@ def vulnerabilities_update(request, id) :
         messages.success(request, "La situation de vulnerabilité a été modifié avec succès !")
         return redirect('/vulnerabilities/display')
 
+@login_required(url ='login')
 def vulnerabilities_delete(request, id) :
     vulnerabilities = Vulnerability.objects.get(pk = id)
     vulnerabilities.delete()
@@ -84,6 +91,7 @@ def vulnerabilities_delete(request, id) :
     return redirect('/vulnerabilities/display')
 
 
+@login_required(url ='login')
 def display (request) :
     page_title = 'Liste des vulnerabilités'
     vulnerabilities = Vulnerability.objects.all()
