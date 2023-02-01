@@ -1,5 +1,6 @@
 from django.db import models
 from phone_field import PhoneField
+from djmoney.models.fields import MoneyField
 
 from fondation.models import TypeAide, TypeAssistance
 
@@ -19,6 +20,7 @@ class Donor(models.Model) :
     type_aide = models.ForeignKey(TypeAide, on_delete=models.CASCADE)
 
     type_assistance = models.ForeignKey(TypeAssistance, on_delete=models.CASCADE)
+    montant = MoneyField(max_digits=14, decimal_places=2, null=True, default_currency='BIF')
 
     numero_de_telephone = PhoneField(help_text='ce numero de téléphone sera utilisé pour entrer en contact avec vous')
 
