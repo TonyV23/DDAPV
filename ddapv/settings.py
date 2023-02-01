@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'phone_field',
     'multiselectfield',
     'django_filters',
+    'djmoney',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
