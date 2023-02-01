@@ -42,6 +42,9 @@
                                 </div>
                                 <div class="col-lg-6 col-xl-5">
                                     <div class="col-12">
+                                        {{ form.montant|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12">
                                         {{ form.type_aide|as_crispy_field }}
                                     </div>
                                     <div class="col-12">
