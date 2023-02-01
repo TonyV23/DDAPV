@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 
 from fondation.forms import UserForm
 from fondation.decorators import unauthenticated_user, allowed_users
@@ -62,9 +63,12 @@ def userStore(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Le compte de '+user+' a été ajouté')
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            group = Group.objects.get(name = 'employees')
+            user.groups.add(group)    
+            messages.success(request, 'Le compte de '+username+' a été ajouté')
+        
         return redirect('/userList/')
 
 @unauthenticated_user
