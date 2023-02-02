@@ -15,7 +15,7 @@ def index(request) :
 
     total_refugees = Person.objects.count()
     total_donors = Donor.objects.count()
-    total_distributions = Distribution.objects.only('beneficiaire_id').count()
+    total_distributions = Distribution.objects.values('beneficiaire_id').distinct().count()
     total_employees = User.objects.filter(is_superuser=False).count()
 
     
