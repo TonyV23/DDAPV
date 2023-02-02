@@ -15,6 +15,8 @@ Including another URLconf
 """
 
 from django.urls import path
+from django.contrib.auth import views as auth_views
+
 from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance, home_employee, donations_employee, distributions_employee, refugees_employee
 
 urlpatterns = [
@@ -119,6 +121,11 @@ urlpatterns = [
     path ('logout/', auth.userLogout, name = 'logout'),
     path ('userList/', auth.userList, name = 'users_list'),
     path ('user/delete/<int:id>', auth.userDelete, name = 'delete_user'),
+
+    path ('password_reset/', auth_views.PasswordResetView.as_view(template_name = 'fondation/user/password_reset.html'), name = 'password_reset'),
+    path ('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name = 'fondation/user/password_reset_done.html'), name = 'password_reset_done'),
+    path ('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='fondation/user/password_reset_confirm.html'), name='password_reset_confirm'),
+    path ('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='fondation/user/password_reset_complete.html'), name='password_reset_complete'),
 
     # type aide urls
 
