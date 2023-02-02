@@ -1,4 +1,4 @@
-{% extends 'fondation/layouts/default.html' %} 
+{% extends 'fondation/layouts/default_employee.html' %} 
 
 {% block content %}
 
@@ -8,8 +8,8 @@
 
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-                  <li class="breadcrumb-item">  <a href="{% url 'donations_overview' %}">Aperçu sur les donateurs</a>  </li>
+                  <li class="breadcrumb-item">  <a href="{% url 'dashboard_employee' %}">Dashboard  </a>  </li>
+                  <li class="breadcrumb-item">  <a href="{% url 'donations_overview_employee' %}">Aperçu sur les donateurs</a>  </li>
                   <li class="breadcrumb-item active" aria-current="page">Modifier donateur</li>
                 </ol>
             </nav>           
@@ -23,7 +23,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- Vertical Form -->
-                                <form action="{% url 'donors_update' form.instance.pk %}" method="post">
+                                <form action="{% url 'donors_update_employee' form.instance.pk %}" method="post">
                                     <div class="col row d-flex justify-content-center">
 
                                         <div class="col-lg-6 col-xl-5">

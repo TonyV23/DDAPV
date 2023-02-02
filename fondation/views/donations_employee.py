@@ -14,7 +14,7 @@ def index(request) :
 
     return render(
         request,
-        'fondation/donations/index.html',
+        'fondation/donations/index_employee.html',
         {
             'page_title' : page_title
         }
@@ -31,7 +31,7 @@ def donors_add(request) :
 
     return render(
         request,
-        'fondation/donations/add_donator.html',
+        'fondation/donations/add_donor_employee.html',
         {
             'page_title' : page_title,
             'donors' : donors,
@@ -48,7 +48,7 @@ def donors_store(request) :
             messages.success(request,"Le (la) donateur (trice) a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/donations/display')
+        return redirect('/donationsEmployee/display')
 
 @login_required(login_url ='login')
 def donors_edit(request, id) :
@@ -62,7 +62,7 @@ def donors_edit(request, id) :
             form = DonorForm(instance=donor)
         return render(
             request,
-            'fondation/donations/edit_donor.html',
+            'fondation/donations/edit_donor_employee.html',
             {
                 'form': form,
                 'page_title' :page_title
@@ -80,14 +80,14 @@ def donors_update(request, id) :
         if form.is_valid():
             form.save()
         messages.success(request, "L'état du donateur a été modifié avec succès !")
-        return redirect('/donations/display')
+        return redirect('/donationsEmployee/display')
 
 @login_required(login_url ='login')
 def donors_delete(request,id) :
     donors = Donor.objects.get(pk = id)
     donors.delete()
     messages.success(request,"Le (la) donateur (trice) a été supprimé avec succès !")
-    return redirect('/donations/display')
+    return redirect('/donationsEmployee/display')
 
 
 @login_required(login_url ='login')
@@ -101,7 +101,7 @@ def donors_display(request) :
 
     return render(
         request,
-        'fondation/donations/donors_display.html',
+        'fondation/donations/donor_display_employee.html',
         {
             'donors' : donors,
             'page_title' : page_title,

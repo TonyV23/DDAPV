@@ -14,7 +14,7 @@ def index (request) :
 
     return render(
         request,
-        'fondation/distributions/index.html',
+        'fondation/distributions/index_employee.html',
         {
             'page_title' : page_title,
         }
@@ -29,7 +29,7 @@ def distribution_add(request) :
 
     return render(
         request,
-        'fondation/distributions/add_distribution.html',
+        'fondation/distributions/add_distribution_employee.html',
         {
             'form' : form,
             'page_title' : page_title,
@@ -45,7 +45,7 @@ def distribution_store(request) :
             messages.success(request,"La distribution a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/distributions/display')
+        return redirect('/distributionsEmployee/display')
 
 @login_required(login_url ='login')
 def distribution_edit(request, id) :
@@ -59,7 +59,7 @@ def distribution_edit(request, id) :
             form = DistributionForm(instance=distribution)
         return render(
             request,
-            'fondation/distributions/edit_distribution.html',
+            'fondation/distributions/edit_distribution_employee.html',
             {
                 'form': form,
                 'page_title' :page_title
@@ -77,14 +77,14 @@ def distribution_update(request, id) :
         if form.is_valid():
             form.save()
         messages.success(request, "La distribution a été modifié avec succès !")
-        return redirect('/distributions/display')
+        return redirect('/distributionsEmployee/display')
 
 @login_required(login_url ='login')
 def distribution_delete(request, id) :
     distributions = Distribution.objects.get(pk = id)
     distributions.delete()
     messages.success(request,"La distribution a été supprimé avec succès !")
-    return redirect('/distributions/display')
+    return redirect('/distributionsEmployee/display')
 
 @login_required(login_url ='login')
 def display(request) :
@@ -96,7 +96,7 @@ def display(request) :
 
     return render(
         request,
-        'fondation/distributions/display.html',
+        'fondation/distributions/display_employee.html',
         { 
             'page_title' : page_title,
             'distributions' : distributions,

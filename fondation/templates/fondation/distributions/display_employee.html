@@ -1,4 +1,4 @@
-{% extends 'fondation/layouts/default.html' %} 
+{% extends 'fondation/layouts/default_employee.html' %} 
 
 {% block content %}
 
@@ -7,8 +7,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-          <li class="breadcrumb-item">  <a href="{% url 'distributions_overview' %}">Aperçu sur la distribution</a>  </li>
+          <li class="breadcrumb-item">  <a href="{% url 'dashboard_employee' %}">Dashboard  </a>  </li>
+          <li class="breadcrumb-item">  <a href="{% url 'distributions_overview_employee' %}">Aperçu sur la distribution</a>  </li>
           <li class="breadcrumb-item active" aria-current="page">Toutes les distribution</li>
         </ol>
     </nav>
@@ -21,9 +21,9 @@
                     <div class="card-body">
                         <h2 class="card-title">Toutes les distributions</h2>
                         <div class="card-header py-3">
-                          <a href="{% url 'distributions_add' %}" class="btn btn-sm btn-primary btn-pill"
+                          <a href="{% url 'distributions_add_employee' %}" class="btn btn-sm btn-primary btn-pill"
                             > + </a>
-                            <a href="{% url 'distributions_overview' %}" class="btn btn-sm btn-primary btn-pill"
+                            <a href="{% url 'distributions_overview_employee' %}" class="btn btn-sm btn-primary btn-pill"
                             > retour </a>
                         </div>
                         <div class="row d-flex justify-content-center">
@@ -83,12 +83,12 @@
                                         <td>{{ distribution.date_given }}</td>
                                                                     
                                         <td>
-                                            <a href="{% url 'distributions_edit' distribution.id %}"
+                                            <a href="{% url 'distributions_edit_employee' distribution.id %}"
                                             class="btn btn-sm btn-primary btn-pill">MODIFIER</a>
                                         </td>
                             
                                         <td>
-                                            <form action="{% url 'distributions_delete' distribution.id %}" method="post">
+                                            <form action="{% url 'distributions_delete_employee' distribution.id %}" method="post">
                                                 {% csrf_token %}
                                                 <button
                                                     type="submit"

@@ -1,4 +1,4 @@
-{% extends 'fondation/layouts/default.html' %} 
+{% extends 'fondation/layouts/default_employee.html' %} 
 
 {% block content %}
 
@@ -8,56 +8,76 @@
 
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-                  <li class="breadcrumb-item">  <a href="{% url 'donations_overview' %}">Aperçu sur les donateurs</a>  </li>
-                  <li class="breadcrumb-item active" aria-current="page">Modifier donateur</li>
+                    <li class="breadcrumb-item">  <a href="{% url 'dashboard_employee' %}">Dashboard  </a>  </li>
+                    <li class="breadcrumb-item">  <a href="{% url 'refugees_overview_employee' %}">Aperçu sur les personnes vulnérables</a>  </li>
+                    <li class="breadcrumb-item active" aria-current="page">Modifier les informations de la personne</li>
                 </ol>
-            </nav>           
+            </nav>   
 
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header py-3">
-                                <h2 class="m-0 font-weight-bold text-dark">Modifier l'état du donateur</h2>
+                                <h2 class="m-0 font-weight-bold text-dark">Modifier les informations de la personne</h2>
                             </div>
                             <div class="card-body">
                                 <!-- Vertical Form -->
-                                <form action="{% url 'donors_update' form.instance.pk %}" method="post">
+                                <form action="{% url 'refugees_update_employee' form.instance.pk %}" method="post">
+                                    {% csrf_token %}
                                     <div class="col row d-flex justify-content-center">
-
+        
                                         <div class="col-lg-6 col-xl-5">
-                                            {% csrf_token %}
                                             <div class="col-12">
-                                                {{ form.type_donneur|as_crispy_field }}
+                                                {{ form.nom|as_crispy_field }}
                                             </div>
                                             <div class="col-12">
-                                                {{ form.nom_du_donneur|as_crispy_field }}
+                                                {{ form.prenom|as_crispy_field }}
                                             </div>
                                             <div class="col-12">
-                                                {{ form.type_aide|as_crispy_field }}
+                                                {{ form.sexe|as_crispy_field }}
                                             </div>
                                             <div class="col-12">
-                                                {{ form.type_assistance|as_crispy_field }}
+                                                {{ form.age|as_crispy_field }}
                                             </div>
-                                            <div class="col-12">
-                                                {{ form.adresse_mail|as_crispy_field }}
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-lg-6 col-xl-5">
-                                            
                                             <div class="col-12">
                                                 {{ form.numero_de_telephone|as_crispy_field }}
                                             </div>
                                             <div class="col-12">
-                                                {{ form.montant|as_crispy_field }}
+                                                {{ form.nom_prenom_du_pere|as_crispy_field }}
                                             </div>
                                             <div class="col-12">
-                                                {{ form.description|as_crispy_field }}
+                                                {{ form.nom_prenom_de_la_mere|as_crispy_field }}
                                             </div>
-                                                    
                                         </div>
+                                        
+                                        <div class="col-lg-6 col-xl-5">
+                                            <div class="col-12">
+                                                {{ form.nom_de_la_province|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.nom_de_la_commune|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.nom_de_la_zone|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.la_vulnerabilite|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.le_niveau_etudes|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.situation_matrimoniale|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.nombre_enfants|as_crispy_field }}
+                                            </div>
+                                            <div class="col-12">
+                                                {{ form.fonction|as_crispy_field }}
+                                            </div>
+                                        </div>
+        
                                     </div>
                                     
                                     <div class="text-center">

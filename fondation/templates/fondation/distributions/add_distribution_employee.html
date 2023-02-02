@@ -1,4 +1,4 @@
-{% extends 'fondation/layouts/default.html' %} 
+{% extends 'fondation/layouts/default_employee.html' %} 
 
 {% block content %}
 
@@ -8,8 +8,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
-          <li class="breadcrumb-item">  <a href="{% url 'distributions_overview' %}">Aperçu sur la distribution</a>  </li>
+          <li class="breadcrumb-item">  <a href="{% url 'dashboard_employee' %}">Dashboard  </a>  </li>
+          <li class="breadcrumb-item">  <a href="{% url 'distributions_overview_employee' %}">Aperçu sur la distribution</a>  </li>
           <li class="breadcrumb-item active" aria-current="page">Nouvelle Distribution</li>
         </ol>
     </nav>
@@ -23,7 +23,7 @@
                         <h2 class="m-0 font-weight-bold text-dark">Nouvelle distribution</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{% url 'distributions_store' %}" method="post">
+                        <form action="{% url 'distributions_store_employee' %}" method="post">
                             {% csrf_token %}
                             <div class="col row d-flex justify-content-center">
                                 <div class="col-lg-6 col-xl-5 ">

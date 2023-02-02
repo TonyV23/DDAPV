@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from fondation.forms import LevelStudyForm
 from fondation.models import LevelStudy
+from fondation.decorators import allowed_users
 
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request):
     
     page_title = "Aperçu sur les niveaux d'études"
@@ -17,6 +21,7 @@ def index(request):
         }
     )
 
+@login_required(login_url ='login')
 def level_study_add(request) :
     assert isinstance(request, HttpRequest)
     page_title = "Ajouter niveau d'études"
@@ -32,6 +37,7 @@ def level_study_add(request) :
         }
     )
 
+@login_required(login_url ='login')
 def level_study_store(request) :
     if request.method == 'POST':
         form = LevelStudyForm(request.POST)
@@ -42,6 +48,7 @@ def level_study_store(request) :
             messages.error(request, form.errors)
         return redirect('/levelStudies/display')
 
+@login_required(login_url ='login')
 def level_study_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier le niveau d\'études'
@@ -60,6 +67,7 @@ def level_study_edit(request, id) :
             }
         )
 
+@login_required(login_url ='login')
 def level_study_update(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -73,6 +81,7 @@ def level_study_update(request, id):
         return redirect('/levelStudies/display')
 
 
+@login_required(login_url ='login')
 def level_study_delete(request, id):
     level_studies = LevelStudy.objects.get(pk = id)
     level_studies.delete()
@@ -80,6 +89,7 @@ def level_study_delete(request, id):
     return redirect('/levelStudies/display')
 
 
+@login_required(login_url ='login')
 def display(request) :
 
     page_title = "Ajouter niveau d'études"

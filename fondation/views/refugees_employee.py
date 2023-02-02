@@ -14,7 +14,7 @@ def index (request):
 
     return render(
         request,
-        'fondation/refugees/index.html',
+        'fondation/refugees/index_employee.html',
         {
             'page_title' : page_title,
         }
@@ -30,7 +30,7 @@ def refugees_add(request) :
 
     return render(
         request,
-        'fondation/refugees/add_refugee.html',
+        'fondation/refugees/add_refugee_employee.html',
         {
             'provinces' : provinces,
             'form' : form,
@@ -47,7 +47,7 @@ def refugees_store(request) :
             messages.success(request,"La personne a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/refugees/display/')
+        return redirect('/refugeesEmployee/display/')
 
 @login_required(login_url ='login')
 def refugees_edit(request, id) :
@@ -61,7 +61,7 @@ def refugees_edit(request, id) :
             form = RefugeeForm(instance=refugee)
         return render(
             request,
-            'fondation/refugees/edit_refugee.html',
+            'fondation/refugees/edit_refugee_employee.html',
             {
                 'form': form,
                 'page_title' :page_title
@@ -80,14 +80,14 @@ def refugees_update(request, id) :
         if form.is_valid():
             form.save()
         messages.success(request, "Les infos de la personne ont été modifié avec succès !")
-        return redirect('/refugees/display/')
+        return redirect('/refugeesEmployee/display/')
 
 @login_required(login_url ='login')
 def refugees_delete(request, id) :
     refugee = Person.objects.get(pk = id)
     refugee.delete()
     messages.success(request,"Les infos de la personne ont été supprimé avec succès !")
-    return redirect('/refugees/display/')
+    return redirect('/refugeesEmployee/display/')
 
 @login_required(login_url ='login')
 def refugees_display(request) :
@@ -99,7 +99,7 @@ def refugees_display(request) :
     
     return render(
         request,
-        'fondation/refugees/display_refugees.html',
+        'fondation/refugees/display_refugee_employee.html',
         {
             'refugees' : refugees,
             'page_title' : page_title,

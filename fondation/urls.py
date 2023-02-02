@@ -15,10 +15,13 @@ Including another URLconf
 """
 
 from django.urls import path
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance
+from django.contrib.auth import views as auth_views
+
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance, home_employee, donations_employee, distributions_employee, refugees_employee
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
+    path('employeeDashboard/', home_employee.index, name ='dashboard_employee'),
 
     
     # refugees urls
@@ -111,8 +114,18 @@ urlpatterns = [
 
     # authentication urls
 
+    path ('users/', auth.index, name = 'users_overview'),
+    path ('register/', auth.userRegister, name = 'register'),
+    path ('store/', auth.userStore, name = 'users_store'),
     path ('login/', auth.userLogin, name = 'login'),
     path ('logout/', auth.userLogout, name = 'logout'),
+    path ('userList/', auth.userList, name = 'users_list'),
+    path ('user/delete/<int:id>', auth.userDelete, name = 'delete_user'),
+
+    path ('password_reset/', auth_views.PasswordResetView.as_view(template_name = 'fondation/user/password_reset.html'), name = 'password_reset'),
+    path ('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name = 'fondation/user/password_reset_done.html'), name = 'password_reset_done'),
+    path ('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='fondation/user/password_reset_confirm.html'), name='password_reset_confirm'),
+    path ('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='fondation/user/password_reset_complete.html'), name='password_reset_complete'),
 
     # type aide urls
 
@@ -135,4 +148,40 @@ urlpatterns = [
     path('typeAssistance/type_assistance_delete/<int:id>', type_assistance.type_assistance_delete, name = 'type_assistance_delete'),
     path('typeAssistance/display', type_assistance.display, name = 'type_assistance_display'),
     
+
+    ####
+    # urls for employees 
+    #     
+    
+    # refugees urls
+
+    path ('refugeesEmployee/', refugees_employee.index, name = 'refugees_overview_employee'),
+    path ('refugeesEmployee/refugees_add/', refugees_employee.refugees_add, name ='refugees_add_employee'),
+    path ('refugeesEmployee/refugees_store/', refugees_employee.refugees_store, name ='refugees_store_employee'),
+    path ('refugeesEmployee/refugees_edit/<int:id>', refugees_employee.refugees_edit, name ='refugees_edit_employee'),
+    path ('refugeesEmployee/refugees_update/<int:id>', refugees_employee.refugees_update, name ='refugees_update_employee'),
+    path ('refugeesEmployee/refugees_delete/<int:id>', refugees_employee.refugees_delete, name ='refugees_delete_employee'),
+    path ('refugeesEmployee/display/', refugees_employee.refugees_display, name ='refugees_display_employee'),
+
+    
+    # donations urls
+    
+    path ('donationsEmployee/', donations_employee.index, name = 'donations_overview_employee'),
+    path ('donationsEmployee/donors_add', donations_employee.donors_add, name = 'donors_add_employee'),
+    path ('donationsEmployee/donors_store', donations_employee.donors_store, name = 'donors_store_employee'),
+    path ('donationsEmployee/donors_edit/<int:id>', donations_employee.donors_edit, name = 'donors_edit_employee'),
+    path ('donationsEmployee/donors_update/<int:id>', donations_employee.donors_update, name = 'donors_update_employee'),
+    path ('donationsEmployee/donors_delete/<int:id>', donations_employee.donors_delete, name = 'donors_delete_employee'),
+    path ('donationsEmployee/display', donations_employee.donors_display, name = 'donors_display_employee'),
+
+
+    # distributions urls
+
+    path ('distributionsEmployee/', distributions_employee.index, name = 'distributions_overview_employee'),
+    path ('distributionsEmployee/distribution_add', distributions_employee.distribution_add, name = 'distributions_add_employee'),
+    path ('distributionsEmployee/distribution_store', distributions_employee.distribution_store, name = 'distributions_store_employee'),
+    path ('distributionsEmployee/distribution_edit/<int:id>', distributions_employee.distribution_edit, name = 'distributions_edit_employee'),
+    path ('distributionsEmployee/distribution_update/<int:id>', distributions_employee.distribution_update, name = 'distributions_update_employee'),
+    path ('distributionsEmployee/distribution_delete/<int:id>', distributions_employee.distribution_delete, name = 'distributions_delete_employee'),
+    path ('distributionsEmployee/display', distributions_employee.display, name = 'distributions_display_employee'),
 ]

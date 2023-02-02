@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from fondation.forms import ProvinceForm, CommuneForm
 from fondation.models import Province, Commune
+from fondation.decorators import allowed_users
 
+
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index (request) :
 
     page_title = 'Aperçu sur les addresses'
@@ -17,6 +22,7 @@ def index (request) :
         }
     )
 
+@login_required(login_url ='login')
 def add_province(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une province'
@@ -32,6 +38,7 @@ def add_province(request) :
         }
     )
 
+@login_required(login_url ='login')
 def store_province(request) : 
     if request.method == 'POST':
         form = ProvinceForm(request.POST)
@@ -42,6 +49,7 @@ def store_province(request) :
             messages.error(request, form.errors)
         return redirect('/address/address_view_provinces')
 
+@login_required(login_url ='login')
 def province_edit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la province'
@@ -60,6 +68,7 @@ def province_edit(request, id) :
             }
         )
 
+@login_required(login_url ='login')
 def province_update(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -79,6 +88,7 @@ def province_delete(request, id):
     return redirect('/address/address_view_provinces')
 
 
+@login_required(login_url ='login')
 def add_commune(request) :
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une commune'
@@ -97,6 +107,7 @@ def add_commune(request) :
         }
     )
 
+@login_required(login_url ='login')
 def store_commune(request) :
     if request.method == 'POST':
         form = CommuneForm(request.POST)
@@ -125,6 +136,7 @@ def commune_edit(request, id) :
             }
         )
 
+@login_required(login_url ='login')
 def commune_update(request, id) :
     if request.method == 'POST':
         if id == 0:
@@ -137,6 +149,7 @@ def commune_update(request, id) :
         messages.success(request, "La commune a été modifié avec succès !")
         return redirect('/address/address_view_communes')
 
+@login_required(login_url ='login')
 def commune_delete(request, id) :
     communes = Commune.objects.get(pk = id)
     communes.delete()
@@ -153,7 +166,7 @@ def commune_delete(request, id) :
             'page_title' : page_title
         }
     )
-
+@login_required(login_url ='login')
 def view_provinces(request) :
     
     page_title = 'Liste des provinces'
@@ -168,6 +181,7 @@ def view_provinces(request) :
         }
     )
 
+@login_required(login_url ='login')
 def view_communes(request) :
     
     page_title = 'Liste des communes'

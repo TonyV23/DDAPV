@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from fondation.models import Person, Donor, Distribution ,Province, Vulnerability, LevelStudy, MatiralStatus
+from fondation.decorators import admin_only
 
-
+@login_required(login_url ='login')
+@admin_only
 def index(request) :
 
     page_title = 'Tableau de Bord'
@@ -11,7 +15,8 @@ def index(request) :
 
     total_refugees = Person.objects.count()
     total_donors = Donor.objects.count()
-    total_distributions = Distribution.objects.only('beneficiaire_id').count()
+    total_distributions = Distribution.objects.values('beneficiaire_id').distinct().count()
+    total_employees = User.objects.filter(is_superuser=False).count()
 
     
     all_province_occurence = getProvinceOccurence()
@@ -38,6 +43,7 @@ def index(request) :
         'total_refugees' : total_refugees,
         'total_donors' : total_donors,
         'total_distributions' : total_distributions,
+        'total_employees' :total_employees,
         
 
         'all_province_occurence' : all_province_occurence,
