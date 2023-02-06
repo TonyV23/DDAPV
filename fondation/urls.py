@@ -120,6 +120,8 @@ urlpatterns = [
     path ('login/', auth.userLogin, name = 'login'),
     path ('logout/', auth.userLogout, name = 'logout'),
     path ('userList/', auth.userList, name = 'users_list'),
+    path ('userEdit/<int:id>', auth.userEdit, name = 'edit_user'),
+    path ('userUpdate/<int:id>', auth.userUpdate, name = 'update_user'),
     path ('user/delete/<int:id>', auth.userDelete, name = 'delete_user'),
 
     path ('password_reset/', auth_views.PasswordResetView.as_view(template_name = 'fondation/user/password_reset.html'), name = 'password_reset'),
