@@ -18,7 +18,7 @@ class Person (models.Model) :
 
     nom_de_la_province = models.ForeignKey(Province, on_delete=models.CASCADE, help_text="province d'origine")
     nom_de_la_commune = models.ForeignKey(Commune, on_delete=models.CASCADE, help_text="commune d'origine")
-    nom_de_la_zone = models.CharField('zone', max_length=20, help_text="zone d'origine")
+    nom_de_la_zone = models.CharField('Colline', max_length=20, help_text="zone d'origine")
 
     la_vulnerabilite = models.ForeignKey(Vulnerability, on_delete=models.CASCADE, help_text="sélectionez sa situation de vulnerabilité")
     le_niveau_etudes = models.ForeignKey(LevelStudy, on_delete=models.CASCADE, help_text="sélectionez son niveau d'études")
