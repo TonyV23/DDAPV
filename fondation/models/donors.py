@@ -32,3 +32,6 @@ class Donor(models.Model) :
     description = models.TextField(max_length=500, help_text='décrivez le type de don et/ou aides que vous souhaitez donner à notre fondation',blank=True)
 
     donor_date_given = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.type_donneur + " " +self.nom_du_donneur
