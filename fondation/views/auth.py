@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.http import HttpRequest
 
 from fondation.forms import UserForm
 from fondation.decorators import unauthenticated_user, allowed_users
@@ -99,11 +100,45 @@ def userLogin(request) :
         context = variable
     )
 
+@login_required(login_url ='login')
+def userEdit(request, id) :
+    assert isinstance(request, HttpRequest)
+    page_title = 'Modifier les informations de l\'utilisateur'
+    if request.method == 'GET':
+        if id == 0:
+            form = UserForm()
+        else:
+            user = User.objects.get(pk=id)
+            form = UserForm(instance=user)
+        return render(
+            request,
+            'fondation/user/edit_user.html',
+            {
+                'form': form,
+                'page_title' :page_title
+            }
+        )
+
+@login_required(login_url ='login')
+def userUpdate(request, id) :
+    if request.method == 'POST':
+        if id == 0:
+            form = UserForm(request.POST)
+        else:
+            user = User.objects.get(pk=id)
+            form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Les informations de l'utilisateur ont été modifié avec succès !")
+        return redirect('/userList') 
+
+
 def userLogout(request) :
     logout(request)
 
     return redirect('/login')
 
+@login_required(login_url ='login')
 def userDelete(request, id) :
     user = User.objects.get(pk = id)
     user.delete()
