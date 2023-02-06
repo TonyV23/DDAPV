@@ -2,7 +2,7 @@ from django.db import models
 from phone_field import PhoneField
 from djmoney.models.fields import MoneyField
 
-from fondation.models import TypeAide, TypeAssistance
+from fondation.models import TypeAide, TypeAssistance, Province, Commune
 
 class Donor(models.Model) : 
 
@@ -16,6 +16,9 @@ class Donor(models.Model) :
     type_donneur = models.CharField(choices=TypeDonor, max_length=50)
 
     nom_du_donneur = models.CharField(max_length=50, help_text="tapez votre nom / le nom de l'entreprise , de l'association ou de l'organisation", blank=True)
+
+    province = models.ForeignKey(Province, on_delete=models.CASCADE, null = True)
+    commune = models.ForeignKey(Commune, on_delete=models.CASCADE, null = True)
 
     type_aide = models.ForeignKey(TypeAide, on_delete=models.CASCADE)
 
