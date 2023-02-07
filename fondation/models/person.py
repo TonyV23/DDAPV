@@ -22,7 +22,7 @@ class Person (models.Model) :
 
     la_vulnerabilite = models.ForeignKey(Vulnerability, on_delete=models.CASCADE, help_text="sélectionez sa situation de vulnerabilité")
     le_niveau_etudes = models.ForeignKey(LevelStudy, on_delete=models.CASCADE, help_text="sélectionez son niveau d'études")
-    situation_matrimoniale = models.ForeignKey(MatiralStatus, on_delete=models.CASCADE, help_text="sélectionez sa situation de situation matrimoniale")
+    situation_matrimoniale = models.ForeignKey(MatiralStatus, on_delete=models.CASCADE, help_text="sélectionez sa situation de situation matrimoniale", verbose_name='statut matrimonial')
 
     nombre_enfants =  models.PositiveIntegerField(help_text="renseignez le nombre d'enfants à sa charge")
     fonction = models.CharField(max_length=50, blank=True)
