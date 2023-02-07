@@ -1,13 +1,14 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
 
-from fondation.models import Province, Commune, Person, TypeAide, TypeAssistance
+from fondation.models import Province, Commune, Person, TypeAide, TypeAssistance, Donor
 
 class Distribution(models.Model) : 
     
+    donateur = models.ForeignKey(Donor, on_delete=models.CASCADE, null = True)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
     commune =  models.ForeignKey(Commune, on_delete=models.CASCADE)
-    zone =  models.CharField(max_length=50)
+    zone =  models.CharField("Colline",max_length=50)
     beneficiaire = models.ForeignKey(Person, on_delete=models.CASCADE ,help_text="sélectionez le (la) bénéficiaire", unique_for_date='date_given')
     
     type_aide = models.ForeignKey(TypeAide, on_delete=models.CASCADE)

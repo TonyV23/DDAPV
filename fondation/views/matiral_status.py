@@ -11,7 +11,7 @@ from fondation.decorators import allowed_users
 @allowed_users(allowed_roles= ['admins'])
 def index(request) :
 
-    page_title = 'Aperçu sur les situations matrimoniales'
+    page_title = 'Aperçu sur les statuts matrimonials'
 
     return render(
         request,
@@ -24,7 +24,7 @@ def index(request) :
 @login_required(login_url ='login')
 def matiral_status_add(request) :
     assert isinstance(request, HttpRequest)
-    page_title = 'Ajouter une situation matrimoniale'
+    page_title = 'Ajouter un statut matrimonial'
     
     if request.method == 'GET' :
         form = MatiralStatusForm()
@@ -44,7 +44,7 @@ def matiral_status_store(request) :
         form = MatiralStatusForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,"La situation matrimoniale a été enregistré avec succès !")
+            messages.success(request,"Le statut matrimonial a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
         return redirect('/matiralStatus/display')
@@ -52,7 +52,7 @@ def matiral_status_store(request) :
 @login_required(login_url ='login')
 def matiral_status_edit(request, id) :
     assert isinstance(request, HttpRequest)
-    page_title = 'Modifier la situation matrimoniale'
+    page_title = 'Modifier le statut matrimonial'
     if request.method == 'GET':
         if id == 0:
             form = MatiralStatusForm()
@@ -79,20 +79,20 @@ def matiral_status_update(request,id) :
             form = MatiralStatusForm(request.POST, instance=matiral_status)
         if form.is_valid():
             form.save()
-        messages.success(request, "La situation matrimoniale a été modifié avec succès !")
+        messages.success(request, "Le statut matrimonial a été modifié avec succès !")
         return redirect('/matiralStatus/display')
 
 @login_required(login_url ='login')
 def matiral_status_delete(request, id) :
     matiral_status = MatiralStatus.objects.get(pk = id)
     matiral_status.delete()
-    messages.success(request,"La situation matrimoniale a été supprimé avec succès !")
+    messages.success(request,"Le statut matrimonial a été supprimé avec succès !")
     return redirect('/matiralStatus/display')
 
 @login_required(login_url ='login')
 def display(request) :
 
-    page_title = 'Liste des situations matrimoniales'
+    page_title = 'Liste des statuts matrimonials'
     matiral_status = MatiralStatus.objects.all()
 
     return render(

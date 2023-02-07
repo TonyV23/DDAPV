@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance, home_employee, donations_employee, distributions_employee, refugees_employee
+from fondation.views import home, refugees, donations, vulnerabilities, address, level_studies, matiral_status, distributions, auth, type_aide, type_assistance, home_employee, donations_employee, distributions_employee, refugees_employee, print
 
 urlpatterns = [
     path('dashboard/', home.index, name ='dashboard'),
@@ -186,4 +186,10 @@ urlpatterns = [
     path ('distributionsEmployee/distribution_update/<int:id>', distributions_employee.distribution_update, name = 'distributions_update_employee'),
     path ('distributionsEmployee/distribution_delete/<int:id>', distributions_employee.distribution_delete, name = 'distributions_delete_employee'),
     path ('distributionsEmployee/display', distributions_employee.display, name = 'distributions_display_employee'),
+
+    # print urls
+
+    path ('print/donors/', print.printDonors, name = 'print_donors'),
+    path ('print/distributions/', print.printDistributions, name = 'print_distributions'),
+    path ('print/persons/', print.printPersons, name = 'print_persons'),
 ]

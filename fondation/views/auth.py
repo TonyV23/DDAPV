@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.http import HttpRequest
 
-from fondation.forms import UserForm
+from fondation.forms import UserForm, UserEditInfoForm
 from fondation.decorators import unauthenticated_user, allowed_users
 
 @login_required(login_url ='login')
@@ -106,10 +106,10 @@ def userEdit(request, id) :
     page_title = 'Modifier les informations de l\'utilisateur'
     if request.method == 'GET':
         if id == 0:
-            form = UserForm()
+            form = UserEditInfoForm()
         else:
             user = User.objects.get(pk=id)
-            form = UserForm(instance=user)
+            form = UserEditInfoForm(instance=user)
         return render(
             request,
             'fondation/user/edit_user.html',
@@ -123,10 +123,10 @@ def userEdit(request, id) :
 def userUpdate(request, id) :
     if request.method == 'POST':
         if id == 0:
-            form = UserForm(request.POST)
+            form = UserEditInfoForm(request.POST)
         else:
             user = User.objects.get(pk=id)
-            form = UserForm(request.POST, instance=user)
+            form = UserEditInfoForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             messages.success(request, "Les informations de l'utilisateur ont été modifié avec succès !")
