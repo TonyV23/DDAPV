@@ -190,4 +190,5 @@ urlpatterns = [
     # print urls
 
     path ('print/Donors/', print.printDonors, name = 'print_donors'),
+    path ('print/Distributions/', print.printDistributions, name = 'print_distributions'),
 ]
