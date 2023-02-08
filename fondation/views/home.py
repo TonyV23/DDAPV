@@ -36,6 +36,8 @@ def index(request) :
 
     refugees_arrived_per_day = getRefugeesArrivedPerDay()
 
+    donor_beneficiaire = getBeneficiaireDon()
+
     variable = {
 
         'page_title' : page_title,
@@ -62,6 +64,8 @@ def index(request) :
         'anonyme_occurence' : anonyme_occurence,
 
         'refugees_arrived_per_day' : refugees_arrived_per_day,
+
+        'donor_beneficiaire' : donor_beneficiaire,
 
     }
 
@@ -232,20 +236,25 @@ def getRefugeesArrivedPerDay() :
     refugees_arrived_per_day = Person.objects.extra(select={'day': 'date( date_joined )'}).values('day').annotate(available=Count('date_joined'))
     
     return refugees_arrived_per_day
-    get_all_provinces_ids = Province.objects.values('id')
-    get_all_provinces_ids_list = []
 
-    for i in range(0, len(get_all_provinces_ids)) :
-        get_all_provinces_ids_list.append(list(get_all_provinces_ids[i].values())[0]) 
+def getBeneficiaireDon() : 
+    get_all_donors_id = Donor.objects.values('id')
+    get_all_donors_id_list = []
 
-    province_person_dict = {}
+    for i in range(0, len(get_all_donors_id)) :
+        get_all_donors_id_list.append(list(get_all_donors_id[i].values())[0])
 
-    for k in get_all_provinces_ids_list :
-        get_all_provinces_names = Province.objects.filter(pk = k).values('nom_de_la_province')
+    donors_beneficiaire_dict ={}
 
-        for i in range(0, len(get_all_provinces_names)) :
-            get_all_provinces_name = list(get_all_provinces_names[i].values())[0]
-        occurence_provinces = Person.objects.filter(nom_de_la_province_id = k).count()
-        province_person_dict [get_all_provinces_name] = occurence_provinces
+    for k in get_all_donors_id_list :
+        get_all_donors_name = Donor.objects.filter(pk = k).values('nom_du_donneur')
+        get_donors_name = ""
 
-    return province_person_dict
+        for i in range(0, len(get_all_donors_name)) :
+            get_donors_name = list(get_all_donors_name[i].values())[0]
+            occurence_donor = 0
+            occurence_donor = Distribution.objects.filter(donateur_id = k).count()
+
+            donors_beneficiaire_dict[get_donors_name] = occurence_donor
+
+    return donors_beneficiaire_dict
