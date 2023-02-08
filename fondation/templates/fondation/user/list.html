@@ -25,7 +25,7 @@
                 <table class="table table-bordered" >
                     <thead>
                         <tr>
-                            <th scope="col"> Id </th>
+                            <th scope="col"> * </th>
                             <th scope="col"> Prenom </th>
                             <th scope="col"> Nom </th>
                             <th scope="col"> Email </th>
@@ -39,7 +39,7 @@
                     <tbody>
                         {% for user in users %}
                         <tr>
-                            <td scope="row">{{ user.id }}</td>
+                            <td scope="row">{{ forloop.counter }}</td>
                             <td scope="row">{{ user.first_name }}</td>
                             <td scope="row">{{ user.last_name }}</td>
                             <td scope="row">{{ user.email }}</td>

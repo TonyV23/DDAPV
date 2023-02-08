@@ -22,6 +22,7 @@
         <table class="table table-striped table-bordered zero-configuration">
             <thead>
                 <tr>
+                    <th>*</th>
                     <th>type</th>
                     <th>Nom</th>
                     <th>province</th>
@@ -35,6 +36,7 @@
             <tbody>
                 {% for donor in donors %}
                <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ donor.type_donneur }}</td>
                     <td>{{ donor.nom_du_donneur }}</td>
                     <td>{{ donor.province }}</td>

@@ -277,14 +277,45 @@
 
     <div class="row d-flex justify-content-center">
 
-      
-      <div class="col-lg-12">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Effectif des vulnérables ayant un don</h5>
+
+            <!-- Bar Chart -->
+            <div id="barchart" style="min-height: 400px;" class="echart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                echarts.init(document.querySelector("#barchart")).setOption({
+                  xAxis: {
+                    type: 'category',
+                    data: [{% for occurence_donor in donor_beneficiaire.keys %} '{{occurence_donor}}', {% endfor %}]
+                  },
+                  yAxis: {
+                    type: 'value'
+                  },
+                  series: [{
+                    data: [{% for  occurence_donor in donor_beneficiaire.values %} {{occurence_donor}}, {% endfor %}],
+                    type: 'bar'
+                  }]
+                });
+              });
+            </script>
+            <!-- End Bar Chart -->
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-6">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title font-weight-bolder text-primary">Enregistrement des personnes vulnerables par jour</h5>
 
             <!-- Line Chart -->
-            <canvas id="lineChart" style="max-height: 300px;"></canvas>
+            <canvas id="lineChart" style="min-height: 400px;" class="echart"></canvas>
             <script>
               document.addEventListener("DOMContentLoaded", () => {
                 new Chart(document.querySelector('#lineChart'), {
