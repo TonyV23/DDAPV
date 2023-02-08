@@ -6,6 +6,7 @@
         <table class="table table-striped table-bordered zero-configuration">
             <thead>
                 <tr>
+                    <th>*</th>
                     <th>nom</th>
                     <th>prenom</th>
                     <th>sexe</th>
@@ -21,7 +22,9 @@
             <tbody>
                 {% for refugee in refugees %}
                 <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ refugee.nom }}</td>
+                    <td>{{ refugee.prenom }}</td>
                     <td>{{ refugee.prenom }}</td>
                     <td>{{ refugee.sexe }}</td>
                     <td>{{ refugee.age }}</td>
