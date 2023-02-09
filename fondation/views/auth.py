@@ -123,6 +123,7 @@ def userEdit(request, id) :
 @login_required(login_url ='login')
 @allowed_users(allowed_roles= ['admins'])
 def userChangePassword(request):
+    page_title = 'Changer le mot de passe'
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
         form = UserChangePasswordForm(request.user, request.POST)
@@ -136,13 +137,20 @@ def userChangePassword(request):
             messages.error(request, "Une erreur est survenue !")
     else:
         form = UserChangePasswordForm(request.user)
-    return render(request, 'fondation/user/password_change.html', {
-        'form': form
-    })
+    
+    return render(
+        request, 
+        'fondation/user/password_change.html', 
+        {
+            'form': form,
+            'page_title' : page_title
+        }
+    )
 
 @login_required(login_url ='login')
 @allowed_users(allowed_roles= ['employees'])
 def userChangePasswordEmployee(request):
+    page_title = 'Changer le mot passe'
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
         form = UserChangePasswordForm(request.user, request.POST)
@@ -156,9 +164,15 @@ def userChangePasswordEmployee(request):
             messages.error(request, "Une erreur est survenue !")
     else:
         form = UserChangePasswordForm(request.user)
-    return render(request, 'fondation/user/password_change_employee.html', {
-        'form': form
-    })
+    
+    return render(
+        request,
+        'fondation/user/password_change_employee.html',      
+        {
+            'form': form,
+            'page_title' : page_title
+        }
+    )
 
 
 @login_required(login_url ='login')
