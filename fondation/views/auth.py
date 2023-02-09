@@ -121,7 +121,7 @@ def userEdit(request, id) :
         )
 
 @login_required(login_url ='login')
-@allowed_users(allowed_roles= ['admins','employees'])
+@allowed_users(allowed_roles= ['admins'])
 def userChangePassword(request):
     assert isinstance(request, HttpRequest)
     if request.method == 'POST':
@@ -137,6 +137,26 @@ def userChangePassword(request):
     else:
         form = UserChangePasswordForm(request.user)
     return render(request, 'fondation/user/password_change.html', {
+        'form': form
+    })
+
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['employees'])
+def userChangePasswordEmployee(request):
+    assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        form = UserChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = User
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Votre mot de passe a été bien modifié !')
+            return redirect('/employeeDashboard')
+        else:
+            messages.error(request, "Une erreur est survenue !")
+    else:
+        form = UserChangePasswordForm(request.user)
+    return render(request, 'fondation/user/password_change_employee.html', {
         'form': form
     })
 

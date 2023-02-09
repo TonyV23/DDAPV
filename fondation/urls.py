@@ -130,6 +130,7 @@ urlpatterns = [
     path ('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='fondation/user/password_reset_complete.html'), name='password_reset_complete'),
 
     path('user/ChangePassword/', auth.userChangePassword, name='user_change_password'),
+    path('user/ChangePasswordEmployee/', auth.userChangePasswordEmployee, name='user_change_password_employee'),
 
     # type aide urls
 
