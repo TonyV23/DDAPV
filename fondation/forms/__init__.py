@@ -10,3 +10,4 @@ from .type_aide_form import TypeAideForm
 from .type_assistance_form import TypeAssistanceForm
 from .user_form import UserForm
 from .user_change_form import UserEditInfoForm
+from .change_password import UserChangePasswordForm

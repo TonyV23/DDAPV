@@ -129,6 +129,9 @@ urlpatterns = [
     path ('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='fondation/user/password_reset_confirm.html'), name='password_reset_confirm'),
     path ('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='fondation/user/password_reset_complete.html'), name='password_reset_complete'),
 
+    path('user/ChangePassword/', auth.userChangePassword, name='user_change_password'),
+    path('user/ChangePasswordEmployee/', auth.userChangePasswordEmployee, name='user_change_password_employee'),
+
     # type aide urls
 
     path('typeAide/', type_aide.index, name = 'type_aide_overview'),
