@@ -1,12 +1,12 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.http import HttpRequest
 
-from fondation.forms import UserForm, UserEditInfoForm
+from fondation.forms import UserForm, UserEditInfoForm, UserChangePasswordForm
 from fondation.decorators import unauthenticated_user, allowed_users
 
 @login_required(login_url ='login')
@@ -101,6 +101,7 @@ def userLogin(request) :
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def userEdit(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier les informations de l\'utilisateur'
@@ -118,6 +119,27 @@ def userEdit(request, id) :
                 'page_title' :page_title
             }
         )
+
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins','employees'])
+def userChangePassword(request):
+    assert isinstance(request, HttpRequest)
+    if request.method == 'POST':
+        form = UserChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = User
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Votre mot de passe a été bien modifié !')
+            return redirect('/dashboard')
+        else:
+            messages.error(request, "Une erreur est survenue !")
+    else:
+        form = UserChangePasswordForm(request.user)
+    return render(request, 'fondation/user/password_change.html', {
+        'form': form
+    })
+
 
 @login_required(login_url ='login')
 def userUpdate(request, id) :
