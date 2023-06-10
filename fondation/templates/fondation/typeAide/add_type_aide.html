@@ -1,0 +1,86 @@
+{% extends 'fondation/layouts/default.html' %} 
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="content-body">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+          <li class="breadcrumb-item">  <a href="{% url 'type_aide_overview' %}">Aperçu sur les types d'aides</a>  </li>
+          <li class="breadcrumb-item active" aria-current="page">Ajouter le type d'aide</li>
+        </ol>
+    </nav>
+ 
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h2 class="m-0 font-weight-bold text-dark">Le type d'aides</h2>
+                    </div>
+                    <div class="card-body">
+                        <!-- Vertical Form -->
+                        <form action="{% url 'type_aide_store' %}" method="post">
+                            {% csrf_token %}
+                            <div class="col-12">
+                                {{ form.type_aide|as_crispy_field }}
+                            </div>
+                            <div class="text-center">
+                                <br/>
+                                <button type="submit" class="btn btn-sm btn-success btn-pill">Enregistrer</button>
+                                <button type="reset" class="btn btn-sm btn-outline-danger btn-pill">Vider le formulaire</button>
+                            </div>
+                        </form><!-- Vertical Form -->
+          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+</div>
+
+<div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Information de votre compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <h5 class="font-weight-bold">Nom d'utilisateur</h5>
+                <p>{{user.username}}</p>
+                <hr>
+                
+                <h5 class="font-weight-bold">Adresse e-mail</h5>
+                <p>{{user.email}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Création du compte</h5>
+                <p>{{user.date_joined}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Dernière connexion</h5>
+                <p>{{user.last_login}}</p>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

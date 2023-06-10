@@ -1,0 +1,43 @@
+{% include 'fondation/partials/head.html' %}
+
+<body class="content" onload="window.print()">
+    
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered zero-configuration">
+            <thead>
+                <tr>
+                    <th>*</th>
+                    <th>nom</th>
+                    <th>prenom</th>
+                    <th>sexe</th>
+                    <th>age</th>
+                    <th>province</th>
+                    <th>vulnerabilite</th>
+                    <th>etudes</th>
+                    <th>statut matrimonial</th>
+                    <th>nombre d'enfants</th>
+            
+                </tr>
+            </thead>
+            <tbody>
+                {% for refugee in refugees %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ refugee.nom }}</td>
+                    <td>{{ refugee.prenom }}</td>
+                    <td>{{ refugee.prenom }}</td>
+                    <td>{{ refugee.sexe }}</td>
+                    <td>{{ refugee.age }}</td>
+                    <td>{{ refugee.nom_de_la_province }}</td>
+                    <td>{{ refugee.la_vulnerabilite }}</td>
+                    <td>{{ refugee.le_niveau_etudes }}</td>
+                    <td>{{ refugee.situation_matrimoniale }}</td>
+                    <td>{{ refugee.nombre_enfants }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>

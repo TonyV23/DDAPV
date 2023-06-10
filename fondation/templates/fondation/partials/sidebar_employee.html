@@ -1,0 +1,54 @@
+{% load static %}
+<aside class="left-sidebar sidebar-dark" id="left-sidebar">
+    <div id="sidebar" class="sidebar sidebar-with-footer">
+    <!-- Application Brand -->
+    <div class="app-brand">
+        <a href="{% url 'dashboard_employee' %}">
+        <span class="brand-name">Fondation Evan You</span>
+        </a>
+    </div>
+    
+    <!-- begin sidebar scrollbar -->
+    <div class="sidebar-left" data-simplebar style="height: 100%;">
+        <!-- sidebar menu -->
+        <ul class="nav sidebar-inner" id="sidebar-menu">
+            
+            <li >
+                <a class="sidenav-item-link" href="{% url 'dashboard_employee' %}">
+                    <i class="mdi mdi-speedometer"></i>
+                    <span class="nav-text ">Tableau de bord</span>
+                </a>
+            </li>
+
+            <li >
+                <a class="sidenav-item-link" href="{% url 'distributions_overview_employee' %}">
+                    <i class="mdi mdi-source-fork"></i>
+                    <span class="nav-text ">Distribution</span>
+                </a>
+            </li>
+            
+            
+            <li class="section-title">Gestion de la fondation</li>
+        
+            <li>
+                <a class="sidenav-item-link" href="{% url 'refugees_overview_employee' %}">
+                    <i class="mdi mdi-human-male-female"></i>
+                    <span class="nav-text">Personnes</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="sidenav-item-link" href="{% url 'donations_overview_employee' %}">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span class="nav-text">donateurs / dons</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="sidenav-item-link" href="{% url 'user_change_password_employee' %}">
+                    <i class="mdi mdi-onepassword"></i>
+                    <span class="nav-text">Changer le mot passe</span>
+                </a>
+            </li>
+
+</aside>

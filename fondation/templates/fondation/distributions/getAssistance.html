@@ -1,0 +1,4 @@
+<option value="">-------</option>
+{% for type_assist in type_assistances %}
+    <option value="{{type_assist.id}}">{{ type_assist.type_assistance }}</option>
+{% endfor %}

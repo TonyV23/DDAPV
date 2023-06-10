@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include 'fondation/partials/head.html' %}
+    
+    <body  class="sidebar-static-offcanvas sidebar-collapse" id="body">
+
+        <script>
+            NProgress.trickle();
+            NProgress.configure({ 
+                easing: 'ease',
+                speed: 500,
+                trickle: true,
+                showSpinner: false,
+                trickleSpeed: 250, 
+            });
+            
+            NProgress.start();
+        </script>
+
+        <div class="wrapper">
+            
+            {% include 'fondation/partials/sidebar.html' %}
+
+            <div class="page-wrapper">
+            
+                <!-- Header -->
+                <header class="main-header" id="header">
+                    {% include 'fondation/partials/navbar.html' %}
+                </header>
+
+            <div class="content-wrapper">
+                {% block content %}{% endblock %}
+
+                {% include 'fondation/partials/footer.html' %}
+        </div>
+                
+        </div>
+    
+        {% load static %}
+        <script src="{% static 'fondation/plugins/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'fondation/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'fondation/plugins/simplebar/simplebar.min.js' %}"></script>
+        
+        <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
+        
+        <script src="{% static 'fondation/plugins/apexcharts/apexcharts.js' %}"></script>
+        <script src="{% static 'fondation/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'fondation/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js' %}"></script>
+        <script src="{% static 'fondation/plugins/jvectormap/jquery-jvectormap-world-mill.js' %}"></script>
+        <script src="{% static 'fondation/plugins/jvectormap/jquery-jvectormap-us-aea.js' %}"></script>
+        <script src="{% static 'fondation/plugins/daterangepicker/moment.min.js' %}"></script>
+        <script src="{% static 'fondation/plugins/daterangepicker/daterangepicker.js' %}"></script>
+
+        <script>
+            jQuery(document).ready(function() {
+            jQuery('input[name="dateRange"]').daterangepicker({
+            autoUpdateInput: false,
+            singleDatePicker: true,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+            });
+            jQuery('input[name="dateRange"]').on('apply.daterangepicker', function (ev, picker) {
+                jQuery(this).val(picker.startDate.format('MM/DD/YYYY'));
+            });
+            jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function (ev, picker) {
+                jQuery(this).val('');
+            });
+            });
+        </script>
+
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        
+        {% load static %}
+        <script src="{% static 'fondation/plugins/toaster/toastr.min.js' %}"></script>
+        <script src="{% static 'fondation/js/mono.js' %}"></script>
+        <script src="{% static 'fondation/js/chart.js' %}"></script>
+        <script src="{% static 'fondation/js/map.js' %}"></script>
+        <script src="{% static 'fondation/js/custom.js' %}"></script>
+
+        <!-- DataTableJS -->
+        <script src="{% static 'fondation/plugins1/tables/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'fondation/plugins1/tables/js/datatable/dataTables.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'fondation/plugins1/tables/js/datatable-init/datatable-basic.min.js' %}"></script>
+
+        <!-- Vendor JS Files -->
+        <script src="{% static 'fondation/vendor/apexcharts/apexcharts.min.js' %}"></script>
+        <script src="{% static 'fondation/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'fondation/vendor/chart.js/chart.min.js' %}"></script>
+        <script src="{% static 'fondation/vendor/echarts/echarts.min.js' %}"></script>
+        <!-- <script src="{% static 'fondation/vendor/quill/quill.min.js' %}"></script>
+        <script src="{% static 'fondation/vendor/simple-datatables/simple-datatables.js' %}"></script>
+        <script src="{% static 'fondation/vendor/tinymce/tinymce.min.js' %}"></script>
+        <script src="{% static 'fondation/vendor/php-email-form/validate.js' %}"></script> -->
+
+        <script src="{% static 'fondation/js/main.js' %}"></script>
+
+    </body>
+</html>

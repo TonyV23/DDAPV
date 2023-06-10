@@ -1,0 +1,392 @@
+{% extends 'fondation/layouts/default.html' %} 
+
+{% block content %}
+<div class="content">
+
+    <div class="row d-flex justify-content-center">
+      
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-secondary">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-secondary rounded-circle mr-3">
+                  <i class="fa-solid fa-person-harassing"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_refugees}}</span>
+                  <a href="{% url 'refugees_overview' %}">
+                    <p class="text-white">Personnes vulnérables</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+                   
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-primary">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-primary rounded-circle mr-3">
+                  <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_donors}}</span>
+                  <a href="{% url 'donations_overview' %}">
+                    <p class="text-white">Donateurs</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-info">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-info rounded-circle mr-3">
+                  <i class="fa-sharp fa-solid fa-dollar-sign"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_distributions}}</span>
+                  <a href="{% url 'distributions_overview' %}"><p class="text-white">bénéficiaires</p></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-default bg-success">
+              <div class="d-flex p-5">
+                <div class="icon-md bg-success rounded-circle mr-3">
+                  <i class="fa-solid fa-people-group"></i>
+                </div>
+                <div class="text-left">
+                  <span class="h2 d-block text-white">{{total_employees}}</span>
+                  <a href="{% url 'users_overview' %}"><p class="text-white">Employés</p></a>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Effectifs des vulnérables par province</h5>
+
+            <!-- Bar Chart -->
+            <div id="barChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#barChart"), {
+                  series: [{
+                    data: [{% for province in all_province_occurence.values %} '{{province}}', {% endfor %}]
+                  }],
+                  chart: {
+                    type: 'bar',
+                    height: 350
+                  },
+                  plotOptions: {
+                    bar: {
+                      borderRadius: 4,
+                      horizontal: true,
+                    }
+                  },
+                  dataLabels: {
+                    enabled: false
+                  },
+                  xaxis: {
+                    categories: [{% for province_name in all_province_occurence.keys %} '{{province_name}}', {% endfor %}],
+                  }
+                }).render();
+              });
+            </script>
+            <!-- End Bar Chart -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-primary font-weight-bold">Effectifs par vulnérabilités</h5>
+
+            <!-- Radar Chart -->
+            <div id="radarChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#radarChart"), {
+                  series: [{
+                    name: 'Series 1',
+                    data: [{% for occurence_vulnerabilities in all_vulnerabilities_occurence.values %} '{{occurence_vulnerabilities}}', {% endfor %}],
+                  }],
+                  chart: {
+                    height: 350,
+                    type: 'radar',
+                  },
+                  xaxis: {
+                    categories: [{% for vulnerability in all_vulnerabilities_occurence.keys %} '{{vulnerability}}', {% endfor %}]
+                  }
+                }).render();
+              });
+            </script>
+            <!-- End Radar Chart -->
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-lg-6 mb-2">
+        <div class="card" style="height: 392px;">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Le niveau d'études des vulnérables</h5>
+
+            <!-- Pie Chart -->
+            <div id="pieChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#pieChart"), {
+                  series: [{% for level_studies_occurence in all_level_studies_occurence.values %} {{level_studies_occurence}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'pie',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  labels: [{% for level_studies in all_level_studies_occurence.keys %} '{{level_studies}}', {% endfor %}]
+                }).render();
+              });
+            </script>
+            <!-- End Pie Chart -->
+
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Statut matrimonial des vulnérables</h5>
+
+            <!-- Donut Chart -->
+            <div id="donutChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#donutChart"), {
+                  series: [{% for matiral_status_occurence in all_matiral_status_occurence.values %} {{matiral_status_occurence}}, {% endfor %}],
+                  chart: {
+                    height: 350,
+                    type: 'donut',
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  labels: [{% for matiral_status_name in all_matiral_status_occurence.keys %} '{{matiral_status_name}}', {% endfor %}],
+                }).render();
+              });
+            </script>
+            <!-- End Donut Chart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Désagrégation des vulnérables par sexe</h5>
+
+            <!-- Doughnut Chart -->
+            <canvas id="doughnutChart" style="max-height: 328px;"></canvas>
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new Chart(document.querySelector('#doughnutChart'), {
+                  type: 'doughnut',
+                  data: {
+                    labels: ['Hommes', 'Femmes'],
+                    datasets: [{
+                      label: 'My First Dataset',
+                      data: [{{masculine_gender_occurence}}, {{feminine_gender_occurence}}],
+                      backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                      ],
+                      hoverOffset: 4
+                    }]
+                  }
+                });
+              });
+            </script>
+            <!-- End Doughnut CHart -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Les donateurs selon leur type</h5>
+
+            <!-- Polar Area Chart -->
+            <div id="polarAreaChart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#polarAreaChart"), {
+                  series: [{{organization_occurence}},{{entreprise_occurence}},{{association_occurence}},{{particulier_occurence}},{{anonyme_occurence}}],
+                  chart: {
+                    type: 'polarArea',
+                    height: 350,
+                    toolbar: {
+                      show: true
+                    }
+                  },
+                  stroke: {
+                    colors: ['#fff']
+                  },
+                  fill: {
+                    opacity: 0.8
+                  },
+                  labels :['Organisation','Entreprise','Association','Particulier','Anonyme']
+                }).render();
+              });
+            </script>
+            <!-- End Polar Area Chart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-primary">Effectif des vulnérables ayant un don</h5>
+
+            <!-- Bar Chart -->
+            <div id="barchart" style="min-height: 400px;" class="echart"></div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                echarts.init(document.querySelector("#barchart")).setOption({
+                  xAxis: {
+                    type: 'category',
+                    data: [{% for occurence_donor in donor_beneficiaire.keys %} '{{occurence_donor}}', {% endfor %}]
+                  },
+                  yAxis: {
+                    type: 'value'
+                  },
+                  series: [{
+                    data: [{% for  occurence_donor in donor_beneficiaire.values %} {{occurence_donor}}, {% endfor %}],
+                    type: 'bar'
+                  }]
+                });
+              });
+            </script>
+            <!-- End Bar Chart -->
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bolder text-primary">Enregistrement des personnes vulnerables par jour</h5>
+
+            <!-- Line Chart -->
+            <canvas id="lineChart" style="min-height: 400px;" class="echart"></canvas>
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new Chart(document.querySelector('#lineChart'), {
+                  type: 'line',
+                  data: {
+                    labels: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.day}}', {% endfor %}],
+                    datasets: [{
+                      label: 'Line Chart',
+                      data: [{% for refugee_per_day in refugees_arrived_per_day %} '{{refugee_per_day.available}}', {% endfor %}],
+                      fill: false,
+                      borderColor: 'rgb(75, 192, 192)',
+                      tension: 0.1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+              });
+            </script>
+            <!-- End Line CHart -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Information de votre compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <h5 class="font-weight-bold">Nom d'utilisateur</h5>
+                <p>{{user.username}}</p>
+                <hr>
+                
+                <h5 class="font-weight-bold">Adresse e-mail</h5>
+                <p>{{user.email}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Création du compte</h5>
+                <p>{{user.date_joined}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Dernière connexion</h5>
+                <p>{{user.last_login}}</p>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

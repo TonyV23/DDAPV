@@ -1,0 +1,76 @@
+{% extends 'fondation/layouts/default.html' %} 
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">  <a href="{% url 'dashboard' %}">Dashboard  </a>  </li>
+      <li class="breadcrumb-item active" aria-current="page">Aperçu sur les donateurs</li>
+    </ol>
+</nav>
+
+<div class="row d-flex justify-content-center">
+    
+    <div class="col-lg-6 col-xl-5">
+        <div class="card mb-4">
+        <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
+        <div class="card-body">
+            <h5 class="card-title pt-2">De Nouveaux donateurs ?</h5>
+            <br><p class="card-text mb-6">Cliquez sur le bouton en bas pour ajouter de nouveaux donateurs de la fondation</p>
+            <a href="{% url 'donors_add' %}" class="btn btn-outline-primary">Acceder au formulaire</a>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-xl-5">
+        <div class="card mb-4">
+        <!-- <img class="card-img-top" src="images/elements/cc1.jpg"> -->
+        <div class="card-body">
+            <h5 class="card-title pt-2">Liste des donateurs et leurs dons ?</h5>
+            <br><p class="card-text mb-6">Cliquez sur le bouton en bas pour afficher la liste des donateurs de la fondation</p>
+            <a href="{% url 'donors_display' %}" class="btn btn-outline-primary">Afficher</a>
+        </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="exampleModalTooltip" tabindex="-1" role="dialog" aria-labelledby="exampleModalTooltip"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle2">Information de votre compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <h5 class="font-weight-bold">Nom d'utilisateur</h5>
+                <p>{{user.username}}</p>
+                <hr>
+                
+                <h5 class="font-weight-bold">Adresse e-mail</h5>
+                <p>{{user.email}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Création du compte</h5>
+                <p>{{user.date_joined}}</p>
+                <hr>
+
+                <h5 class="font-weight-bold">Dernière connexion</h5>
+                <p>{{user.last_login}}</p>
+            
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-pill" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
